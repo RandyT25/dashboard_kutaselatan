@@ -527,7 +527,7 @@ const D = {
   juni_fb:    [473515051, 423127652, 525850618,  587553665,  729769381, 285083308],
   monica_bal: [0, 0, 0, 162398500, 653603663, 440646010],
   juni_bal:   [0, 0, 0,  77143660, 282626000,  78926400],
-  target: 2200000000,
+  target: 1800000000,
 
   top10: [
     {n:'BAMBU BALI ULUWATU',            cls:'A',sp:'Juni',  rev:1185026950},
@@ -1158,6 +1158,9 @@ function initTarget(){
   if(saved){
     const n=parseInt(saved,10);
     if(n>0) D.target=n;
+  } else {
+    // H1 Jan–Jun = 1.80 M, H2 Jul–Dec = 2.20 M
+    D.target = new Date().getMonth() < 6 ? 1800000000 : 2200000000;
   }
   _updateTargetUI();
 }
