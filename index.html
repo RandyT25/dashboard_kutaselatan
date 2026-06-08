@@ -943,7 +943,7 @@ function makeCF(){
                titleColor:tipTt,bodyColor:tipBy,padding:10}
     },
     scales:{
-      x:{grid:{color:grid},ticks:{color:tick,font:{size:11}}},
+      x:{grid:{display:false},ticks:{color:tick,font:{size:11}}},
       y:{grid:{color:grid},ticks:{color:tick,font:{size:11},
         callback:v=>{
           if(v>=1e9)return(v/1e9).toFixed(1)+'M';
@@ -959,12 +959,13 @@ function refreshCharts(){
   const c=makeCF();
   allCharts.forEach(ch=>{
     if(ch.options.scales){
-      ['x','y'].forEach(ax=>{
-        if(ch.options.scales[ax]){
-          if(ch.options.scales[ax].grid) ch.options.scales[ax].grid.color=c.scales[ax].grid.color;
-          if(ch.options.scales[ax].ticks) ch.options.scales[ax].ticks.color=c.scales[ax].ticks.color;
-        }
-      });
+      if(ch.options.scales.y){
+        if(ch.options.scales.y.grid) ch.options.scales.y.grid.color=c.scales.y.grid.color;
+        if(ch.options.scales.y.ticks) ch.options.scales.y.ticks.color=c.scales.y.ticks.color;
+      }
+      if(ch.options.scales.x&&ch.options.scales.x.ticks){
+        ch.options.scales.x.ticks.color=c.scales.x.ticks.color;
+      }
     }
     const tt=ch.options.plugins?.tooltip;
     if(tt){
