@@ -975,8 +975,7 @@ function refreshCharts(){
       tt.titleColor=tipTt; tt.bodyColor=tipBy;
     }
     if(ch.config.type==='doughnut'){
-      ch.data.datasets[0].borderColor=cv('--surf');
-      ch.data.datasets[0].borderWidth=2;
+      ch.data.datasets[0].borderWidth=0;
     }
     ch.update('none');
   });
@@ -1053,7 +1052,7 @@ allCharts.push(new Chart(document.getElementById('cABC'),{
     datasets:[{
       data:D.abc.map(a=>a.rev),
       backgroundColor:['rgba(248,81,73,0.85)','rgba(240,136,62,0.85)','rgba(139,148,158,0.5)'],
-      borderColor:cv('--surf'),borderWidth:2
+      borderWidth:0
     }]
   },
   options:(()=>{const c=makeCF();return{
