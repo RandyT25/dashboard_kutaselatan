@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MKS Bali Horeca Dashboard · Kuta Selatan</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d1117">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Horeca KS">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surf:#161b22;--surf2:#21262d;--bord:#30363d;
+  --txt:#e6edf3;--muted:#8b949e;--subtle:#6e7681;
+  --green:#3fb950;--gdim:#238636;
+  --blue:#58a6ff;--bdim:#1f6feb;
+  --orange:#f0883e;--red:#f85149;--purple:#bc8cff;
+  --yellow:#e3b341;--cyan:#39c5cf;
+  --monica:#58a6ff;--juni:#3fb950;
+  --shadow:0 1px 3px rgba(0,0,0,.5);
+  --hover-row:rgba(255,255,255,.03);
+}
+[data-theme="light"]{
+  --bg:#f6f8fa;--surf:#ffffff;--surf2:#eaeef2;--bord:#d0d7de;
+  --txt:#1f2328;--muted:#57606a;--subtle:#6e7781;
+  --green:#1a7f37;--gdim:#d4edda;
+  --blue:#0969da;--bdim:#dbeafe;
+  --orange:#bc4c00;--red:#cf222e;--purple:#8250df;
+  --yellow:#7d4e00;--cyan:#0a7fc4;
+  --monica:#0969da;--juni:#1a7f37;
+  --shadow:0 1px 3px rgba(0,0,0,.15);
+  --hover-row:rgba(0,0,0,.04);
+}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.5;min-height:100vh;transition:background .2s,color .2s}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--surf)}
+::-webkit-scrollbar-thumb{background:var(--bord);border-radius:3px}
+
+/* ── Layout ── */
+.wrap{max-width:1440px;margin:0 auto;padding:0 16px}
+.main{padding:20px 0 40px}
+
+/* ── Header ── */
+.hdr{background:var(--surf);border-bottom:1px solid var(--bord);padding:14px 0;position:sticky;top:0;z-index:100}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.hdr-title{font-size:17px;font-weight:700}
+.hdr-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.live-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(35,134,54,.3);color:var(--green);border-radius:20px;font-size:12px;font-weight:600}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── Section ── */
+.sec{margin-bottom:24px}
+.sec-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--bord)}
+
+/* ── Card ── */
+.card{background:var(--surf);border:1px solid var(--bord);border-radius:8px;padding:16px}
+.card-hd{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+
+/* ── Grids ── */
+.g6{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.g12{display:grid;grid-template-columns:1fr 2fr;gap:16px}
+
+/* ── KPI Cards ── */
+.kpi{background:var(--surf);border:1px solid var(--bord);border-radius:8px;padding:14px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.kpi.g::before{background:var(--green)}
+.kpi.b::before{background:var(--blue)}
+.kpi.o::before{background:var(--orange)}
+.kpi.c::before{background:var(--cyan)}
+.kpi.p::before{background:var(--purple)}
+.kpi.r::before{background:var(--red)}
+.kpi-lbl{font-size:11px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.kpi-val{font-size:22px;font-weight:800;line-height:1.15}
+.kpi-val.g{color:var(--green)}.kpi-val.b{color:var(--blue)}.kpi-val.o{color:var(--orange)}
+.kpi-val.c{color:var(--cyan)}.kpi-val.p{color:var(--purple)}.kpi-val.r{color:var(--red)}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:4px}
+.badge-pill{display:inline-flex;align-items:center;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;margin-top:4px}
+.pill-up{background:rgba(63,185,80,.15);color:var(--green)}
+.pill-down{background:rgba(248,81,73,.15);color:var(--red)}
+.pill-warn{background:rgba(240,136,62,.15);color:var(--orange)}
+.pill-info{background:rgba(88,166,255,.15);color:var(--blue)}
+
+/* ── Tables ── */
+.tbl-wrap{overflow-x:auto;border-radius:6px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:var(--surf2);color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--bord)}
+td{padding:8px 10px;border-bottom:1px solid var(--bord);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--hover-row)}
+.ta-r{text-align:right!important}
+
+/* ── Badges ── */
+.ba{display:inline-flex;align-items:center;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:700}
+.ba-A{background:rgba(248,81,73,.15);color:#f85149}
+.ba-B{background:rgba(240,136,62,.15);color:#f0883e}
+.ba-C{background:rgba(139,148,158,.15);color:#8b949e}
+.ba-M{background:rgba(88,166,255,.15);color:var(--monica)}
+.ba-J{background:rgba(63,185,80,.15);color:var(--juni)}
+
+/* ── Salesperson cards ── */
+.sp-card{background:var(--surf);border:1px solid var(--bord);border-radius:8px;overflow:hidden}
+.sp-hd{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bord)}
+.sp-name{font-size:17px;font-weight:800}
+.sp-name.m{color:var(--monica)}.sp-name.j{color:var(--juni)}
+.sp-body{padding:16px}
+.sp-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.sp-ml{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.sp-mv{font-size:15px;font-weight:700}
+
+/* ── Charts ── */
+.ch{position:relative;width:100%}
+
+/* ── Tabs ── */
+.tabs{display:flex;gap:2px;background:var(--surf2);border-radius:8px;padding:3px;margin-bottom:14px;overflow-x:auto}
+.tab-btn{flex:1;min-width:90px;padding:7px 10px;border:none;background:transparent;color:var(--muted);font-size:12.5px;font-weight:500;cursor:pointer;border-radius:6px;white-space:nowrap;transition:all .15s}
+.tab-btn.act{background:var(--surf);color:var(--txt);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.tab-btn:hover:not(.act){background:rgba(255,255,255,.05);color:var(--txt)}
+.tab-panel{display:none}.tab-panel.act{display:block}
+
+/* ── Channel toggle ── */
+.ch-btn{padding:7px 18px;border:1px solid var(--bord);background:var(--surf2);color:var(--muted);border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.ch-btn.act{background:var(--surf);color:var(--txt);border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.ch-btn:hover:not(.act){color:var(--txt);border-color:var(--muted)}
+
+/* ── Progress ── */
+.prog-wrap{background:var(--surf2);border-radius:3px;height:4px;margin-top:4px;overflow:hidden}
+.prog-bar{height:100%;border-radius:3px}
+
+/* ── Opp cards ── */
+.opp{background:var(--surf);border:1px solid var(--bord);border-radius:8px;padding:13px 16px;display:flex;align-items:flex-start;gap:14px;margin-bottom:8px}
+.opp-rank{font-size:22px;font-weight:900;color:var(--subtle);min-width:30px;line-height:1.1}
+.opp-name{font-size:14px;font-weight:600;margin-bottom:3px}
+.opp-meta{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.opp-act{font-size:12px;color:var(--orange)}
+
+/* ── Theme toggle ── */
+.theme-toggle{display:flex;background:var(--surf2);border:1px solid var(--bord);border-radius:8px;padding:3px;gap:2px}
+.tt-btn{background:transparent;border:none;width:30px;height:28px;border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .15s;font-size:14px}
+.tt-btn.act{background:var(--surf);color:var(--txt);box-shadow:var(--shadow)}
+.tt-btn:hover:not(.act){color:var(--txt);background:var(--hover-row)}
+[data-theme="light"] .live-badge{background:rgba(26,127,55,.12);color:var(--green)}
+[data-theme="light"] .tab-btn.act{box-shadow:0 1px 3px rgba(0,0,0,.12)}
+[data-theme="light"] .kpi::before{opacity:.85}
+[data-theme="light"] .ba-A{background:rgba(207,34,46,.1)}
+[data-theme="light"] .ba-B{background:rgba(188,76,0,.1)}
+[data-theme="light"] .ba-C{background:rgba(87,96,106,.1)}
+[data-theme="light"] .ba-M{background:rgba(9,105,218,.1)}
+[data-theme="light"] .ba-J{background:rgba(26,127,55,.1)}
+[data-theme="light"] .opp{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+
+/* ── Action list ── */
+.action-item{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid var(--bord)}
+.action-item:last-child{border-bottom:none}
+.action-day{font-size:10px;font-weight:700;color:var(--muted);min-width:32px}
+
+/* ── Divider ── */
+.div{height:1px;background:var(--bord);margin:14px 0}
+
+/* ── Small top5 rows ── */
+.top5-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--bord)}
+.top5-row:last-child{border-bottom:none}
+
+/* ── Rank numbers ── */
+.rk{font-size:11px;font-weight:700;color:var(--subtle)}
+.rk-1{color:#ffd700}.rk-2{color:#c0c0c0}.rk-3{color:#cd7f32}
+
+/* ── Mobile nav ── */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surf);border-top:1px solid var(--bord);z-index:200;padding:6px 0 env(safe-area-inset-bottom,6px)}
+.mob-nav-inner{display:flex;justify-content:space-around}
+.mnav-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 10px;background:none;border:none;color:var(--muted);font-size:10px;cursor:pointer;border-radius:6px;transition:all .15s}
+.mnav-btn.act{color:var(--blue)}
+.mnav-ico{font-size:17px;line-height:1.2}
+
+/* ── Responsive ── */
+@media(max-width:1100px){
+  .g6{grid-template-columns:repeat(3,1fr)}
+  .g21{grid-template-columns:1fr}
+  .g12{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .g6{grid-template-columns:repeat(2,1fr)}
+  .g2{grid-template-columns:1fr}
+  .g3{grid-template-columns:1fr}
+  .g21{grid-template-columns:1fr}
+  .g12{grid-template-columns:1fr}
+  .sp-metrics{grid-template-columns:repeat(2,1fr)}
+  .mob-nav{display:block}
+  .main{padding-bottom:72px}
+  .kpi-val{font-size:18px}
+  .hdr-title{font-size:14px}
+  /* mobile section visibility is JS-controlled via display */
+}
+@media(max-width:480px){
+  .wrap{padding:0 10px}
+  .kpi-val{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="wrap">
+    <div class="hdr-inner">
+      <div>
+        <div class="hdr-title">MKS Bali Horeca · Kuta Selatan</div>
+        <div class="hdr-sub">Salesperson: Monica &amp; Juni &nbsp;|&nbsp; Jan – Jun 2026</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span class="live-badge"><span class="pulse"></span>Live Data</span>
+        <span style="font-size:12px;color:var(--muted)">As of Jun 2026</span>
+        <div class="theme-toggle" id="themeToggle">
+          <button class="tt-btn" id="tt-light" onclick="setTheme('light')" title="Light mode">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <button class="tt-btn" id="tt-dark" onclick="setTheme('dark')" title="Dark mode">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <button class="tt-btn" id="tt-system" onclick="setTheme('system')" title="System default">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="main">
+<div class="wrap">
+
+<!-- KPI STRIP -->
+<div class="sec" id="s-kpi">
+  <div class="g6">
+    <div class="kpi g">
+      <div class="kpi-lbl">Revenue YTD</div>
+      <div class="kpi-val g">IDR 8.15 M</div>
+      <div class="kpi-sub">Jan – Jun 2026 · F&amp;B only</div>
+    </div>
+    <div class="kpi b">
+      <div class="kpi-lbl">May Revenue (last full)</div>
+      <div class="kpi-val b">IDR 1.88 M</div>
+      <span class="badge-pill pill-up">↑ 41.2% vs Apr</span>
+    </div>
+    <div class="kpi o">
+      <div class="kpi-lbl" style="display:flex;align-items:center;justify-content:space-between">
+        vs Target (May)
+        <button onclick="toggleTargetInput()" title="Edit target" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:0;line-height:1">✏</button>
+      </div>
+      <div class="kpi-val o" id="kpi-vs-target">—</div>
+      <div class="kpi-sub">Target: <span id="target-display">—</span></div>
+      <div id="target-input-wrap" style="display:none;margin-top:8px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <input id="target-miliar" type="number" step="0.1" min="0" placeholder="M (e.g. 2.2)"
+            style="width:80px;padding:4px 6px;border-radius:5px;border:1px solid var(--bord);
+                   background:var(--surf2);color:var(--txt);font-size:12px">
+          <button onclick="saveTarget()" style="padding:4px 8px;border-radius:5px;border:none;
+            background:var(--orange);color:#fff;font-size:11px;cursor:pointer;font-weight:600">Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="kpi c">
+      <div class="kpi-lbl">Active Customers</div>
+      <div class="kpi-val c">174</div>
+      <div class="kpi-sub">58 Monica · 116 Juni</div>
+    </div>
+    <div class="kpi p">
+      <div class="kpi-lbl">SKUs Sold</div>
+      <div class="kpi-val p">205</div>
+      <div class="kpi-sub">Unique products</div>
+    </div>
+    <div class="kpi r">
+      <div class="kpi-lbl">Dormant</div>
+      <div class="kpi-val r">34</div>
+      <span class="badge-pill pill-down">No order May/Jun</span>
+    </div>
+  </div>
+</div>
+
+<!-- REVENUE TREND + TOP 10 -->
+<div class="sec" id="s-revenue">
+  <div class="sec-title">Revenue Trends</div>
+  <div class="g21" style="margin-bottom:16px">
+
+    <!-- Revenue chart -->
+    <div class="card">
+      <div class="card-hd">Monthly F&amp;B Revenue · Monica vs Juni (IDR)</div>
+      <div class="ch" style="height:250px"><canvas id="cRevenue"></canvas></div>
+      <div style="display:flex;gap:16px;margin-top:10px;font-size:11px;color:var(--muted)">
+        <span><span style="display:inline-block;width:14px;height:3px;background:var(--monica);border-radius:2px;vertical-align:middle;margin-right:4px"></span>Monica</span>
+        <span><span style="display:inline-block;width:14px;height:3px;background:var(--juni);border-radius:2px;vertical-align:middle;margin-right:4px"></span>Juni</span>
+        <span><span style="display:inline-block;width:14px;height:0;border-top:2px dashed var(--orange);vertical-align:middle;margin-right:4px"></span>Monthly Target</span>
+      </div>
+    </div>
+
+    <!-- Top 10 table -->
+    <div class="card" style="padding:16px 0">
+      <div class="card-hd" style="padding:0 16px">Top 10 Customers · YTD</div>
+      <div class="tbl-wrap" style="max-height:300px;overflow-y:auto">
+        <table>
+          <thead><tr><th>#</th><th>Customer</th><th>Cls</th><th>SP</th><th class="ta-r">Revenue</th></tr></thead>
+          <tbody id="t-top10"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Balian chart -->
+  <div class="card">
+    <div class="card-hd">Balian Revenue Trend · Monica vs Juni (IDR)</div>
+    <div class="ch" style="height:150px"><canvas id="cBalian"></canvas></div>
+  </div>
+</div>
+
+<!-- SALESPERSON -->
+<div class="sec" id="s-sales">
+  <div class="sec-title">Salesperson Performance</div>
+  <div class="g2">
+
+    <!-- Monica -->
+    <div class="sp-card" style="border-top:3px solid var(--monica)">
+      <div class="sp-hd">
+        <div>
+          <div class="sp-name m">Monica</div>
+          <div style="font-size:12px;color:var(--muted)">F&amp;B + Balian · 58 customers</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:20px;font-weight:800;color:var(--monica)">IDR 5.13 M</div>
+          <div style="font-size:11px;color:var(--muted)">F&amp;B Revenue YTD</div>
+        </div>
+      </div>
+      <div class="sp-body">
+        <div class="sp-metrics">
+          <div><div class="sp-ml">Avg Order Val</div><div class="sp-mv" style="color:var(--monica)">5.64 Jt</div></div>
+          <div><div class="sp-ml">Top-3 Conc.</div><div class="sp-mv" style="color:var(--orange)">46.7%</div></div>
+          <div><div class="sp-ml">May vs Apr</div><div class="sp-mv" style="color:var(--green)">+35.6%</div></div>
+        </div>
+        <div class="card-hd">Monthly (IDR Miliar)</div>
+        <div class="ch" style="height:110px"><canvas id="cMonica"></canvas></div>
+        <div class="div"></div>
+        <div class="card-hd">Top 5 Customers</div>
+        <div id="monica-top5"></div>
+      </div>
+    </div>
+
+    <!-- Juni -->
+    <div class="sp-card" style="border-top:3px solid var(--juni)">
+      <div class="sp-hd">
+        <div>
+          <div class="sp-name j">Juni</div>
+          <div style="font-size:12px;color:var(--muted)">F&amp;B + Balian · 116 customers</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:20px;font-weight:800;color:var(--juni)">IDR 3.02 M</div>
+          <div style="font-size:11px;color:var(--muted)">F&amp;B Revenue YTD</div>
+        </div>
+      </div>
+      <div class="sp-body">
+        <div class="sp-metrics">
+          <div><div class="sp-ml">Avg Order Val</div><div class="sp-mv" style="color:var(--juni)">3.64 Jt</div></div>
+          <div><div class="sp-ml">Top-3 Conc.</div><div class="sp-mv" style="color:var(--orange)">57.2%</div></div>
+          <div><div class="sp-ml">May vs Apr</div><div class="sp-mv" style="color:var(--green)">+52.3%</div></div>
+        </div>
+        <div class="card-hd">Monthly (IDR Miliar)</div>
+        <div class="ch" style="height:110px"><canvas id="cJuni"></canvas></div>
+        <div class="div"></div>
+        <div class="card-hd">Top 5 Customers</div>
+        <div id="juni-top5"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEGMENTATION + PRODUCTS -->
+<div class="sec" id="s-products">
+  <div class="sec-title">Segmentation &amp; Products</div>
+  <div class="g12">
+    <div class="card">
+      <div class="card-hd">ABC Customer Segmentation</div>
+      <div class="ch" style="height:200px"><canvas id="cABC"></canvas></div>
+      <div style="margin-top:14px" id="abc-rows"></div>
+    </div>
+    <div class="card">
+      <div class="card-hd">Top 10 Products by Revenue (IDR)</div>
+      <div class="ch" style="height:300px"><canvas id="cProducts"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOMER INSIGHTS -->
+<div class="sec" id="s-customers">
+  <div class="sec-title">Customer Insights</div>
+  <div class="card">
+    <!-- Channel toggle -->
+    <div style="display:flex;gap:6px;margin-bottom:16px">
+      <button class="ch-btn act" id="ch-fb"  onclick="switchChannel('fb', this)">🍽 F&amp;B</button>
+      <button class="ch-btn"     id="ch-bal" onclick="switchChannel('bal',this)">💧 Balian</button>
+    </div>
+
+    <!-- ── F&B channel ── -->
+    <div id="ch-panel-fb">
+      <div class="tabs">
+        <button class="tab-btn act" onclick="switchTabCh('fb','growing', this)">📈 Growing</button>
+        <button class="tab-btn"     onclick="switchTabCh('fb','declining',this)">📉 Declining</button>
+        <button class="tab-btn"     onclick="switchTabCh('fb','dormant',  this)">🔕 Dormant (<span id="fb-dorm-count">0</span>)</button>
+        <button class="tab-btn"     onclick="switchTabCh('fb','upsell',   this)">💡 Upsell</button>
+      </div>
+      <div class="tab-panel act" id="tp-fb-growing">
+        <div class="g2">
+          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r">May Rev</th></tr></thead><tbody id="t-fb-grow-m"></tbody></table></div></div>
+          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r">May Rev</th></tr></thead><tbody id="t-fb-grow-j"></tbody></table></div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tp-fb-declining">
+        <div class="g2">
+          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Change</th><th class="ta-r">Action</th></tr></thead><tbody id="t-fb-dec-m"></tbody></table></div></div>
+          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Change</th><th class="ta-r">Action</th></tr></thead><tbody id="t-fb-dec-j"></tbody></table></div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tp-fb-dormant">
+        <div class="g2">
+          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Last Active</th><th class="ta-r">YTD Rev</th></tr></thead><tbody id="t-fb-dorm-m"></tbody></table></div></div>
+          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Last Active</th><th class="ta-r">YTD Rev</th></tr></thead><tbody id="t-fb-dorm-j"></tbody></table></div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tp-fb-upsell">
+        <div class="g2">
+          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Product</th><th>Cls</th><th class="ta-r">F&amp;B YTD</th></tr></thead><tbody id="t-ups-m"></tbody></table></div></div>
+          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Product</th><th>Cls</th><th class="ta-r">F&amp;B YTD</th></tr></thead><tbody id="t-ups-j"></tbody></table></div></div>
+        </div>
+      </div>
+    </div><!-- /ch-panel-fb -->
+
+    <!-- ── Balian channel ── -->
+    <div id="ch-panel-bal" style="display:none">
+      <div class="tabs">
+        <button class="tab-btn act" onclick="switchTabCh('bal','growing', this)">📈 Growing</button>
+        <button class="tab-btn"     onclick="switchTabCh('bal','declining',this)">📉 Declining</button>
+        <button class="tab-btn"     onclick="switchTabCh('bal','dormant',  this)">🔕 Dormant (<span id="bal-dorm-count">0</span>)</button>
+      </div>
+      <div class="tab-panel act" id="tp-bal-growing">
+        <div class="g2">
+          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r">May Rev</th></tr></thead><tbody id="t-bal-grow-m"></tbody></table></div></div>
+          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r">May Rev</th></tr></thead><tbody id="t-bal-grow-j"></tbody></table></div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tp-bal-declining">
+        <div class="g2">
+          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Change</th><th class="ta-r">Action</th></tr></thead><tbody id="t-bal-dec-m"></tbody></table></div></div>
+          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Change</th><th class="ta-r">Action</th></tr></thead><tbody id="t-bal-dec-j"></tbody></table></div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tp-bal-dormant">
+        <div class="g2">
+          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Last Active</th><th class="ta-r">YTD Rev</th></tr></thead><tbody id="t-bal-dorm-m"></tbody></table></div></div>
+          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Last Active</th><th class="ta-r">YTD Rev</th></tr></thead><tbody id="t-bal-dorm-j"></tbody></table></div></div>
+        </div>
+      </div>
+    </div><!-- /ch-panel-bal -->
+  </div>
+</div>
+
+<!-- OPPORTUNITIES -->
+<div class="sec" id="s-opps">
+  <div class="sec-title">Top Growth Opportunities</div>
+  <div id="opp-list"></div>
+</div>
+
+<!-- WEEKLY ACTIONS -->
+<div class="sec" id="s-actions">
+  <div class="sec-title">Weekly Action Plan</div>
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div class="card-hd" style="margin-bottom:0">Auto-generated from latest data</div>
+      <span id="action-period" style="font-size:11px;color:var(--muted)"></span>
+    </div>
+    <div id="action-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2px"></div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+</div><!-- /main -->
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav">
+  <div class="mob-nav-inner">
+    <button class="mnav-btn act" id="mn-overview" onclick="mobNav('overview',this)"><span class="mnav-ico">📊</span>Overview</button>
+    <button class="mnav-btn" id="mn-revenue" onclick="mobNav('revenue',this)"><span class="mnav-ico">💰</span>Revenue</button>
+    <button class="mnav-btn" id="mn-customers" onclick="mobNav('customers',this)"><span class="mnav-ico">👥</span>Customers</button>
+    <button class="mnav-btn" id="mn-products" onclick="mobNav('products',this)"><span class="mnav-ico">📦</span>Products</button>
+    <button class="mnav-btn" id="mn-actions" onclick="mobNav('actions',this)"><span class="mnav-ico">⚡</span>Actions</button>
+  </div>
+</nav>
+
+<script>
+// ════════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════════
+const D = {
+  months: ['Jan','Feb','Mar','Apr','May','Jun*'],
+  monica_fb:  [830856825, 824175755, 873574402, 1169492207, 1152404402, 276995902],
+  juni_fb:    [473515051, 423127652, 525850618,  587553665,  729769381, 285083308],
+  monica_bal: [0, 0, 0, 162398500, 653603663, 440646010],
+  juni_bal:   [0, 0, 0,  77143660, 282626000,  78926400],
+  target: 2200000000,
+
+  top10: [
+    {n:'BAMBU BALI ULUWATU',            cls:'A',sp:'Juni',  rev:1185026950},
+    {n:'INTERCONTINENTAL BALI RESORT',  cls:'A',sp:'Monica',rev:880739004},
+    {n:'CONRAD HOTEL',                  cls:'A',sp:'Monica',rev:860027396},
+    {n:'HILTON HOTEL',                  cls:'A',sp:'Monica',rev:656527280},
+    {n:'MERUSAKA NUSA DUA',             cls:'A',sp:'Monica',rev:511409218},
+    {n:'TABU ULUWATU',                  cls:'A',sp:'Juni',  rev:281166600},
+    {n:'NOURISH UNGASAN',               cls:'A',sp:'Juni',  rev:264516380},
+    {n:'MOVENPICK',                     cls:'A',sp:'Monica',rev:247714746},
+    {n:'PT. GRAHA ALAM LESTARI',        cls:'A',sp:'Monica',rev:201377944},
+    {n:'THE LAGUNA',                    cls:'A',sp:'Monica',rev:170199330},
+  ],
+
+  monica_top5:[
+    {n:'INTERCONTINENTAL BALI RESORT', rev:880739004, pct:17.18},
+    {n:'CONRAD HOTEL',                 rev:860027396, pct:16.77},
+    {n:'HILTON HOTEL',                 rev:656527280, pct:12.80},
+    {n:'MERUSAKA NUSA DUA',            rev:511409218, pct:9.97},
+    {n:'MOVENPICK',                    rev:247714746, pct:4.83},
+  ],
+  juni_top5:[
+    {n:'BAMBU BALI ULUWATU', rev:1185026950, pct:39.18},
+    {n:'TABU ULUWATU',       rev:281166600,  pct:9.30},
+    {n:'NOURISH UNGASAN',    rev:264516380,  pct:8.74},
+    {n:'COCO ROTI',          rev:161756200,  pct:5.35},
+    {n:'NOURISH CAFE',       rev:134169850,  pct:4.44},
+  ],
+
+  abc:[
+    {cls:'A',accs:21, rev:6468991444, pct:0.794, strat:'Top 20% — Protect & Grow'},
+    {cls:'B',accs:34, rev:1268618252, pct:0.156, strat:'Middle — Upsell'},
+    {cls:'C',accs:113,rev:414789480,  pct:0.051, strat:'Long tail — Review'},
+  ],
+
+  products:[
+    {n:'Tepung Double Zero @25Kg',      rev:782995950, cust:59},
+    {n:'Allana Tenderloin Whole',        rev:771036520, cust:11},
+    {n:'ECT Tenderloin Import',          rev:611593336, cust:7},
+    {n:'BALIAN Glass Still 750ml',       rev:455604000, cust:17},
+    {n:'BALIAN Glass Still 330ml',       rev:423274070, cust:20},
+    {n:'Australian Butter Unsalted',     rev:377650000, cust:1},
+    {n:'Tepung 00 Fusion @25Kg',         rev:367058800, cust:18},
+    {n:'Tepung Hime @25Kg',              rev:359386150, cust:14},
+    {n:'Halal Premium Oxtail 3Cm',       rev:336424308, cust:4},
+    {n:'MAMAS BELLY RIND ON SB',         rev:325982398, cust:6},
+  ],
+
+  grow_m:[
+    {n:'UMANA BALI',                     cls:'B',g:369.1, lat:10752040},
+    {n:'ULU SEGARA LUXURY',              cls:'C',g:200.0, lat:1650000},
+    {n:'NUSA DUA BEACH HOTEL',           cls:'B',g:194.3, lat:48300000},
+    {n:'BULGARI',                        cls:'A',g:121.5, lat:2516520},
+    {n:'RITZ CARLTON',                   cls:'B',g:109.1, lat:33643000},
+    {n:'BALI NUSA DUA CONV. CTR',        cls:'B',g:103.4, lat:32532900},
+  ],
+  grow_j:[
+    {n:'TT BEACH CLUB',                  cls:'C',g:921,   lat:1904130},
+    {n:'PT BALI PAWIWAHAN',              cls:'A',g:642,   lat:68901935},
+    {n:'CAFE MADE BAKERY',               cls:'C',g:240,   lat:6431904},
+    {n:'LA TERAZA',                      cls:'B',g:225,   lat:5683200},
+    {n:'CV. TROPIKAL - OFFICE',          cls:'C',g:166,   lat:1445850},
+    {n:'MAGUS WARUNG MELASTI',           cls:'B',g:153,   lat:6395105},
+    {n:'GOURMET GARAGE',                 cls:'C',g:131,   lat:1509600},
+    {n:'MANARAI BEACH HOUSE',            cls:'C',g:100,   lat:775000},
+  ],
+
+  bal_grow_m:[
+    {n:'PARADISUS BY MELIA NUSA DUA',   cls:'A',g:108.4, lat:247975600},
+    {n:'UMANA BALI HOTEL RESORT',       cls:'B',g:14.0,  lat:11258000},
+  ],
+  bal_grow_j:[
+    {n:'MASON ULUWATU',                 cls:'A',g:99.3,  lat:26948000},
+    {n:'GELATO FACTORY ULUWATU',        cls:'C',g:87.5,  lat:2700000},
+    {n:'LOSTERIA LABUAN SAIT',          cls:'B',g:81.5,  lat:20800000},
+    {n:'LOSTERIA JIMBARAN',             cls:'C',g:32.3,  lat:6520000},
+    {n:'ULU CLIFF HOUSE',               cls:'A',g:26.1,  lat:31900000},
+  ],
+  bal_dec_m:  [],
+  bal_dec_j:  [],
+  bal_dorm_m: [],
+  bal_dorm_j: [],
+
+  dec_m:[
+    {n:'KARMA KANDARA',                  cls:'C',d:-100.0, act:'URGENT'},
+    {n:'SOL BY MELIA BENOA',             cls:'C',d:-100.0, act:'URGENT'},
+    {n:'THE MULIA HOTEL',                cls:'B',d:-82.0,  act:'URGENT'},
+    {n:'COURTYARD MARRIOT HOTEL',        cls:'A',d:-78.3,  act:'URGENT'},
+    {n:'LE MERIDIEN JIMBARAN',           cls:'B',d:-67.7,  act:'URGENT'},
+    {n:'BALI TROPIC RESORT & SPA',       cls:'B',d:-58.2,  act:'URGENT'},
+    {n:'HOLIDAY INN TANJUNG BENOA',      cls:'C',d:-46.5,  act:'URGENT'},
+    {n:'SOFITEL BALI ND BEACH RESORT',   cls:'A',d:-41.4,  act:'URGENT'},
+  ],
+  dec_j:[
+    {n:'DELICATESSEN',                   cls:'C',d:-100.0, act:'URGENT'},
+    {n:'GORGONZOLA RESTAURANT',          cls:'C',d:-100.0, act:'URGENT'},
+    {n:'MURNI NI KOMANG',                cls:'B',d:-100.0, act:'URGENT'},
+    {n:'NUSA DUA PIZZA',                 cls:'C',d:-100.0, act:'URGENT'},
+    {n:'PT ULU ARTISAN EATS',            cls:'B',d:-100.0, act:'URGENT'},
+    {n:'ROLLING FORK ULUWATU',           cls:'C',d:-100.0, act:'URGENT'},
+    {n:'ACALA BAR BISTRO',               cls:'C',d:-100.0, act:'URGENT'},
+    {n:'AMAZING BALI CATERING',          cls:'C',d:-100.0, act:'URGENT'},
+  ],
+
+  dorm_m:[
+    {n:'KARMA KANDARA',                  cls:'C',last:'Apr', ytd:10150950},
+    {n:'ARMATERRA HOTEL',                cls:'C',last:'Feb', ytd:2905000},
+    {n:'THE SAKALA RESORT',              cls:'C',last:'Mar', ytd:2780000},
+    {n:'SIX SENSE ULUWATU',              cls:'C',last:'Jan', ytd:1160000},
+    {n:'NEST HOTEL NUSA DUA',            cls:'C',last:'Feb', ytd:945000},
+    {n:'JANGAN DIPAKAI MELIA BALI SOL',  cls:'C',last:'Feb', ytd:362970},
+  ],
+  dorm_j:[
+    {n:'AMAZING BALI CATERING',          cls:'C',last:'Apr', ytd:12509600},
+    {n:'NUSA DUA PIZZA',                 cls:'C',last:'Apr', ytd:9142310},
+    {n:'ROLLING FORK ULUWATU',           cls:'C',last:'Apr', ytd:6940000},
+    {n:'MADE BAKERY',                    cls:'C',last:'Mar', ytd:6555000},
+    {n:'MR SMASH BURGER ULUWATU',        cls:'C',last:'Feb', ytd:5800000},
+    {n:'DELICATESSEN',                   cls:'C',last:'Apr', ytd:4299700},
+    {n:'IGLOOS BAKERY JIMBARAN',         cls:'C',last:'Apr', ytd:2510600},
+    {n:'BENDEGA RESTAURANT JIMBARAN',    cls:'C',last:'Mar', ytd:2305345},
+    {n:'NUSA DUA BEACH GRILL',           cls:'C',last:'Mar', ytd:2241000},
+    {n:'GORGONZOLA RESTAURANT',          cls:'C',last:'Apr', ytd:1709400},
+    {n:'TANAH BAKERY AND GRILL',         cls:'C',last:'Feb', ytd:1680000},
+    {n:'ULUWATU STREET PIZZA',           cls:'C',last:'Apr', ytd:1665000},
+    {n:'PIZZA MAFIA JIMBARAN',           cls:'C',last:'Apr', ytd:1555775},
+    {n:'C CAFE JIMBARAN',                cls:'C',last:'Feb', ytd:1303875},
+    {n:'AKUA DE BILBAO',                 cls:'C',last:'Feb', ytd:1120000},
+  ],
+
+  ups_m:[
+    {n:'INTERCONTINENTAL BALI RESORT', prod:'Traditional Smoked Salmon',    cls:'A',rev:880739004},
+    {n:'CONRAD HOTEL',                 prod:'Australian Butter Unsalted',   cls:'A',rev:860027396},
+    {n:'HILTON HOTEL',                 prod:'MAMAS BELLY RIND ON SB',       cls:'A',rev:656527280},
+    {n:'MERUSAKA NUSA DUA',            prod:'Allana Tenderloin Whole',      cls:'A',rev:511409218},
+    {n:'PT. GRAHA ALAM LESTARI',       prod:'Tepung Hime @25Kg',           cls:'A',rev:201377944},
+    {n:'MOVENPICK',                    prod:'Gold Box Melange Butter',      cls:'A',rev:247714746},
+  ],
+  ups_j:[
+    {n:'BAMBU BALI ULUWATU',           prod:'ECT Tenderloin Import',        cls:'A',rev:1185026950},
+    {n:'TABU ULUWATU',                 prod:'Allana Tenderloin Whole',      cls:'A',rev:281166600},
+    {n:'NOURISH UNGASAN',              prod:'DP Mozzarella 2.5Kg',          cls:'A',rev:264516380},
+    {n:'COCO ROTI',                    prod:'Canary Lactic Butter 10Kg',    cls:'A',rev:161756200},
+    {n:'NOURISH CAFE',                 prod:'Tepung Hime @25Kg',            cls:'A',rev:134169850},
+    {n:'VIVRE CATERING',               prod:'Tepung 00 Fusion @25Kg',      cls:'A',rev:117603000},
+    {n:'LOSTERIA LABUAN SAIT',         prod:'Tepung Double Zero @25Kg',     cls:'A',rev:112677060},
+  ],
+
+  opps:[
+    {rank:1,n:'NOURISH UNGASAN',           sp:'Juni',  cls:'A',skus:4,  ytd:264516380, act:'Pitch full pasta & dry goods range'},
+    {rank:2,n:'PT. GRAHA ALAM LESTARI',    sp:'Monica',cls:'A',skus:13, ytd:409077944, act:'Introduce Armando linguine & spaghetti'},
+    {rank:3,n:'NOURISH CAFE',              sp:'Juni',  cls:'A',skus:2,  ytd:134169850, act:'Cross-sell dry goods & sauces'},
+    {rank:4,n:'VIVRE CATERING',            sp:'Juni',  cls:'A',skus:1,  ytd:117603000, act:'Expand beyond Tepung 00 Fusion'},
+    {rank:5,n:'BALI NUSA DUA CONV. CTR',   sp:'Monica',cls:'A',skus:3,  ytd:85383404,  act:'Share product catalogue — schedule tasting'},
+  ],
+
+  // pipeline removed
+};
+
+// ════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════
+function idr(v,compact=true){
+  if(!v||v===0)return'IDR 0';
+  const a=Math.abs(v);
+  if(compact){
+    if(a>=1e9)return'IDR '+(v/1e9).toFixed(2)+' M';
+    if(a>=1e6)return'IDR '+(v/1e6).toFixed(1)+' Jt';
+  }
+  return'IDR '+Math.round(v).toLocaleString('id-ID');
+}
+function pct(v){return(v*100).toFixed(1)+'%'}
+function gStr(v){const s=v>=0?'+':'';return s+v.toFixed(1)+'%'}
+function clsBa(c){return`<span class="ba ba-${c}">${c}</span>`}
+function spBa(s){return s==='Monica'?`<span class="ba ba-M">Monica</span>`:`<span class="ba ba-J">Juni</span>`}
+function actBa(a){
+  if(a==='URGENT')return`<span style="color:var(--red);font-weight:700;font-size:11px">URGENT</span>`;
+  if(a==='Call')return`<span style="color:var(--orange);font-size:11px">Call</span>`;
+  return`<span style="color:var(--muted);font-size:11px">${a}</span>`;
+}
+
+// ════════════════════════════════════════════
+// POPULATE TABLES
+// ════════════════════════════════════════════
+
+// Top 10
+const t10=document.getElementById('t-top10');
+D.top10.forEach((c,i)=>{
+  const rkCls=i===0?'rk-1':i===1?'rk-2':i===2?'rk-3':'rk';
+  const tr=document.createElement('tr');
+  tr.innerHTML=`
+    <td><span class="${rkCls}">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</span></td>
+    <td style="font-weight:${i<3?600:400};max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
+    <td>${clsBa(c.cls)}</td>
+    <td>${spBa(c.sp)}</td>
+    <td class="ta-r" style="font-weight:600">${idr(c.rev)}</td>`;
+  t10.appendChild(tr);
+});
+
+// ABC rows
+const abcEl=document.getElementById('abc-rows');
+const abcCol=['var(--red)','var(--orange)','var(--muted)'];
+D.abc.forEach((a,i)=>{
+  abcEl.innerHTML+=`
+    <div style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+        <span>${clsBa(a.cls)} <span style="font-size:12px;margin-left:6px">${a.accs} accounts</span></span>
+        <span style="font-weight:700;color:${abcCol[i]}">${idr(a.rev)}</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-bar" style="width:${(a.pct*100).toFixed(1)}%;background:${abcCol[i]}"></div></div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">${(a.pct*100).toFixed(1)}% · ${a.strat}</div>
+    </div>`;
+});
+
+// Top5 rows
+function fillTop5(elId,data,col){
+  const el=document.getElementById(elId);
+  data.forEach(c=>{
+    el.innerHTML+=`
+      <div class="top5-row">
+        <span style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60%">${c.n}</span>
+        <span style="font-size:12px;font-weight:700;color:${col}">${idr(c.rev)}</span>
+      </div>`;
+  });
+}
+fillTop5('monica-top5',D.monica_top5,'var(--monica)');
+fillTop5('juni-top5',D.juni_top5,'var(--juni)');
+
+// Growing
+function fillGrow(id,data){
+  const tb=document.getElementById(id);
+  data.forEach(c=>{
+    const pos=c.g>=0;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
+      <td>${clsBa(c.cls)}</td>
+      <td style="color:${pos?'var(--green)':'var(--red)'};font-weight:600">${gStr(c.g)}</td>
+      <td class="ta-r">${idr(c.lat)}</td>`;
+    tb.appendChild(tr);
+  });
+}
+fillGrow('t-fb-grow-m',D.grow_m);
+fillGrow('t-fb-grow-j',D.grow_j);
+fillGrow('t-bal-grow-m',D.bal_grow_m);
+fillGrow('t-bal-grow-j',D.bal_grow_j);
+
+// Declining
+function fillDec(id,data){
+  const tb=document.getElementById(id);
+  data.forEach(c=>{
+    const pos=c.d>=0;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
+      <td>${clsBa(c.cls)}</td>
+      <td style="color:${pos?'var(--green)':'var(--red)'};font-weight:600">${gStr(c.d)}</td>
+      <td class="ta-r">${actBa(c.act)}</td>`;
+    tb.appendChild(tr);
+  });
+}
+fillDec('t-fb-dec-m',D.dec_m);
+fillDec('t-fb-dec-j',D.dec_j);
+fillDec('t-bal-dec-m',D.bal_dec_m);
+fillDec('t-bal-dec-j',D.bal_dec_j);
+
+// Dormant
+function fillDorm(id,data){
+  const tb=document.getElementById(id);
+  data.forEach(c=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
+      <td>${clsBa(c.cls)}</td>
+      <td style="color:var(--muted);font-size:11px">${c.last}</td>
+      <td class="ta-r">${idr(c.ytd)}</td>`;
+    tb.appendChild(tr);
+  });
+}
+fillDorm('t-fb-dorm-m',D.dorm_m);
+fillDorm('t-fb-dorm-j',D.dorm_j);
+fillDorm('t-bal-dorm-m',D.bal_dorm_m);
+fillDorm('t-bal-dorm-j',D.bal_dorm_j);
+// update dormant counts in tabs
+const fbDormEl=document.getElementById('fb-dorm-count');
+if(fbDormEl) fbDormEl.textContent=D.dorm_m.length+D.dorm_j.length;
+const balDormEl=document.getElementById('bal-dorm-count');
+if(balDormEl) balDormEl.textContent=D.bal_dorm_m.length+D.bal_dorm_j.length;
+
+// Upsell
+function fillUps(id,data){
+  const tb=document.getElementById(id);
+  data.forEach(c=>{
+    const p=c.prod.length>18?c.prod.substring(0,18)+'…':c.prod;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500">${c.n}</td>
+      <td style="font-size:11px;color:var(--muted)">${p}</td>
+      <td>${clsBa(c.cls)}</td>
+      <td class="ta-r" style="font-weight:600">${idr(c.rev)}</td>`;
+    tb.appendChild(tr);
+  });
+}
+fillUps('t-ups-m',D.ups_m);
+fillUps('t-ups-j',D.ups_j);
+
+// Opportunities
+const oppEl=document.getElementById('opp-list');
+D.opps.forEach(o=>{
+  const oc={'A':'var(--red)','B':'var(--orange)','C':'var(--muted)'}[o.cls];
+  const sc=o.sp==='Monica'?'var(--monica)':'var(--juni)';
+  oppEl.innerHTML+=`
+    <div class="opp">
+      <div class="opp-rank" style="color:${oc}">#${o.rank}</div>
+      <div style="flex:1;min-width:0">
+        <div class="opp-name">${o.n}</div>
+        <div class="opp-meta">
+          <span style="color:${sc}">${o.sp}</span>
+          ${clsBa(o.cls)}
+          <span>${o.skus} SKUs</span>
+          <span>YTD: ${idr(o.ytd)}</span>
+        </div>
+        <div class="opp-act">→ ${o.act}</div>
+      </div>
+    </div>`;
+});
+
+// ── Dynamic weekly actions ─────────────────────
+function buildActions(){
+  const dormCount = D.dorm_m.length + D.dorm_j.length;
+  const decUrgM   = D.dec_m.filter(c=>c.act==='URGENT');
+  const decUrgJ   = D.dec_j.filter(c=>c.act==='URGENT');
+  const mConc     = D.monica_top5.slice(0,3).reduce((s,c)=>s+c.pct,0).toFixed(1);
+  const jConc     = D.juni_top5.slice(0,3).reduce((s,c)=>s+c.pct,0).toFixed(1);
+  const mYTD      = [...D.monica_fb,...D.monica_bal].reduce((a,b)=>a+b,0);
+  const jYTD      = [...D.juni_fb,  ...D.juni_bal  ].reduce((a,b)=>a+b,0);
+  const topOpp    = D.opps[0];
+  const topGrowM  = D.grow_m[0];
+  const topGrowJ  = D.grow_j[0];
+
+  const acts = [];
+
+  // Monday — P1 urgent
+  acts.push({day:'MON',col:'var(--red)',label:'P1',
+    act:`Review updated data — verify KPIs and flag any anomalies.`,owner:'Manager'});
+  if(dormCount>0) acts.push({day:'MON',col:'var(--red)',label:'P1',
+    act:`${dormCount} dormant accounts — follow up A/B-class first; re-activation call list.`,owner:'Both'});
+  if(decUrgM.length>0) acts.push({day:'MON',col:'var(--red)',label:'P1',
+    act:`Monica: Contact ${decUrgM[0].n}${decUrgM.length>1?' + '+(decUrgM.length-1)+' more':''} — urgent revenue decline.`,owner:'Monica'});
+  if(decUrgJ.length>0) acts.push({day:'MON',col:'var(--red)',label:'P1',
+    act:`Juni: Contact ${decUrgJ[0].n}${decUrgJ.length>1?' + '+(decUrgJ.length-1)+' more':''} — urgent revenue decline.`,owner:'Juni'});
+
+  // Tuesday — P2 concentration & strategy
+  acts.push({day:'TUE',col:'var(--yellow)',label:'P2',
+    act:`Monica top-3 conc. ${mConc}% (YTD ${idr(mYTD)}) — grow pipeline beyond current key accounts.`,owner:'Monica'});
+  acts.push({day:'TUE',col:'var(--yellow)',label:'P2',
+    act:`Juni top-3 conc. ${jConc}% (YTD ${idr(jYTD)}) — pitch 2+ new categories to mid-tier accounts.`,owner:'Juni'});
+
+  // Wednesday — P2 opportunity visit
+  if(topOpp) acts.push({day:'WED',col:'var(--yellow)',label:'P2',
+    act:`Opp #1 — ${topOpp.n} (${topOpp.sp}, ${topOpp.skus} SKUs, YTD ${idr(topOpp.ytd)}): ${topOpp.act}`,owner:topOpp.sp});
+  if(topGrowM) acts.push({day:'WED',col:'var(--yellow)',label:'P2',
+    act:`Monica growth account: ${topGrowM.n} +${topGrowM.g}% — reinforce with new SKU proposal.`,owner:'Monica'});
+  if(topGrowJ) acts.push({day:'WED',col:'var(--yellow)',label:'P2',
+    act:`Juni growth account: ${topGrowJ.n} +${topGrowJ.g}% — lock in next order before month-end.`,owner:'Juni'});
+
+  // Thursday — P2 commercial
+  acts.push({day:'THU',col:'var(--yellow)',label:'P2',
+    act:'Prepare bundle promos: pair slow-moving SKUs with top sellers for next cycle.',owner:'Manager'});
+
+  // Friday — P3 review
+  acts.push({day:'FRI',col:'var(--green)',label:'P3',
+    act:`Weekly KPI review — compare actuals vs ${idr(D.target)} target, set next-week priorities.`,owner:'Manager'});
+
+  return acts;
+}
+
+function renderActions(){
+  const actEl = document.getElementById('action-list');
+  const period = document.getElementById('action-period');
+  actEl.innerHTML='';
+  if(period) period.textContent = D.months[D.months.length-1]+' data';
+  const labelCols={P1:'var(--red)',P2:'var(--yellow)',P3:'var(--green)'};
+  buildActions().forEach(a=>{
+    actEl.innerHTML+=`
+      <div class="action-item">
+        <div style="min-width:40px;padding-top:2px;display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div class="action-day">${a.day}</div>
+          <span style="font-size:9px;font-weight:700;color:${labelCols[a.label]||'var(--muted)'};background:${labelCols[a.label]||'var(--muted)'}22;padding:1px 5px;border-radius:3px;line-height:1.4">${a.label}</span>
+        </div>
+        <div>
+          <div style="font-size:12px">${a.act}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Owner: ${a.owner}</div>
+        </div>
+      </div>`;
+  });
+}
+renderActions();
+
+// ════════════════════════════════════════════
+// CHARTS
+// ════════════════════════════════════════════
+function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||null}
+const allCharts=[];
+
+function makeCF(){
+  const grid=cv('--surf2'), tick=cv('--subtle'),
+        tipBg=cv('--surf'), tipBd=cv('--bord'), tipTt=cv('--txt'), tipBy=cv('--muted');
+  return {
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{backgroundColor:tipBg,borderColor:tipBd,borderWidth:1,
+               titleColor:tipTt,bodyColor:tipBy,padding:10}
+    },
+    scales:{
+      x:{grid:{color:grid},ticks:{color:tick,font:{size:11}}},
+      y:{grid:{color:grid},ticks:{color:tick,font:{size:11},
+        callback:v=>{
+          if(v>=1e9)return(v/1e9).toFixed(1)+'M';
+          if(v>=1e6)return(v/1e6).toFixed(0)+'Jt';
+          return v===0?'0':v;
+        }
+      }}
+    }
+  };
+}
+
+function refreshCharts(){
+  const c=makeCF();
+  allCharts.forEach(ch=>{
+    if(ch.options.scales){
+      ['x','y'].forEach(ax=>{
+        if(ch.options.scales[ax]){
+          if(ch.options.scales[ax].grid) ch.options.scales[ax].grid.color=c.scales[ax].grid.color;
+          if(ch.options.scales[ax].ticks) ch.options.scales[ax].ticks.color=c.scales[ax].ticks.color;
+        }
+      });
+    }
+    const tt=ch.options.plugins?.tooltip;
+    if(tt){
+      tt.backgroundColor=c.plugins.tooltip.backgroundColor;
+      tt.borderColor=c.plugins.tooltip.borderColor;
+      tt.titleColor=c.plugins.tooltip.titleColor;
+      tt.bodyColor=c.plugins.tooltip.bodyColor;
+    }
+    // ABC donut border tracks surface color
+    if(ch.config.type==='doughnut'){
+      ch.data.datasets[0].borderColor=cv('--surf');
+    }
+    ch.update('none');
+  });
+}
+
+// Revenue trend
+allCharts.push(new Chart(document.getElementById('cRevenue'),{
+  type:'line',
+  data:{
+    labels:D.months,
+    datasets:[
+      {label:'Monica F&B',data:D.monica_fb,borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.08)',tension:.35,fill:true,pointRadius:4,pointBackgroundColor:'#58a6ff'},
+      {label:'Juni F&B',  data:D.juni_fb,  borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.08)',  tension:.35,fill:true,pointRadius:4,pointBackgroundColor:'#3fb950'},
+      {label:'Target',    data:D.months.map(()=>D.target),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false}
+    ]
+  },
+  options:(()=>{const c=makeCF();return{...c,plugins:{...c.plugins,tooltip:{...c.plugins.tooltip,
+    callbacks:{label:ctx=>ctx.dataset.label+': '+idr(ctx.raw)}}}};})()
+}));
+
+// Balian chart
+allCharts.push(new Chart(document.getElementById('cBalian'),{
+  type:'bar',
+  data:{
+    labels:D.months,
+    datasets:[
+      {label:'Monica Balian',data:D.monica_bal,backgroundColor:'rgba(88,166,255,0.65)',borderRadius:4},
+      {label:'Juni Balian',  data:D.juni_bal,  backgroundColor:'rgba(63,185,80,0.65)', borderRadius:4}
+    ]
+  },
+  options:(()=>{const c=makeCF();return{...c,plugins:{...c.plugins,
+    legend:{display:true,position:'top',labels:{color:cv('--muted'),font:{size:11},boxWidth:12,padding:10}}}};})()
+}));
+
+// Monica monthly
+allCharts.push(new Chart(document.getElementById('cMonica'),{
+  type:'bar',
+  data:{
+    labels:D.months,
+    datasets:[{
+      data:D.monica_fb.map(v=>v/1e9),
+      backgroundColor:D.monica_fb.map((_,i)=>i===D.monica_fb.length-1?'#58a6ff':'rgba(88,166,255,0.4)'),
+      borderRadius:4
+    }]
+  },
+  options:(()=>{const c=makeCF();return{...c,scales:{
+    x:{grid:{display:false},ticks:{color:c.scales.x.ticks.color,font:{size:10}}},
+    y:{grid:{color:c.scales.y.grid.color},ticks:{color:c.scales.y.ticks.color,font:{size:10},callback:v=>v.toFixed(2)+'M'}}
+  }};})()
+}));
+
+// Juni monthly
+allCharts.push(new Chart(document.getElementById('cJuni'),{
+  type:'bar',
+  data:{
+    labels:D.months,
+    datasets:[{
+      data:D.juni_fb.map(v=>v/1e9),
+      backgroundColor:D.juni_fb.map((_,i)=>i===D.juni_fb.length-1?'#3fb950':'rgba(63,185,80,0.4)'),
+      borderRadius:4
+    }]
+  },
+  options:(()=>{const c=makeCF();return{...c,scales:{
+    x:{grid:{display:false},ticks:{color:c.scales.x.ticks.color,font:{size:10}}},
+    y:{grid:{color:c.scales.y.grid.color},ticks:{color:c.scales.y.ticks.color,font:{size:10},callback:v=>v.toFixed(2)+'M'}}
+  }};})()
+}));
+
+// ABC donut
+allCharts.push(new Chart(document.getElementById('cABC'),{
+  type:'doughnut',
+  data:{
+    labels:['Class A','Class B','Class C'],
+    datasets:[{
+      data:D.abc.map(a=>a.rev),
+      backgroundColor:['rgba(248,81,73,0.85)','rgba(240,136,62,0.85)','rgba(139,148,158,0.5)'],
+      borderColor:cv('--surf'),borderWidth:3
+    }]
+  },
+  options:(()=>{const c=makeCF();return{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{display:true,position:'bottom',labels:{color:cv('--muted'),font:{size:11},boxWidth:12,padding:10}},
+      tooltip:{...c.plugins.tooltip,
+        callbacks:{label:ctx=>`${ctx.label}: ${idr(ctx.raw)} (${(D.abc[ctx.dataIndex].pct*100).toFixed(1)}%)`}
+      }
+    }
+  };})()
+}));
+
+// Top products horizontal bar
+allCharts.push(new Chart(document.getElementById('cProducts'),{
+  type:'bar',
+  data:{
+    labels:D.products.map(p=>p.n.length>24?p.n.substring(0,24)+'…':p.n),
+    datasets:[{
+      data:D.products.map(p=>p.rev),
+      backgroundColor:['#58a6ff','#3fb950','#f0883e','#bc8cff','#f85149','#39c5cf','#e3b341','#58a6ff','#3fb950','#f0883e'].map(c=>c+'cc'),
+      borderRadius:4
+    }]
+  },
+  options:(()=>{const c=makeCF();return{...c,
+    indexAxis:'y',
+    scales:{
+      x:{grid:{color:c.scales.x.grid.color},ticks:{color:c.scales.x.ticks.color,font:{size:10},
+        callback:v=>{if(v>=1e9)return(v/1e9).toFixed(1)+'M';if(v>=1e6)return(v/1e6).toFixed(0)+'Jt';return v;}}},
+      y:{grid:{display:false},ticks:{color:cv('--txt'),font:{size:11}}}
+    },
+    plugins:{...c.plugins,tooltip:{...c.plugins.tooltip,
+      callbacks:{label:ctx=>`${idr(ctx.raw)} · ${D.products[ctx.dataIndex].cust} customers`}
+    }}
+  };})()
+}));
+
+// ════════════════════════════════════════════
+// CHANNEL & TAB SWITCHING
+// ════════════════════════════════════════════
+function switchChannel(ch, btn){
+  document.querySelectorAll('.ch-btn').forEach(b=>b.classList.remove('act'));
+  btn.classList.add('act');
+  document.getElementById('ch-panel-fb').style.display  = ch==='fb'  ? '' : 'none';
+  document.getElementById('ch-panel-bal').style.display = ch==='bal' ? '' : 'none';
+}
+
+function switchTabCh(ch, tab, btn){
+  const panel = document.getElementById('ch-panel-'+ch);
+  panel.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('act'));
+  panel.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('act'));
+  document.getElementById('tp-'+ch+'-'+tab).classList.add('act');
+  btn.classList.add('act');
+}
+
+// ════════════════════════════════════════════
+// TARGET (persisted in localStorage)
+// ════════════════════════════════════════════
+function toggleTargetInput(){
+  const wrap=document.getElementById('target-input-wrap');
+  if(!wrap)return;
+  const showing=wrap.style.display!=='none';
+  wrap.style.display=showing?'none':'block';
+  if(!showing){
+    const inp=document.getElementById('target-miliar');
+    if(inp) inp.value=(D.target/1e9).toFixed(1);
+    inp&&inp.focus();
+  }
+}
+
+function saveTarget(){
+  const inp=document.getElementById('target-miliar');
+  const val=parseFloat(inp&&inp.value);
+  if(!val||val<=0)return;
+  D.target=Math.round(val*1e9);
+  localStorage.setItem('dashboard_target',String(D.target));
+  document.getElementById('target-input-wrap').style.display='none';
+  _updateTargetUI();
+  // update revenue chart target line
+  const revChart=allCharts[0];
+  if(revChart){
+    revChart.data.datasets[2].data=D.months.map(()=>D.target);
+    revChart.update();
+  }
+  renderActions();
+}
+
+function _updateTargetUI(){
+  const mayFB = D.monica_fb[4]+D.juni_fb[4];
+  const diff=mayFB-D.target;
+  const pctVal=((mayFB/D.target-1)*100).toFixed(1);
+  const kpiEl=document.getElementById('kpi-vs-target');
+  const dispEl=document.getElementById('target-display');
+  if(kpiEl){
+    kpiEl.className='kpi-val '+(diff>=0?'g':'r');
+    kpiEl.textContent=(diff>=0?'+':'')+idr(diff);
+  }
+  if(dispEl) dispEl.textContent=idr(D.target)+' · '+(diff>=0?'+':'')+pctVal+'%';
+}
+
+function initTarget(){
+  const saved=localStorage.getItem('dashboard_target');
+  if(saved){
+    const n=parseInt(saved,10);
+    if(n>0) D.target=n;
+  }
+  _updateTargetUI();
+}
+initTarget();
+
+// ════════════════════════════════════════════
+// MOBILE NAV
+// ════════════════════════════════════════════
+const ALL_SECS=['s-kpi','s-revenue','s-sales','s-products','s-customers','s-opps','s-actions'];
+const MOB_PAGES={
+  overview:['s-kpi'],
+  revenue: ['s-revenue'],
+  customers:['s-customers','s-opps'],
+  products: ['s-products','s-sales'],
+  actions:  ['s-actions']
+};
+
+function mobNav(page,btn){
+  if(window.innerWidth>768){return;}
+  document.querySelectorAll('.mnav-btn').forEach(b=>b.classList.remove('act'));
+  btn.classList.add('act');
+  ALL_SECS.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.style.display=MOB_PAGES[page].includes(id)?'block':'none';
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function initMobile(){
+  if(window.innerWidth<=768){
+    ALL_SECS.forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.style.display='none';
+    });
+    MOB_PAGES['overview'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.style.display='block';
+    });
+  } else {
+    ALL_SECS.forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.style.display='';
+    });
+  }
+}
+
+window.addEventListener('resize',()=>{
+  if(window.innerWidth>768){
+    ALL_SECS.forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='';});
+  }
+});
+
+initMobile();
+
+// ════════════════════════════════════════════
+// THEME TOGGLE
+// ════════════════════════════════════════════
+function applyThemeToDOM(resolved){
+  document.documentElement.setAttribute('data-theme', resolved);
+  refreshCharts();
+}
+
+function setTheme(choice){
+  localStorage.setItem('theme', choice);
+  // Update button states
+  document.querySelectorAll('.tt-btn').forEach(b=>b.classList.remove('act'));
+  const btn=document.getElementById('tt-'+choice);
+  if(btn)btn.classList.add('act');
+  // Resolve system
+  const resolved = choice==='system'
+    ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+    : choice;
+  applyThemeToDOM(resolved);
+}
+
+// Init theme on load
+(function(){
+  const saved = localStorage.getItem('theme')||'dark';
+  const resolved = saved==='system'
+    ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+    : saved;
+  document.documentElement.setAttribute('data-theme', resolved);
+  const btn = document.getElementById('tt-'+saved);
+  if(btn) btn.classList.add('act');
+  // Remove default act if different from saved
+  if(saved!=='dark') document.getElementById('tt-dark')?.classList.remove('act');
+})();
+
+// Follow system changes when mode=system
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e=>{
+  if(localStorage.getItem('theme')==='system'){
+    applyThemeToDOM(e.matches ? 'light' : 'dark');
+  }
+});
+
+// PWA service worker
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
