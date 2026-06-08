@@ -23,6 +23,7 @@
   --monica:#58a6ff;--juni:#3fb950;
   --shadow:0 1px 3px rgba(0,0,0,.5);
   --hover-row:rgba(255,255,255,.03);
+  --chart-grid:rgba(255,255,255,0.06);
 }
 [data-theme="light"]{
   --bg:#f6f8fa;--surf:#ffffff;--surf2:#eaeef2;--bord:#d0d7de;
@@ -34,6 +35,7 @@
   --monica:#0969da;--juni:#1a7f37;
   --shadow:0 1px 3px rgba(0,0,0,.15);
   --hover-row:rgba(0,0,0,.04);
+  --chart-grid:rgba(0,0,0,0.07);
 }
 body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.5;min-height:100vh;transition:background .2s,color .2s}
 ::-webkit-scrollbar{width:5px;height:5px}
@@ -932,7 +934,7 @@ function cv(n){return getComputedStyle(document.documentElement).getPropertyValu
 const allCharts=[];
 
 function makeCF(){
-  const grid=cv('--surf2'), tick=cv('--subtle'),
+  const grid=cv('--chart-grid'), tick=cv('--subtle'),
         tipBg=cv('--surf'), tipBd=cv('--bord'), tipTt=cv('--txt'), tipBy=cv('--muted');
   return {
     responsive:true,
@@ -956,27 +958,25 @@ function makeCF(){
 }
 
 function refreshCharts(){
-  const c=makeCF();
+  const grid=cv('--chart-grid'), tick=cv('--subtle');
+  const tipBg=cv('--surf'), tipBd=cv('--bord'), tipTt=cv('--txt'), tipBy=cv('--muted');
   allCharts.forEach(ch=>{
     if(ch.options.scales){
-      if(ch.options.scales.y){
-        if(ch.options.scales.y.grid) ch.options.scales.y.grid.color=c.scales.y.grid.color;
-        if(ch.options.scales.y.ticks) ch.options.scales.y.ticks.color=c.scales.y.ticks.color;
-      }
-      if(ch.options.scales.x&&ch.options.scales.x.ticks){
-        ch.options.scales.x.ticks.color=c.scales.x.ticks.color;
-      }
+      ['x','y'].forEach(ax=>{
+        const s=ch.options.scales[ax];
+        if(!s)return;
+        if(s.grid&&s.grid.display!==false) s.grid.color=grid;
+        if(s.ticks) s.ticks.color=tick;
+      });
     }
     const tt=ch.options.plugins?.tooltip;
     if(tt){
-      tt.backgroundColor=c.plugins.tooltip.backgroundColor;
-      tt.borderColor=c.plugins.tooltip.borderColor;
-      tt.titleColor=c.plugins.tooltip.titleColor;
-      tt.bodyColor=c.plugins.tooltip.bodyColor;
+      tt.backgroundColor=tipBg; tt.borderColor=tipBd;
+      tt.titleColor=tipTt; tt.bodyColor=tipBy;
     }
-    // ABC donut border tracks surface color
     if(ch.config.type==='doughnut'){
       ch.data.datasets[0].borderColor=cv('--surf');
+      ch.data.datasets[0].borderWidth=2;
     }
     ch.update('none');
   });
@@ -1053,7 +1053,7 @@ allCharts.push(new Chart(document.getElementById('cABC'),{
     datasets:[{
       data:D.abc.map(a=>a.rev),
       backgroundColor:['rgba(248,81,73,0.85)','rgba(240,136,62,0.85)','rgba(139,148,158,0.5)'],
-      borderColor:cv('--surf'),borderWidth:3
+      borderColor:cv('--surf'),borderWidth:2
     }]
   },
   options:(()=>{const c=makeCF();return{
@@ -1081,9 +1081,9 @@ allCharts.push(new Chart(document.getElementById('cProducts'),{
   options:(()=>{const c=makeCF();return{...c,
     indexAxis:'y',
     scales:{
-      x:{grid:{color:c.scales.x.grid.color},ticks:{color:c.scales.x.ticks.color,font:{size:10},
+      x:{grid:{color:cv('--chart-grid')},ticks:{color:c.scales.x.ticks.color,font:{size:10},
         callback:v=>{if(v>=1e9)return(v/1e9).toFixed(1)+'M';if(v>=1e6)return(v/1e6).toFixed(0)+'Jt';return v;}}},
-      y:{grid:{display:false},ticks:{color:cv('--txt'),font:{size:11}}}
+      y:{grid:{display:false},ticks:{color:cv('--subtle'),font:{size:11}}}
     },
     plugins:{...c.plugins,tooltip:{...c.plugins.tooltip,
       callbacks:{label:ctx=>`${idr(ctx.raw)} · ${D.products[ctx.dataIndex].cust} customers`}
