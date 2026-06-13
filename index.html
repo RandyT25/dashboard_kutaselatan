@@ -248,18 +248,13 @@ tr:hover td{background:var(--hover-row)}
 <!-- KPI STRIP -->
 <div class="sec" id="s-kpi">
   <div class="g7">
-    <div class="kpi y">
-      <div class="kpi-lbl" id="kpi-currmonth-lbl">Jun Revenue (MTD)</div>
-      <div class="kpi-val y" id="kpi-currmonth-val">—</div>
-      <div class="kpi-sub" id="kpi-currmonth-sub">Combined · excl. Balian</div>
-    </div>
     <div class="kpi g">
       <div class="kpi-lbl">Revenue YTD</div>
       <div class="kpi-val g">IDR 8.15 M</div>
       <div class="kpi-sub">Jan – Jun 2026 · F&amp;B only</div>
     </div>
     <div class="kpi b">
-      <div class="kpi-lbl" id="kpi-lastmon-lbl">Last Full Month</div>
+      <div class="kpi-lbl" id="kpi-lastmon-lbl">May Revenue</div>
       <div class="kpi-val b" id="kpi-lastmon-val">—</div>
       <span class="badge-pill" id="kpi-lastmon-badge" style="display:none"></span>
     </div>
@@ -279,6 +274,11 @@ tr:hover td{background:var(--hover-row)}
             background:var(--orange);color:#fff;font-size:11px;cursor:pointer;font-weight:600">Save</button>
         </div>
       </div>
+    </div>
+    <div class="kpi y">
+      <div class="kpi-lbl" id="kpi-currmonth-lbl">Jun Revenue (MTD)</div>
+      <div class="kpi-val y" id="kpi-currmonth-val">—</div>
+      <div class="kpi-sub" id="kpi-currmonth-sub">excl. Balian</div>
     </div>
     <div class="kpi c">
       <div class="kpi-lbl">Active Customers</div>
@@ -1002,7 +1002,7 @@ function _updateTargetUI(){
   const valEl=document.getElementById('kpi-lastmon-val');
   const badgeEl=document.getElementById('kpi-lastmon-badge');
   const vtLbl=document.getElementById('kpi-vstarget-lbl');
-  if(lblEl) lblEl.textContent=fullMon+' Revenue (last full)';
+  if(lblEl) lblEl.textContent=fullMon+' Revenue';
   if(valEl) valEl.textContent=idr(fullFB);
   if(vtLbl) vtLbl.textContent='vs Target ('+fullMon+')';
   if(badgeEl && prevIdx>=0){
@@ -1039,7 +1039,9 @@ initTarget();
   const sub = document.getElementById('kpi-currmonth-sub');
   if(lbl) lbl.textContent = lastMon + ' Revenue (MTD)';
   if(el) el.textContent = idr(total);
-  if(sub) sub.textContent = 'M: '+idr(mVal)+' · J: '+idr(jVal);
+  // short format: "M 524Jt · J 513Jt" — no "IDR" prefix to avoid wrapping
+  function shortJt(v){return Math.round(v/1e6)+'Jt';}
+  if(sub) sub.textContent = 'M '+shortJt(mVal)+' · J '+shortJt(jVal)+' · excl. Balian';
 })();
 
 // ════════════════════════════════════════════
