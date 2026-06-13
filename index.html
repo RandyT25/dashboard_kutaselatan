@@ -66,6 +66,7 @@ body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSys
 
 /* ── Grids ── */
 .g6{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.g7{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
 .g21{display:grid;grid-template-columns:2fr 1fr;gap:16px}
@@ -80,10 +81,12 @@ body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSys
 .kpi.c::before{background:var(--cyan)}
 .kpi.p::before{background:var(--purple)}
 .kpi.r::before{background:var(--red)}
+.kpi.y::before{background:var(--yellow)}
 .kpi-lbl{font-size:11px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
 .kpi-val{font-size:22px;font-weight:800;line-height:1.15}
 .kpi-val.g{color:var(--green)}.kpi-val.b{color:var(--blue)}.kpi-val.o{color:var(--orange)}
 .kpi-val.c{color:var(--cyan)}.kpi-val.p{color:var(--purple)}.kpi-val.r{color:var(--red)}
+.kpi-val.y{color:var(--yellow)}
 .kpi-sub{font-size:11px;color:var(--muted);margin-top:4px}
 .badge-pill{display:inline-flex;align-items:center;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;margin-top:4px}
 .pill-up{background:rgba(63,185,80,.15);color:var(--green)}
@@ -185,11 +188,13 @@ tr:hover td{background:var(--hover-row)}
 /* ── Responsive ── */
 @media(max-width:1100px){
   .g6{grid-template-columns:repeat(3,1fr)}
+  .g7{grid-template-columns:repeat(4,1fr)}
   .g21{grid-template-columns:1fr}
   .g12{grid-template-columns:1fr}
 }
 @media(max-width:768px){
   .g6{grid-template-columns:repeat(2,1fr)}
+  .g7{grid-template-columns:repeat(2,1fr)}
   .g2{grid-template-columns:1fr}
   .g3{grid-template-columns:1fr}
   .g21{grid-template-columns:1fr}
@@ -242,20 +247,25 @@ tr:hover td{background:var(--hover-row)}
 
 <!-- KPI STRIP -->
 <div class="sec" id="s-kpi">
-  <div class="g6">
+  <div class="g7">
+    <div class="kpi y">
+      <div class="kpi-lbl" id="kpi-currmonth-lbl">Jun Revenue (MTD)</div>
+      <div class="kpi-val y" id="kpi-currmonth-val">—</div>
+      <div class="kpi-sub" id="kpi-currmonth-sub">Combined · excl. Balian</div>
+    </div>
     <div class="kpi g">
       <div class="kpi-lbl">Revenue YTD</div>
       <div class="kpi-val g">IDR 8.15 M</div>
       <div class="kpi-sub">Jan – Jun 2026 · F&amp;B only</div>
     </div>
     <div class="kpi b">
-      <div class="kpi-lbl">May Revenue (last full)</div>
-      <div class="kpi-val b">IDR 1.88 M</div>
-      <span class="badge-pill pill-up">↑ 41.2% vs Apr</span>
+      <div class="kpi-lbl" id="kpi-lastmon-lbl">Last Full Month</div>
+      <div class="kpi-val b" id="kpi-lastmon-val">—</div>
+      <span class="badge-pill" id="kpi-lastmon-badge" style="display:none"></span>
     </div>
     <div class="kpi o">
       <div class="kpi-lbl" style="display:flex;align-items:center;justify-content:space-between">
-        vs Target (May)
+        <span id="kpi-vstarget-lbl">vs Target</span>
         <button onclick="toggleTargetInput()" title="Edit target" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:0;line-height:1">✏</button>
       </div>
       <div class="kpi-val o" id="kpi-vs-target">—</div>
@@ -973,9 +983,13 @@ function saveTarget(){
 }
 
 function _updateTargetUI(){
-  const mayFB = D.monica_fb[4]+D.juni_fb[4];
-  const diff=mayFB-D.target;
-  const pctVal=((mayFB/D.target-1)*100).toFixed(1);
+  // last full month = second-to-last in data (current month is partial)
+  const fullIdx = D.months.length - 2;
+  const prevIdx = fullIdx - 1;
+  const fullMon = D.months[fullIdx];
+  const fullFB = D.monica_fb[fullIdx]+D.juni_fb[fullIdx];
+  const diff=fullFB-D.target;
+  const pctVal=((fullFB/D.target-1)*100).toFixed(1);
   const kpiEl=document.getElementById('kpi-vs-target');
   const dispEl=document.getElementById('target-display');
   if(kpiEl){
@@ -983,6 +997,22 @@ function _updateTargetUI(){
     kpiEl.textContent=(diff>=0?'+':'')+idr(diff);
   }
   if(dispEl) dispEl.textContent=idr(D.target)+' · '+(diff>=0?'+':'')+pctVal+'%';
+  // update "last full month" KPI card
+  const lblEl=document.getElementById('kpi-lastmon-lbl');
+  const valEl=document.getElementById('kpi-lastmon-val');
+  const badgeEl=document.getElementById('kpi-lastmon-badge');
+  const vtLbl=document.getElementById('kpi-vstarget-lbl');
+  if(lblEl) lblEl.textContent=fullMon+' Revenue (last full)';
+  if(valEl) valEl.textContent=idr(fullFB);
+  if(vtLbl) vtLbl.textContent='vs Target ('+fullMon+')';
+  if(badgeEl && prevIdx>=0){
+    const prevFB=D.monica_fb[prevIdx]+D.juni_fb[prevIdx];
+    const momPct=((fullFB/prevFB-1)*100).toFixed(1);
+    const up=fullFB>=prevFB;
+    badgeEl.className='badge-pill '+(up?'pill-up':'pill-down');
+    badgeEl.textContent=(up?'↑':'↓')+Math.abs(momPct)+'% vs '+D.months[prevIdx];
+    badgeEl.style.display='';
+  }
 }
 
 function initTarget(){
@@ -997,6 +1027,20 @@ function initTarget(){
   _updateTargetUI();
 }
 initTarget();
+
+// Current month combined revenue (excl. Balian)
+(function(){
+  const lastIdx = D.months.length - 1;
+  const lastMon = D.months[lastIdx];
+  const total = D.monica_fb[lastIdx] + D.juni_fb[lastIdx];
+  const mVal = D.monica_fb[lastIdx], jVal = D.juni_fb[lastIdx];
+  const el = document.getElementById('kpi-currmonth-val');
+  const lbl = document.getElementById('kpi-currmonth-lbl');
+  const sub = document.getElementById('kpi-currmonth-sub');
+  if(lbl) lbl.textContent = lastMon + ' Revenue (MTD)';
+  if(el) el.textContent = idr(total);
+  if(sub) sub.textContent = 'M: '+idr(mVal)+' · J: '+idr(jVal);
+})();
 
 // ════════════════════════════════════════════
 // MOBILE NAV
