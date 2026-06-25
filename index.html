@@ -305,12 +305,13 @@ tr:hover td{background:var(--hover-row)}
 
     <!-- Revenue chart -->
     <div class="card">
-      <div class="card-hd">Monthly F&amp;B Revenue · Monica vs Juni (IDR)</div>
+      <div class="card-hd">Monthly F&amp;B Revenue · Monica &amp; Juni (IDR)</div>
       <div class="ch" style="height:250px"><canvas id="cRevenue"></canvas></div>
       <div style="display:flex;gap:16px;margin-top:10px;font-size:11px;color:var(--muted)">
         <span><span style="display:inline-block;width:14px;height:3px;background:var(--monica);border-radius:2px;vertical-align:middle;margin-right:4px"></span>Monica</span>
         <span><span style="display:inline-block;width:14px;height:3px;background:var(--juni);border-radius:2px;vertical-align:middle;margin-right:4px"></span>Juni</span>
-        <span><span style="display:inline-block;width:14px;height:0;border-top:2px dashed var(--orange);vertical-align:middle;margin-right:4px"></span>Monthly Target</span>
+        <span><span style="display:inline-block;width:14px;height:3px;background:#a371f7;border-radius:2px;vertical-align:middle;margin-right:4px"></span>Combined</span>
+        <span><span style="display:inline-block;width:14px;height:0;border-top:2px dashed var(--orange);vertical-align:middle;margin-right:4px"></span>Team Target</span>
       </div>
     </div>
 
@@ -829,9 +830,10 @@ allCharts.push(new Chart(document.getElementById('cRevenue'),{
   data:{
     labels:D.months,
     datasets:[
-      {label:'Monica F&B',data:D.monica_fb,borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.08)',tension:.35,fill:true,pointRadius:4,pointBackgroundColor:'#58a6ff'},
-      {label:'Juni F&B',  data:D.juni_fb,  borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.08)',  tension:.35,fill:true,pointRadius:4,pointBackgroundColor:'#3fb950'},
-      {label:'Target',    data:D.months.map(()=>D.target),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false}
+      {label:'Monica F&B',data:D.monica_fb,borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.05)',tension:.35,fill:true,borderWidth:1.5,pointRadius:3,pointBackgroundColor:'#58a6ff'},
+      {label:'Juni F&B',  data:D.juni_fb,  borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.05)',  tension:.35,fill:true,borderWidth:1.5,pointRadius:3,pointBackgroundColor:'#3fb950'},
+      {label:'Combined',  data:D.monica_fb.map((v,i)=>v+D.juni_fb[i]),borderColor:'#a371f7',backgroundColor:'rgba(163,113,247,0.08)',tension:.35,fill:false,borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#a371f7'},
+      {label:'Team Target',data:D.months.map(()=>D.target),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false}
     ]
   },
   options:(()=>{const c=makeCF();return{...c,plugins:{...c.plugins,tooltip:{...c.plugins.tooltip,
