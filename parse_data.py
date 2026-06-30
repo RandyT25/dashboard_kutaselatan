@@ -34,13 +34,13 @@ MONTH_NAMES = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',
 KS_SALES = {'Monica', 'Juni'}
 
 FB_CATEGORIES = {
-    'Beverage', 'DAIRY', 'Dry Goods', 'FLOUR MIP', 'FLOUR SRIBOGA',
-    'Frozen Bakery', 'frozen fries', 'FROZEN MEAT', 'Frozen Sea Food',
-    'Other', 'PIZZA',
+    'BEVERAGE', 'DAIRY', 'FLOUR MIP', 'FLOUR SRIBOGA',
+    'FROZEN BAKERY', 'FROZEN FRIES', 'FROZEN MEAT', 'FROZEN SEA FOOD',
+    'PIZZA',
 }
 
 def is_fb(r):
-    return (r[7] or '').strip() in FB_CATEGORIES
+    return (r[7] or '').strip().upper() in FB_CATEGORIES
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 wb = openpyxl.load_workbook(XLSX, read_only=True, data_only=True)

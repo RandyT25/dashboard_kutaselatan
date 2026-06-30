@@ -1,7 +1,8 @@
-const CACHE = 'horeca-ks-v3';
+const CACHE = 'horeca-ks-v5';
 const ASSETS = [
   './',
   './index.html',
+  './data.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
