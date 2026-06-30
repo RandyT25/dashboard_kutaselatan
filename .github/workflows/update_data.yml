@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "*.xlsx"
+      - "parse_data.py"
 
 jobs:
   parse:

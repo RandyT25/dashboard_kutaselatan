@@ -33,6 +33,15 @@ MONTH_NAMES = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',
 
 KS_SALES = {'Monica', 'Juni'}
 
+FB_CATEGORIES = {
+    'Beverage', 'DAIRY', 'Dry Goods', 'FLOUR MIP', 'FLOUR SRIBOGA',
+    'Frozen Bakery', 'frozen fries', 'FROZEN MEAT', 'Frozen Sea Food',
+    'Other', 'PIZZA',
+}
+
+def is_fb(r):
+    return (r[7] or '').strip() in FB_CATEGORIES
+
 # ── Load ──────────────────────────────────────────────────────────────────────
 wb = openpyxl.load_workbook(XLSX, read_only=True, data_only=True)
 ws = wb.active
@@ -90,10 +99,10 @@ for r in ks:
     if not m:
         continue
     g = grand(r)
-    if r[12] == 'Monica':
-        (monica_bal if is_balian(r) else monica_fb)[m] += g
-    else:
-        (juni_bal   if is_balian(r) else juni_fb  )[m] += g
+    if is_balian(r):
+        (monica_bal if r[12] == 'Monica' else juni_bal)[m] += g
+    elif is_fb(r):
+        (monica_fb  if r[12] == 'Monica' else juni_fb )[m] += g
 
 def month_series(d):
     return [round(d.get(m, 0)) for m in sorted_months]
@@ -127,7 +136,7 @@ for r in ks:
     if is_balian(r):
         cust_bal[cn]            += g
         cust_by_m_bal[cn][m]   += g
-    else:
+    elif is_fb(r):
         cust_fb[cn]             += g
         cust_by_m[cn][m]       += g
     if pn:
@@ -190,6 +199,8 @@ def top5_list(custs):
 prod_rev   = defaultdict(float)
 prod_custs = defaultdict(set)
 for r in ks:
+    if not is_fb(r):
+        continue
     pn = (r[6] or '').strip()
     cn = (r[3] or '').strip()
     if pn:
