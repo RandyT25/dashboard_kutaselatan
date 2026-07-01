@@ -23,7 +23,13 @@ else:
     candidates = glob.glob("*.xlsx")
     if not candidates:
         sys.exit("No .xlsx file found in current directory.")
-    XLSX = Path(max(candidates, key=os.path.getmtime))
+    import re as _re
+    _MON = {'jan':1,'feb':2,'mar':3,'apr':4,'may':5,'jun':6,
+            'jul':7,'aug':8,'sep':9,'oct':10,'nov':11,'dec':12}
+    def _xlsx_key(p):
+        m = _re.search(r'jan-(\w{3})', Path(p).name.lower())
+        return _MON.get(m.group(1), 0) if m else 0
+    XLSX = Path(max(candidates, key=_xlsx_key))
 
 OUT = Path("data.js")
 print(f"Reading: {XLSX}")
