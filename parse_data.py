@@ -311,7 +311,8 @@ for i, (cn, sp, cls, skus, ytd) in enumerate(opp_candidates[:5], 1):
                  'skus': skus, 'ytd': ytd, 'act': act})
 
 # ── Target ─────────────────────────────────────────────────────────────────────
-TARGET = 2_200_000_000 if max(sorted_months) >= 7 else 1_800_000_000
+TARGET_H1 = 1_800_000_000
+TARGET_H2 = 2_200_000_000
 
 # ── Assemble D ─────────────────────────────────────────────────────────────────
 D = {
@@ -320,7 +321,8 @@ D = {
     'juni_fb':     month_series(juni_fb),
     'monica_bal':  month_series(monica_bal),
     'juni_bal':    month_series(juni_bal),
-    'target':      TARGET,
+    'target_h1':   TARGET_H1,
+    'target_h2':   TARGET_H2,
     'top10':       top10,
     'monica_top5': top5_list(monica_custs),
     'juni_top5':   top5_list(juni_custs),

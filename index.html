@@ -259,21 +259,9 @@ tr:hover td{background:var(--hover-row)}
       <span class="badge-pill" id="kpi-lastmon-badge" style="display:none"></span>
     </div>
     <div class="kpi o">
-      <div class="kpi-lbl" style="display:flex;align-items:center;justify-content:space-between">
-        <span id="kpi-vstarget-lbl">vs Target</span>
-        <button onclick="toggleTargetInput()" title="Edit target" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:0;line-height:1">✏</button>
-      </div>
+      <div class="kpi-lbl" id="kpi-vstarget-lbl">vs Target</div>
       <div class="kpi-val o" id="kpi-vs-target">—</div>
-      <div class="kpi-sub">Target: <span id="target-display">—</span></div>
-      <div id="target-input-wrap" style="display:none;margin-top:8px">
-        <div style="display:flex;align-items:center;gap:6px">
-          <input id="target-miliar" type="number" step="0.1" min="0" placeholder="M (e.g. 2.2)"
-            style="width:80px;padding:4px 6px;border-radius:5px;border:1px solid var(--bord);
-                   background:var(--surf2);color:var(--txt);font-size:12px">
-          <button onclick="saveTarget()" style="padding:4px 8px;border-radius:5px;border:none;
-            background:var(--orange);color:#fff;font-size:11px;cursor:pointer;font-weight:600">Save</button>
-        </div>
-      </div>
+      <div class="kpi-sub">H1 <span style="color:var(--orange)">1.8M</span> · H2 <span style="color:var(--orange)">2.2M</span> · <span id="target-display">—</span></div>
     </div>
     <div class="kpi y">
       <div class="kpi-lbl" id="kpi-currmonth-lbl">Jun Revenue (MTD)</div>
@@ -824,6 +812,11 @@ function refreshCharts(){
   });
 }
 
+function monthNum(lbl){
+  return {Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,
+          Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12}[lbl.replace('*','')] || 0;
+}
+
 // Revenue trend
 allCharts.push(new Chart(document.getElementById('cRevenue'),{
   type:'line',
@@ -833,7 +826,7 @@ allCharts.push(new Chart(document.getElementById('cRevenue'),{
       {label:'Monica F&B',data:D.monica_fb,borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.05)',tension:.35,fill:true,borderWidth:1.5,pointRadius:3,pointBackgroundColor:'#58a6ff'},
       {label:'Juni F&B',  data:D.juni_fb,  borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.05)',  tension:.35,fill:true,borderWidth:1.5,pointRadius:3,pointBackgroundColor:'#3fb950'},
       {label:'Combined',  data:D.monica_fb.map((v,i)=>v+D.juni_fb[i]),borderColor:'#a371f7',backgroundColor:'rgba(163,113,247,0.08)',tension:.35,fill:false,borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#a371f7'},
-      {label:'Team Target',data:D.months.map(()=>D.target),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false}
+      {label:'Team Target',data:D.months.map(l=>monthNum(l)<=6?D.target_h1:D.target_h2),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false}
     ]
   },
   options:(()=>{const c=makeCF();return{...c,plugins:{...c.plugins,tooltip:{...c.plugins.tooltip,
@@ -953,83 +946,45 @@ function switchTabCh(ch, tab, btn){
 }
 
 // ════════════════════════════════════════════
-// TARGET (persisted in localStorage)
+// TARGET (H1=1.8B Jan–Jun, H2=2.2B Jul–Dec)
 // ════════════════════════════════════════════
-function toggleTargetInput(){
-  const wrap=document.getElementById('target-input-wrap');
-  if(!wrap)return;
-  const showing=wrap.style.display!=='none';
-  wrap.style.display=showing?'none':'block';
-  if(!showing){
-    const inp=document.getElementById('target-miliar');
-    if(inp) inp.value=(D.target/1e9).toFixed(1);
-    inp&&inp.focus();
-  }
-}
-
-function saveTarget(){
-  const inp=document.getElementById('target-miliar');
-  const val=parseFloat(inp&&inp.value);
-  if(!val||val<=0)return;
-  D.target=Math.round(val*1e9);
-  localStorage.setItem('dashboard_target',String(D.target));
-  document.getElementById('target-input-wrap').style.display='none';
-  _updateTargetUI();
-  // update revenue chart target line
-  const revChart=allCharts[0];
-  if(revChart){
-    revChart.data.datasets[3].data=D.months.map(()=>D.target);
-    revChart.update();
-  }
-  renderActions();
-}
-
 function _updateTargetUI(){
-  // last full month = second-to-last in data (current month is partial)
   const fullIdx = D.months.length - 2;
   const prevIdx = fullIdx - 1;
   const fullMon = D.months[fullIdx];
-  const fullFB = D.monica_fb[fullIdx]+D.juni_fb[fullIdx];
-  const diff=fullFB-D.target;
-  const pctVal=((fullFB/D.target-1)*100).toFixed(1);
-  const kpiEl=document.getElementById('kpi-vs-target');
-  const dispEl=document.getElementById('target-display');
+  const fullFB  = D.monica_fb[fullIdx] + D.juni_fb[fullIdx];
+  const appTarget = monthNum(fullMon) <= 6 ? D.target_h1 : D.target_h2;
+  const diff    = fullFB - appTarget;
+  const pctVal  = ((fullFB / appTarget - 1) * 100).toFixed(1);
+  const kpiEl   = document.getElementById('kpi-vs-target');
+  const dispEl  = document.getElementById('target-display');
   if(kpiEl){
-    kpiEl.className='kpi-val '+(diff>=0?'g':'r');
-    kpiEl.textContent=(diff>=0?'+':'')+idr(diff);
+    kpiEl.className = 'kpi-val ' + (diff >= 0 ? 'g' : 'r');
+    kpiEl.textContent = (diff >= 0 ? '+' : '') + idr(diff);
   }
-  if(dispEl) dispEl.textContent=idr(D.target)+' · '+(diff>=0?'+':'')+pctVal+'%';
-  // update "last full month" KPI card
-  const lblEl=document.getElementById('kpi-lastmon-lbl');
-  const valEl=document.getElementById('kpi-lastmon-val');
-  const badgeEl=document.getElementById('kpi-lastmon-badge');
-  const vtLbl=document.getElementById('kpi-vstarget-lbl');
-  if(lblEl) lblEl.textContent=fullMon+' Revenue';
-  if(valEl) valEl.textContent=idr(fullFB);
-  if(vtLbl) vtLbl.textContent='vs Target ('+fullMon+')';
-  if(badgeEl && prevIdx>=0){
-    const prevFB=D.monica_fb[prevIdx]+D.juni_fb[prevIdx];
-    const momPct=((fullFB/prevFB-1)*100).toFixed(1);
-    const up=fullFB>=prevFB;
-    badgeEl.className='badge-pill '+(up?'pill-up':'pill-down');
-    badgeEl.textContent=(up?'↑':'↓')+Math.abs(momPct)+'% vs '+D.months[prevIdx];
-    badgeEl.style.display='';
+  if(dispEl) dispEl.textContent = (diff >= 0 ? '+' : '') + pctVal + '%';
+  const lblEl   = document.getElementById('kpi-lastmon-lbl');
+  const valEl   = document.getElementById('kpi-lastmon-val');
+  const badgeEl = document.getElementById('kpi-lastmon-badge');
+  const vtLbl   = document.getElementById('kpi-vstarget-lbl');
+  if(lblEl) lblEl.textContent = fullMon + ' Revenue';
+  if(valEl) valEl.textContent = idr(fullFB);
+  if(vtLbl) vtLbl.textContent = 'vs Target (' + fullMon + ')';
+  if(badgeEl && prevIdx >= 0){
+    const prevFB = D.monica_fb[prevIdx] + D.juni_fb[prevIdx];
+    const momPct = ((fullFB / prevFB - 1) * 100).toFixed(1);
+    const up = fullFB >= prevFB;
+    badgeEl.className = 'badge-pill ' + (up ? 'pill-up' : 'pill-down');
+    badgeEl.textContent = (up ? '↑' : '↓') + Math.abs(momPct) + '% vs ' + D.months[prevIdx];
+    badgeEl.style.display = '';
   }
 }
 
 function initTarget(){
-  const saved=localStorage.getItem('dashboard_target');
-  if(saved){
-    const n=parseInt(saved,10);
-    if(n>0) D.target=n;
-  } else {
-    // H1 Jan–Jun = 1.80 M, H2 Jul–Dec = 2.20 M
-    D.target = new Date().getMonth() < 6 ? 1800000000 : 2200000000;
-  }
   _updateTargetUI();
   const revChart = allCharts[0];
   if(revChart){
-    revChart.data.datasets[3].data = D.months.map(()=>D.target);
+    revChart.data.datasets[3].data = D.months.map(l => monthNum(l) <= 6 ? D.target_h1 : D.target_h2);
     revChart.update('none');
   }
 }
