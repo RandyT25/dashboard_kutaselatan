@@ -220,11 +220,11 @@ tr:hover td{background:var(--hover-row)}
     <div class="hdr-inner">
       <div>
         <div class="hdr-title">MKS Bali Horeca · Kuta Selatan</div>
-        <div class="hdr-sub">Salesperson: Monica &amp; Juni &nbsp;|&nbsp; Jan – Jun 2026</div>
+        <div class="hdr-sub" id="hdr-period">Salesperson: Monica &amp; Juni &nbsp;|&nbsp; Jan – Jun 2026</div>
       </div>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <span class="live-badge"><span class="pulse"></span>Live Data</span>
-        <span style="font-size:12px;color:var(--muted)">As of Jun 2026</span>
+        <span id="hdr-asof" style="font-size:12px;color:var(--muted)">As of Jun 2026</span>
         <div class="theme-toggle" id="themeToggle">
           <button class="tt-btn" id="tt-light" onclick="setTheme('light')" title="Light mode">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -250,8 +250,8 @@ tr:hover td{background:var(--hover-row)}
   <div class="g7">
     <div class="kpi g">
       <div class="kpi-lbl">Revenue YTD</div>
-      <div class="kpi-val g">IDR 8.15 M</div>
-      <div class="kpi-sub">Jan – Jun 2026 · F&amp;B only</div>
+      <div class="kpi-val g" id="kpi-ytd-val">IDR 8.15 M</div>
+      <div class="kpi-sub" id="kpi-ytd-sub">Jan – Jun 2026 · F&amp;B only</div>
     </div>
     <div class="kpi b">
       <div class="kpi-lbl" id="kpi-lastmon-lbl">May Revenue</div>
@@ -282,18 +282,18 @@ tr:hover td{background:var(--hover-row)}
     </div>
     <div class="kpi c">
       <div class="kpi-lbl">Active Customers</div>
-      <div class="kpi-val c">174</div>
-      <div class="kpi-sub">58 Monica · 116 Juni</div>
+      <div class="kpi-val c" id="kpi-cust-val">174</div>
+      <div class="kpi-sub" id="kpi-cust-sub">58 Monica · 116 Juni</div>
     </div>
     <div class="kpi p">
       <div class="kpi-lbl">SKUs Sold</div>
-      <div class="kpi-val p">205</div>
+      <div class="kpi-val p" id="kpi-skus-val">205</div>
       <div class="kpi-sub">Unique products</div>
     </div>
     <div class="kpi r">
       <div class="kpi-lbl">Dormant</div>
-      <div class="kpi-val r">34</div>
-      <span class="badge-pill pill-down">No order May/Jun</span>
+      <div class="kpi-val r" id="kpi-dorm-val">34</div>
+      <span class="badge-pill pill-down" id="kpi-dorm-badge">No order May/Jun</span>
     </div>
   </div>
 </div>
@@ -344,10 +344,10 @@ tr:hover td{background:var(--hover-row)}
       <div class="sp-hd">
         <div>
           <div class="sp-name m">Monica</div>
-          <div style="font-size:12px;color:var(--muted)">F&amp;B + Balian · 58 customers</div>
+          <div id="monica-cust-sub" style="font-size:12px;color:var(--muted)">F&amp;B + Balian · 58 customers</div>
         </div>
         <div style="text-align:right">
-          <div style="font-size:20px;font-weight:800;color:var(--monica)">IDR 5.13 M</div>
+          <div id="monica-ytd-val" style="font-size:20px;font-weight:800;color:var(--monica)">IDR 5.13 M</div>
           <div style="font-size:11px;color:var(--muted)">F&amp;B Revenue YTD</div>
         </div>
       </div>
@@ -355,7 +355,7 @@ tr:hover td{background:var(--hover-row)}
         <div class="sp-metrics">
           <div><div class="sp-ml">Avg Order Val</div><div class="sp-mv" style="color:var(--monica)">5.64 Jt</div></div>
           <div><div class="sp-ml">Top-3 Conc.</div><div class="sp-mv" style="color:var(--orange)">46.7%</div></div>
-          <div><div class="sp-ml">May vs Apr</div><div class="sp-mv" style="color:var(--green)">+35.6%</div></div>
+          <div><div id="monica-mom-lbl" class="sp-ml">May vs Apr</div><div id="monica-mom-val" class="sp-mv" style="color:var(--green)">+35.6%</div></div>
         </div>
         <div class="card-hd">Monthly (IDR Miliar)</div>
         <div class="ch" style="height:110px"><canvas id="cMonica"></canvas></div>
@@ -370,10 +370,10 @@ tr:hover td{background:var(--hover-row)}
       <div class="sp-hd">
         <div>
           <div class="sp-name j">Juni</div>
-          <div style="font-size:12px;color:var(--muted)">F&amp;B + Balian · 116 customers</div>
+          <div id="juni-cust-sub" style="font-size:12px;color:var(--muted)">F&amp;B + Balian · 116 customers</div>
         </div>
         <div style="text-align:right">
-          <div style="font-size:20px;font-weight:800;color:var(--juni)">IDR 3.02 M</div>
+          <div id="juni-ytd-val" style="font-size:20px;font-weight:800;color:var(--juni)">IDR 3.02 M</div>
           <div style="font-size:11px;color:var(--muted)">F&amp;B Revenue YTD</div>
         </div>
       </div>
@@ -381,7 +381,7 @@ tr:hover td{background:var(--hover-row)}
         <div class="sp-metrics">
           <div><div class="sp-ml">Avg Order Val</div><div class="sp-mv" style="color:var(--juni)">3.64 Jt</div></div>
           <div><div class="sp-ml">Top-3 Conc.</div><div class="sp-mv" style="color:var(--orange)">57.2%</div></div>
-          <div><div class="sp-ml">May vs Apr</div><div class="sp-mv" style="color:var(--green)">+52.3%</div></div>
+          <div><div id="juni-mom-lbl" class="sp-ml">May vs Apr</div><div id="juni-mom-val" class="sp-mv" style="color:var(--green)">+52.3%</div></div>
         </div>
         <div class="card-hd">Monthly (IDR Miliar)</div>
         <div class="ch" style="height:110px"><canvas id="cJuni"></canvas></div>
@@ -978,7 +978,7 @@ function saveTarget(){
   // update revenue chart target line
   const revChart=allCharts[0];
   if(revChart){
-    revChart.data.datasets[2].data=D.months.map(()=>D.target);
+    revChart.data.datasets[3].data=D.months.map(()=>D.target);
     revChart.update();
   }
   renderActions();
@@ -1027,6 +1027,11 @@ function initTarget(){
     D.target = new Date().getMonth() < 6 ? 1800000000 : 2200000000;
   }
   _updateTargetUI();
+  const revChart = allCharts[0];
+  if(revChart){
+    revChart.data.datasets[3].data = D.months.map(()=>D.target);
+    revChart.update('none');
+  }
 }
 initTarget();
 
@@ -1045,6 +1050,57 @@ initTarget();
   function shortJt(v){return Math.round(v/1e6)+'Jt';}
   if(sub) sub.textContent = 'M '+shortJt(mVal)+' · J '+shortJt(jVal)+' · excl. Balian';
 })();
+
+// ════════════════════════════════════════════
+// DYNAMIC TEXT (period labels, counts, MoM)
+// ════════════════════════════════════════════
+function initDynamic(){
+  const last    = D.months.length - 1;
+  const fullIdx = last - 1;
+  const prevIdx = fullIdx - 1;
+  const period  = D.months[0] + ' – ' + D.months[last] + ' 2026';
+  const ytdFB   = D.monica_fb.reduce((a,b)=>a+b,0) + D.juni_fb.reduce((a,b)=>a+b,0);
+  const mYtd    = D.monica_fb.reduce((a,b)=>a+b,0);
+  const jYtd    = D.juni_fb.reduce((a,b)=>a+b,0);
+  function set(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+  function pct(a,b){return b>0?((a/b-1)*100).toFixed(1):'0.0';}
+  // Header
+  set('hdr-period','Salesperson: Monica & Juni  |  '+period);
+  set('hdr-asof','As of '+D.months[last]+' 2026');
+  // KPI strip
+  set('kpi-ytd-val',idr(ytdFB));
+  set('kpi-ytd-sub',period+' · F&B only');
+  if(D.active_m!==undefined){
+    set('kpi-cust-val',String(D.active_m+D.active_j));
+    set('kpi-cust-sub',D.active_m+' Monica · '+D.active_j+' Juni');
+    set('kpi-skus-val',String(D.skus));
+    set('kpi-dorm-val',String(D.dormant_cnt));
+  }
+  const dBadge=document.getElementById('kpi-dorm-badge');
+  if(dBadge&&last>=1) dBadge.textContent='No order '+D.months[last-1]+'/'+D.months[last];
+  // Salesperson cards
+  set('monica-ytd-val',idr(mYtd));
+  set('juni-ytd-val',idr(jYtd));
+  if(D.active_m!==undefined){
+    set('monica-cust-sub','F&B + Balian · '+D.active_m+' customers');
+    set('juni-cust-sub','F&B + Balian · '+D.active_j+' customers');
+  }
+  // MoM growth (penultimate full month vs prior)
+  if(fullIdx>=1&&prevIdx>=0){
+    const mFull=D.monica_fb[fullIdx],mPrev=D.monica_fb[prevIdx];
+    const jFull=D.juni_fb[fullIdx],  jPrev=D.juni_fb[prevIdx];
+    const mMom=pct(mFull,mPrev), jMom=pct(jFull,jPrev);
+    const mUp=mFull>=mPrev, jUp=jFull>=jPrev;
+    const lblTxt=D.months[fullIdx]+' vs '+D.months[prevIdx];
+    set('monica-mom-lbl',lblTxt);
+    set('juni-mom-lbl',lblTxt);
+    const mEl=document.getElementById('monica-mom-val');
+    const jEl=document.getElementById('juni-mom-val');
+    if(mEl){mEl.textContent=(mUp?'+':'')+mMom+'%';mEl.style.color=mUp?'var(--green)':'var(--red)';}
+    if(jEl){jEl.textContent=(jUp?'+':'')+jMom+'%';jEl.style.color=jUp?'var(--green)':'var(--red)';}
+  }
+}
+initDynamic();
 
 // ════════════════════════════════════════════
 // MOBILE NAV

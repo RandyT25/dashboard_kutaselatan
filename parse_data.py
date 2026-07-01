@@ -7,7 +7,7 @@ Usage:  python3 parse_data.py [path/to/file.xlsx]
         (defaults to the first *.xlsx in the current directory)
 """
 
-import glob, json, sys
+import glob, json, os, sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -23,7 +23,7 @@ else:
     candidates = glob.glob("*.xlsx")
     if not candidates:
         sys.exit("No .xlsx file found in current directory.")
-    XLSX = Path(candidates[0])
+    XLSX = Path(max(candidates, key=os.path.getmtime))
 
 OUT = Path("data.js")
 print(f"Reading: {XLSX}")
@@ -274,6 +274,11 @@ dorm_j  = dormant_list(cust_by_m,     'Juni')
 dorm_bm = dormant_list(cust_by_m_bal, 'Monica')
 dorm_bj = dormant_list(cust_by_m_bal, 'Juni')
 
+active_m    = sum(1 for cn in cust_total if cust_sp.get(cn) == 'Monica')
+active_j    = sum(1 for cn in cust_total if cust_sp.get(cn) == 'Juni')
+total_skus  = len(prod_rev)
+dormant_cnt = len(dorm_m) + len(dorm_j)
+
 # ── Upsell (top account + their top product) ──────────────────────────────────
 def upsell_list(custs):
     out = []
@@ -306,7 +311,7 @@ for i, (cn, sp, cls, skus, ytd) in enumerate(opp_candidates[:5], 1):
                  'skus': skus, 'ytd': ytd, 'act': act})
 
 # ── Target ─────────────────────────────────────────────────────────────────────
-TARGET = 2_200_000_000 if min(sorted_months) >= 7 else 1_800_000_000
+TARGET = 2_200_000_000 if max(sorted_months) >= 7 else 1_800_000_000
 
 # ── Assemble D ─────────────────────────────────────────────────────────────────
 D = {
@@ -336,6 +341,10 @@ D = {
     'ups_m':       ups_m,
     'ups_j':       ups_j,
     'opps':        opps,
+    'active_m':    active_m,
+    'active_j':    active_j,
+    'skus':        total_skus,
+    'dormant_cnt': dormant_cnt,
 }
 
 # ── Write data.js ──────────────────────────────────────────────────────────────
