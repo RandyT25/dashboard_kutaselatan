@@ -14,8 +14,8 @@ const D = {
     827161835,
     1112043077,
     1111821971,
-    1080616101,
-    199094394
+    1080512601,
+    229472753
   ],
   "juni_fb": [
     449308376,
@@ -23,8 +23,8 @@ const D = {
     510343532,
     567076202,
     708599095,
-    1025167745,
-    80959967
+    1023617095,
+    113353457
   ],
   "monica_bal": [
     0,
@@ -33,7 +33,7 @@ const D = {
     162398494,
     583973644,
     1409220064,
-    176300000
+    242211998
   ],
   "juni_bal": [
     0,
@@ -42,7 +42,7 @@ const D = {
     77143659,
     282625998,
     286689101,
-    36800000
+    62001199
   ],
   "target_h1": 1800000000,
   "target_h2": 2200000000,
@@ -51,31 +51,31 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 1513629199
+      "rev": 1522908399
     },
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1021905681
+      "rev": 1083572679
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1021862765
+      "rev": 1021759265
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1019248173
+      "rev": 1020228173
     },
     {
       "n": "HILTON HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 836566379
+      "rev": 842721999
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
@@ -87,13 +87,13 @@ const D = {
       "n": "MERUSAKA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 661650381
+      "rev": 668233751
     },
     {
       "n": "TABU ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 553011229
+      "rev": 568224189
     },
     {
       "n": "BULGARI",
@@ -105,95 +105,95 @@ const D = {
       "n": "MOVENPICK",
       "cls": "A",
       "sp": "Monica",
-      "rev": 326504686
+      "rev": 331504686
     }
   ],
   "monica_top5": [
     {
       "n": "CONRAD HOTEL",
       "rev": 1018863173,
-      "pct": 17.09
+      "pct": 17.0
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
-      "rev": 1000202765,
-      "pct": 16.78
+      "rev": 1000099265,
+      "pct": 16.69
     },
     {
       "n": "HILTON HOTEL",
-      "rev": 734221336,
-      "pct": 12.31
+      "rev": 740376956,
+      "pct": 12.36
     },
     {
       "n": "MERUSAKA NUSA DUA",
-      "rev": 614756906,
-      "pct": 10.31
+      "rev": 621053896,
+      "pct": 10.36
     },
     {
       "n": "MOVENPICK",
-      "rev": 279314193,
-      "pct": 4.68
+      "rev": 284314193,
+      "pct": 4.74
     }
   ],
   "juni_top5": [
     {
       "n": "BAMBU BALI ULUWATU",
-      "rev": 1495470603,
-      "pct": 39.9
+      "rev": 1504910603,
+      "pct": 39.82
     },
     {
       "n": "TABU ULUWATU",
-      "rev": 553011229,
-      "pct": 14.75
+      "rev": 568224189,
+      "pct": 15.04
     },
     {
       "n": "NOURISH UNGASAN",
-      "rev": 312146369,
-      "pct": 8.33
+      "rev": 315321369,
+      "pct": 8.34
     },
     {
       "n": "PT BALI PAWIWAHAN (COCO ROTI)",
       "rev": 169901199,
-      "pct": 4.53
+      "pct": 4.5
     },
     {
       "n": "NOURISH CAFE",
-      "rev": 150135142,
-      "pct": 4.01
+      "rev": 152457262,
+      "pct": 4.03
     }
   ],
   "abc": [
     {
       "cls": "A",
       "accs": 24,
-      "rev": 10462265380,
-      "pct": 0.796,
+      "rev": 10586695308,
+      "pct": 0.795,
       "strat": "Top 20% — Protect & Grow"
     },
     {
       "cls": "B",
-      "accs": 36,
-      "rev": 2028126533,
-      "pct": 0.154,
+      "accs": 35,
+      "rev": 2036497970,
+      "pct": 0.153,
       "strat": "Middle — Upsell"
     },
     {
       "cls": "C",
-      "accs": 128,
-      "rev": 658493883,
-      "pct": 0.05,
+      "accs": 129,
+      "rev": 685411943,
+      "pct": 0.052,
       "strat": "Long tail — Review"
     }
   ],
   "products": [
     {
       "n": "Allana Tenderloin Whole",
-      "rev": 1150413206,
+      "rev": 1171576966,
       "cust": 11
     },
     {
       "n": "Tepung Double Zero @25Kg/Sack",
-      "rev": 949922548,
+      "rev": 953750099,
       "cust": 60
     },
     {
@@ -208,7 +208,7 @@ const D = {
     },
     {
       "n": "Tepung Hime @25Kg/Sack",
-      "rev": 433186844,
+      "rev": 435453764,
       "cust": 15
     },
     {
@@ -218,12 +218,12 @@ const D = {
     },
     {
       "n": "MAMAS BELLY RIND ON SB OUT (SKIN ON) 3-5KG/PACK",
-      "rev": 407416343,
+      "rev": 409143543,
       "cust": 6
     },
     {
       "n": "Friboi Brazil Tenderloin Whole",
-      "rev": 399816570,
+      "rev": 408874570,
       "cust": 2
     },
     {
@@ -233,7 +233,7 @@ const D = {
     },
     {
       "n": "DP Mozzarella 2.5Kg",
-      "rev": 351154986,
+      "rev": 354329986,
       "cust": 2
     }
   ],
@@ -402,7 +402,7 @@ const D = {
     },
     {
       "n": "ZALI ULUWATU",
-      "cls": "B",
+      "cls": "C",
       "g": 999.0,
       "lat": 21673500
     },
@@ -714,25 +714,25 @@ const D = {
       "n": "INTERCONTINENTAL BALI RESORT",
       "prod": "Halal Premium Oxtail Whole Cut 3Cm (2 Kg/Pack)",
       "cls": "A",
-      "rev": 1000202765
+      "rev": 1000099265
     },
     {
       "n": "HILTON HOTEL",
       "prod": "MAMAS BELLY RIND ON SB OUT (SKIN ON) 3-5KG/PACK",
       "cls": "A",
-      "rev": 734221336
+      "rev": 740376956
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "prod": "Allana Tenderloin Whole",
       "cls": "A",
-      "rev": 614756906
+      "rev": 621053896
     },
     {
       "n": "MOVENPICK",
       "prod": "Gold Box Melange Butter MP331",
       "cls": "A",
-      "rev": 279314193
+      "rev": 284314193
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
@@ -752,19 +752,19 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "prod": "ECT Tenderloin Import",
       "cls": "A",
-      "rev": 1495470603
+      "rev": 1504910603
     },
     {
       "n": "TABU ULUWATU",
       "prod": "Allana Tenderloin Whole",
       "cls": "A",
-      "rev": 553011229
+      "rev": 568224189
     },
     {
       "n": "NOURISH UNGASAN",
       "prod": "DP Mozzarella 2.5Kg",
       "cls": "A",
-      "rev": 312146369
+      "rev": 315321369
     },
     {
       "n": "PT BALI PAWIWAHAN (COCO ROTI)",
@@ -776,7 +776,7 @@ const D = {
       "n": "NOURISH CAFE",
       "prod": "Tepung Hime @25Kg/Sack",
       "cls": "A",
-      "rev": 150135142
+      "rev": 152457262
     },
     {
       "n": "VIVRE CATERING",
@@ -798,7 +798,7 @@ const D = {
       "sp": "Juni",
       "cls": "A",
       "skus": 2,
-      "ytd": 553011229,
+      "ytd": 568224189,
       "act": "Expand product range — currently 2 SKUs, pitch new categories"
     },
     {
@@ -807,7 +807,7 @@ const D = {
       "sp": "Juni",
       "cls": "A",
       "skus": 5,
-      "ytd": 312184369,
+      "ytd": 315359369,
       "act": "Expand product range — currently 5 SKUs, pitch new categories"
     },
     {
@@ -834,12 +834,12 @@ const D = {
       "sp": "Juni",
       "cls": "A",
       "skus": 2,
-      "ytd": 150135142,
+      "ytd": 152457262,
       "act": "Expand product range — currently 2 SKUs, pitch new categories"
     }
   ],
   "active_m": 64,
   "active_j": 124,
-  "skus": 188,
+  "skus": 189,
   "dormant_cnt": 20
 };
