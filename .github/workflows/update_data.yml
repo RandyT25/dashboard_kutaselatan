@@ -7,11 +7,17 @@ on:
       - "*.xlsx"
       - "parse_data.py"
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   parse:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -33,3 +39,14 @@ jobs:
           git add data.js
           git diff --cached --quiet && echo "No changes to data.js" || \
             git commit -m "auto: update data.js from latest xlsx [skip ci]" && git push
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
