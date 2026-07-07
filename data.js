@@ -15,7 +15,7 @@ const D = {
     1112043077,
     1111821971,
     1080512601,
-    279618847
+    347757825
   ],
   "juni_fb": [
     449308376,
@@ -24,7 +24,7 @@ const D = {
     567076202,
     708599095,
     1023617095,
-    133947132
+    188194759
   ],
   "monica_bal": [
     0,
@@ -32,8 +32,8 @@ const D = {
     0,
     162398494,
     583973644,
-    1347580064,
-    262031998
+    1299050064,
+    447480025
   ],
   "juni_bal": [
     0,
@@ -42,7 +42,7 @@ const D = {
     77143659,
     282625998,
     286689101,
-    62901199
+    86038600
   ],
   "target_h1": 1800000000,
   "target_h2": 2200000000,
@@ -51,149 +51,149 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 1530009364
+      "rev": 1541039364
     },
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1083572679
+      "rev": 1096877678
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1035931793
+      "rev": 1045200293
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1020820973
+      "rev": 1034520973
     },
     {
       "n": "HILTON HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 848364696
+      "rev": 855079096
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
       "cls": "A",
       "sp": "Monica",
-      "rev": 705527523
+      "rev": 748797524
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 674318482
+      "rev": 679893482
     },
     {
       "n": "TABU ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 579658349
+      "rev": 594702090
     },
     {
       "n": "BULGARI",
       "cls": "A",
       "sp": "Monica",
-      "rev": 458562849
+      "rev": 535970876
     },
     {
       "n": "MOVENPICK",
       "cls": "A",
       "sp": "Monica",
-      "rev": 331504686
+      "rev": 339512073
     }
   ],
   "monica_top5": [
     {
       "n": "CONRAD HOTEL",
-      "rev": 1019455973,
-      "pct": 16.87
+      "rev": 1033155973,
+      "pct": 16.91
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
-      "rev": 1014271793,
-      "pct": 16.79
+      "rev": 1023540293,
+      "pct": 16.75
     },
     {
       "n": "HILTON HOTEL",
-      "rev": 744739653,
-      "pct": 12.33
+      "rev": 751214053,
+      "pct": 12.29
     },
     {
       "n": "MERUSAKA NUSA DUA",
-      "rev": 627043167,
-      "pct": 10.38
+      "rev": 632618167,
+      "pct": 10.35
     },
     {
       "n": "MOVENPICK",
-      "rev": 284314193,
-      "pct": 4.71
+      "rev": 292321580,
+      "pct": 4.78
     }
   ],
   "juni_top5": [
     {
       "n": "BAMBU BALI ULUWATU",
-      "rev": 1512011568,
-      "pct": 39.79
+      "rev": 1523041568,
+      "pct": 39.52
     },
     {
       "n": "TABU ULUWATU",
-      "rev": 579658349,
-      "pct": 15.26
+      "rev": 594702090,
+      "pct": 15.43
     },
     {
       "n": "NOURISH UNGASAN",
-      "rev": 315321369,
+      "rev": 319771369,
       "pct": 8.3
     },
     {
       "n": "PT BALI PAWIWAHAN (COCO ROTI)",
-      "rev": 169901199,
-      "pct": 4.47
+      "rev": 175901199,
+      "pct": 4.56
     },
     {
       "n": "NOURISH CAFE",
       "rev": 152457262,
-      "pct": 4.01
+      "pct": 3.96
     }
   ],
   "abc": [
     {
       "cls": "A",
       "accs": 24,
-      "rev": 10594593727,
-      "pct": 0.794,
+      "rev": 10849814272,
+      "pct": 0.796,
       "strat": "Top 20% — Protect & Grow"
     },
     {
       "cls": "B",
       "accs": 35,
-      "rev": 2056639630,
-      "pct": 0.154,
+      "rev": 2079255317,
+      "pct": 0.153,
       "strat": "Middle — Upsell"
     },
     {
       "cls": "C",
       "accs": 129,
-      "rev": 688904533,
-      "pct": 0.052,
+      "rev": 696656493,
+      "pct": 0.051,
       "strat": "Long tail — Review"
     }
   ],
   "products": [
     {
       "n": "Allana Tenderloin Whole",
-      "rev": 1188675007,
+      "rev": 1208373748,
       "cust": 11
     },
     {
       "n": "Tepung Double Zero @25Kg/Sack",
-      "rev": 964012349,
+      "rev": 989929698,
       "cust": 60
     },
     {
@@ -203,27 +203,27 @@ const D = {
     },
     {
       "n": "Tepung Hime @25Kg/Sack",
-      "rev": 441148964,
+      "rev": 445659164,
       "cust": 15
     },
     {
       "n": "Australian Butter Unsalted",
-      "rev": 435750001,
+      "rev": 437410001,
       "cust": 1
     },
     {
-      "n": "Tepung 00 Fusion @25Kg",
-      "rev": 415988799,
-      "cust": 18
-    },
-    {
       "n": "Friboi Brazil Tenderloin Whole",
-      "rev": 415475535,
+      "rev": 424505535,
       "cust": 2
     },
     {
+      "n": "Tepung 00 Fusion @25Kg",
+      "rev": 423721299,
+      "cust": 18
+    },
+    {
       "n": "MAMAS BELLY RIND ON SB OUT (SKIN ON) 3-5KG/PACK",
-      "rev": 412484901,
+      "rev": 414951241,
       "cust": 6
     },
     {
@@ -233,7 +233,7 @@ const D = {
     },
     {
       "n": "DP Mozzarella 2.5Kg",
-      "rev": 354329986,
+      "rev": 358139986,
       "cust": 2
     }
   ],
@@ -342,7 +342,7 @@ const D = {
       "n": "PT. GRAHA ALAM LESTARI",
       "cls": "A",
       "g": 999.0,
-      "lat": 399550007
+      "lat": 379520007
     },
     {
       "n": "THE UNGASAN CLIFFTOP RESORT",
@@ -353,8 +353,8 @@ const D = {
     {
       "n": "FOUR SEASON RESORT BALI",
       "cls": "A",
-      "g": 78.1,
-      "lat": 104719999
+      "g": 73.9,
+      "lat": 102219999
     },
     {
       "n": "GLAMP NUSA BALI",
@@ -365,8 +365,8 @@ const D = {
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
-      "g": 65.0,
-      "lat": 437563989
+      "g": 55.2,
+      "lat": 411563989
     },
     {
       "n": "BULGARI",
@@ -708,43 +708,43 @@ const D = {
       "n": "CONRAD HOTEL",
       "prod": "Australian Butter Unsalted",
       "cls": "A",
-      "rev": 1019455973
+      "rev": 1033155973
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
       "prod": "Halal Premium Oxtail Whole Cut 3Cm (2 Kg/Pack)",
       "cls": "A",
-      "rev": 1014271793
+      "rev": 1023540293
     },
     {
       "n": "HILTON HOTEL",
       "prod": "MAMAS BELLY RIND ON SB OUT (SKIN ON) 3-5KG/PACK",
       "cls": "A",
-      "rev": 744739653
+      "rev": 751214053
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "prod": "Allana Tenderloin Whole",
       "cls": "A",
-      "rev": 627043167
+      "rev": 632618167
     },
     {
       "n": "MOVENPICK",
       "prod": "Gold Box Melange Butter MP331",
       "cls": "A",
-      "rev": 284314193
+      "rev": 292321580
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
       "prod": "BALIAN Glass Still (750 ml x 12)",
       "cls": "A",
-      "rev": 240365041
+      "rev": 243345041
     },
     {
       "n": "THE LAGUNA",
       "prod": "Tepung Pita Emas @25Kg/Sack",
       "cls": "A",
-      "rev": 208889299
+      "rev": 210793289
     }
   ],
   "ups_j": [
@@ -752,25 +752,25 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "prod": "ECT Tenderloin Import",
       "cls": "A",
-      "rev": 1512011568
+      "rev": 1523041568
     },
     {
       "n": "TABU ULUWATU",
       "prod": "Allana Tenderloin Whole",
       "cls": "A",
-      "rev": 579658349
+      "rev": 594702090
     },
     {
       "n": "NOURISH UNGASAN",
       "prod": "DP Mozzarella 2.5Kg",
       "cls": "A",
-      "rev": 315321369
+      "rev": 319771369
     },
     {
       "n": "PT BALI PAWIWAHAN (COCO ROTI)",
       "prod": "Canary Lactic Butter Sheet 10Kg/Ctn",
       "cls": "A",
-      "rev": 169901199
+      "rev": 175901199
     },
     {
       "n": "NOURISH CAFE",
@@ -782,7 +782,7 @@ const D = {
       "n": "VIVRE CATERING",
       "prod": "Tepung 00 Fusion @25Kg",
       "cls": "A",
-      "rev": 139562999
+      "rev": 146425499
     },
     {
       "n": "PT BALI PAWIWAHAN",
@@ -798,7 +798,7 @@ const D = {
       "sp": "Juni",
       "cls": "A",
       "skus": 2,
-      "ytd": 579658349,
+      "ytd": 594702090,
       "act": "Expand product range — currently 2 SKUs, pitch new categories"
     },
     {
@@ -807,7 +807,7 @@ const D = {
       "sp": "Juni",
       "cls": "A",
       "skus": 5,
-      "ytd": 315359369,
+      "ytd": 319809369,
       "act": "Expand product range — currently 5 SKUs, pitch new categories"
     },
     {
@@ -816,7 +816,7 @@ const D = {
       "sp": "Monica",
       "cls": "A",
       "skus": 7,
-      "ytd": 209549299,
+      "ytd": 211453289,
       "act": "Expand product range — currently 7 SKUs, pitch new categories"
     },
     {
@@ -825,7 +825,7 @@ const D = {
       "sp": "Juni",
       "cls": "A",
       "skus": 5,
-      "ytd": 171076199,
+      "ytd": 177076199,
       "act": "Expand product range — currently 5 SKUs, pitch new categories"
     },
     {
@@ -840,6 +840,6 @@ const D = {
   ],
   "active_m": 64,
   "active_j": 124,
-  "skus": 189,
+  "skus": 190,
   "dormant_cnt": 20
 };
