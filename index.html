@@ -845,7 +845,7 @@ allCharts.push(new Chart(document.getElementById('cRevenue'),{
       {label:'Monica F&B',data:D.monica_fb,borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.05)',tension:.35,fill:true,borderWidth:1.5,pointRadius:partialPointRadius(3),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#58a6ff'),pointBorderColor:'#58a6ff',segment:partialSegment()},
       {label:'Juni F&B',  data:D.juni_fb,  borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.05)',  tension:.35,fill:true,borderWidth:1.5,pointRadius:partialPointRadius(3),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#3fb950'),pointBorderColor:'#3fb950',segment:partialSegment()},
       {label:'Combined',  data:D.monica_fb.map((v,i)=>v+D.juni_fb[i]),borderColor:'#a371f7',backgroundColor:'rgba(163,113,247,0.08)',tension:.35,fill:false,borderWidth:2.5,pointRadius:partialPointRadius(5),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#a371f7'),pointBorderColor:'#a371f7',segment:partialSegment()},
-      {label:'Team Target',data:D.months.map(l=>monthNum(l)<=6?D.target_h1:D.target_h2),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false,stepped:'before'}
+      {label:'Team Target',data:D.months.map(l=>monthNum(l)<=6?D.target_h1:D.target_h2),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false}
     ]
   },
   options:(()=>{const c=makeCF();return{...c,plugins:{...c.plugins,tooltip:{...c.plugins.tooltip,
