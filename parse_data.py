@@ -231,11 +231,13 @@ def growth_decline(cust_months_dict, sp):
             continue
         if prv == 0:
             g_pct = 999.0
+            is_new = True
         else:
             g_pct = round((lat - prv) / prv * 100, 1)
+            is_new = False
         cls = cust_cls.get(cn, 'C')
         if g_pct > 5:
-            grow.append({'n': cn, 'cls': cls, 'g': g_pct, 'lat': round(lat)})
+            grow.append({'n': cn, 'cls': cls, 'g': g_pct, 'lat': round(lat), 'new': is_new})
         elif g_pct < -5:
             decl.append({'n': cn, 'cls': cls, 'd': g_pct, 'act': 'URGENT'})
     grow.sort(key=lambda x: -x['g'])

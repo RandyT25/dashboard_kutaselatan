@@ -342,7 +342,7 @@ tr:hover td{background:var(--hover-row)}
       <div class="sp-body">
         <div class="sp-metrics">
           <div><div class="sp-ml">Avg Order Val</div><div class="sp-mv" style="color:var(--monica)">5.64 Jt</div></div>
-          <div><div class="sp-ml">Top-3 Conc.</div><div class="sp-mv" style="color:var(--orange)">46.7%</div></div>
+          <div><div class="sp-ml">Top-3 Conc.</div><div class="sp-mv" id="monica-top3-val" style="color:var(--orange)">46.7%</div></div>
           <div><div id="monica-mom-lbl" class="sp-ml">May vs Apr</div><div id="monica-mom-val" class="sp-mv" style="color:var(--green)">+35.6%</div></div>
         </div>
         <div class="card-hd">Monthly (IDR Miliar)</div>
@@ -368,7 +368,7 @@ tr:hover td{background:var(--hover-row)}
       <div class="sp-body">
         <div class="sp-metrics">
           <div><div class="sp-ml">Avg Order Val</div><div class="sp-mv" style="color:var(--juni)">3.64 Jt</div></div>
-          <div><div class="sp-ml">Top-3 Conc.</div><div class="sp-mv" style="color:var(--orange)">57.2%</div></div>
+          <div><div class="sp-ml">Top-3 Conc.</div><div class="sp-mv" id="juni-top3-val" style="color:var(--orange)">57.2%</div></div>
           <div><div id="juni-mom-lbl" class="sp-ml">May vs Apr</div><div id="juni-mom-val" class="sp-mv" style="color:var(--green)">+52.3%</div></div>
         </div>
         <div class="card-hd">Monthly (IDR Miliar)</div>
@@ -418,9 +418,9 @@ tr:hover td{background:var(--hover-row)}
       <div class="tab-panel act" id="tp-fb-growing">
         <div class="g2">
           <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r">May Rev</th></tr></thead><tbody id="t-fb-grow-m"></tbody></table></div></div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r" id="fb-grow-m-hd">May Rev</th></tr></thead><tbody id="t-fb-grow-m"></tbody></table></div></div>
           <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r">May Rev</th></tr></thead><tbody id="t-fb-grow-j"></tbody></table></div></div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r" id="fb-grow-j-hd">May Rev</th></tr></thead><tbody id="t-fb-grow-j"></tbody></table></div></div>
         </div>
       </div>
       <div class="tab-panel" id="tp-fb-declining">
@@ -459,9 +459,9 @@ tr:hover td{background:var(--hover-row)}
       <div class="tab-panel act" id="tp-bal-growing">
         <div class="g2">
           <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r">May Rev</th></tr></thead><tbody id="t-bal-grow-m"></tbody></table></div></div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r" id="bal-grow-m-hd">May Rev</th></tr></thead><tbody id="t-bal-grow-m"></tbody></table></div></div>
           <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r">May Rev</th></tr></thead><tbody id="t-bal-grow-j"></tbody></table></div></div>
+            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r" id="bal-grow-j-hd">May Rev</th></tr></thead><tbody id="t-bal-grow-j"></tbody></table></div></div>
         </div>
       </div>
       <div class="tab-panel" id="tp-bal-declining">
@@ -532,6 +532,7 @@ function idr(v,compact=true){
 }
 function pct(v){return(v*100).toFixed(1)+'%'}
 function gStr(v){const s=v>=0?'+':'';return s+v.toFixed(1)+'%'}
+function top3Conc(top5){return top5.slice(0,3).reduce((s,c)=>s+c.pct,0).toFixed(1)}
 function clsBa(c){return`<span class="ba ba-${c}">${c}</span>`}
 function spBa(s){return s==='Monica'?`<span class="ba ba-M">Monica</span>`:`<span class="ba ba-J">Juni</span>`}
 function actBa(a){
@@ -592,11 +593,14 @@ function fillGrow(id,data){
   const tb=document.getElementById(id);
   data.forEach(c=>{
     const pos=c.g>=0;
+    const growthCell=c.new
+      ?`<span class="badge-pill pill-up">NEW</span>`
+      :`<span style="color:${pos?'var(--green)':'var(--red)'};font-weight:600">${gStr(c.g)}</span>`;
     const tr=document.createElement('tr');
     tr.innerHTML=`
       <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
       <td>${clsBa(c.cls)}</td>
-      <td style="color:${pos?'var(--green)':'var(--red)'};font-weight:600">${gStr(c.g)}</td>
+      <td>${growthCell}</td>
       <td class="ta-r">${idr(c.lat)}</td>`;
     tb.appendChild(tr);
   });
@@ -691,8 +695,8 @@ function buildActions(){
   const dormCount = D.dorm_m.length + D.dorm_j.length;
   const decUrgM   = D.dec_m.filter(c=>c.act==='URGENT');
   const decUrgJ   = D.dec_j.filter(c=>c.act==='URGENT');
-  const mConc     = D.monica_top5.slice(0,3).reduce((s,c)=>s+c.pct,0).toFixed(1);
-  const jConc     = D.juni_top5.slice(0,3).reduce((s,c)=>s+c.pct,0).toFixed(1);
+  const mConc     = top3Conc(D.monica_top5);
+  const jConc     = top3Conc(D.juni_top5);
   const mYTD      = [...D.monica_fb,...D.monica_bal].reduce((a,b)=>a+b,0);
   const jYTD      = [...D.juni_fb,  ...D.juni_bal  ].reduce((a,b)=>a+b,0);
   const topOpp    = D.opps[0];
@@ -818,19 +822,34 @@ function monthNum(lbl){
 }
 
 // Revenue trend
+// Partial (in-progress) month gets a dashed final segment + hollow point so it
+// doesn't read as a sudden drop — it's month-to-date, not a completed month.
+const partialIdx = D.months[D.months.length-1].includes('*') ? D.months.length-1 : -1;
+function partialSegment(){
+  return {borderDash:ctx=>ctx.p1DataIndex===partialIdx?[6,4]:undefined};
+}
+function partialPointBg(color){
+  return D.months.map((_,i)=>i===partialIdx?cv('--surf'):color);
+}
+function partialPointRadius(base){
+  return D.months.map((_,i)=>i===partialIdx?base+1:base);
+}
+function partialPointBorderW(base){
+  return D.months.map((_,i)=>i===partialIdx?2:base);
+}
 allCharts.push(new Chart(document.getElementById('cRevenue'),{
   type:'line',
   data:{
     labels:D.months,
     datasets:[
-      {label:'Monica F&B',data:D.monica_fb,borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.05)',tension:.35,fill:true,borderWidth:1.5,pointRadius:3,pointBackgroundColor:'#58a6ff'},
-      {label:'Juni F&B',  data:D.juni_fb,  borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.05)',  tension:.35,fill:true,borderWidth:1.5,pointRadius:3,pointBackgroundColor:'#3fb950'},
-      {label:'Combined',  data:D.monica_fb.map((v,i)=>v+D.juni_fb[i]),borderColor:'#a371f7',backgroundColor:'rgba(163,113,247,0.08)',tension:.35,fill:false,borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#a371f7'},
-      {label:'Team Target',data:D.months.map(l=>monthNum(l)<=6?D.target_h1:D.target_h2),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false}
+      {label:'Monica F&B',data:D.monica_fb,borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.05)',tension:.35,fill:true,borderWidth:1.5,pointRadius:partialPointRadius(3),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#58a6ff'),pointBorderColor:'#58a6ff',segment:partialSegment()},
+      {label:'Juni F&B',  data:D.juni_fb,  borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.05)',  tension:.35,fill:true,borderWidth:1.5,pointRadius:partialPointRadius(3),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#3fb950'),pointBorderColor:'#3fb950',segment:partialSegment()},
+      {label:'Combined',  data:D.monica_fb.map((v,i)=>v+D.juni_fb[i]),borderColor:'#a371f7',backgroundColor:'rgba(163,113,247,0.08)',tension:.35,fill:false,borderWidth:2.5,pointRadius:partialPointRadius(5),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#a371f7'),pointBorderColor:'#a371f7',segment:partialSegment()},
+      {label:'Team Target',data:D.months.map(l=>monthNum(l)<=6?D.target_h1:D.target_h2),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false,stepped:'before'}
     ]
   },
   options:(()=>{const c=makeCF();return{...c,plugins:{...c.plugins,tooltip:{...c.plugins.tooltip,
-    callbacks:{label:ctx=>ctx.dataset.label+': '+idr(ctx.raw)}}}};})()
+    callbacks:{label:ctx=>ctx.dataset.label+': '+idr(ctx.raw)+(ctx.dataIndex===partialIdx&&ctx.dataset.label!=='Team Target'?' (month to date)':'')}}}};})()
 }));
 
 // Balian chart
@@ -1040,6 +1059,14 @@ function initDynamic(){
     set('monica-cust-sub','F&B + Balian · '+D.active_m+' customers');
     set('juni-cust-sub','F&B + Balian · '+D.active_j+' customers');
   }
+  set('monica-top3-val',top3Conc(D.monica_top5)+'%');
+  set('juni-top3-val',top3Conc(D.juni_top5)+'%');
+  // Growing table "latest month" column headers track the real reference month
+  const refMon = D.months[fullIdx].replace('*','')+' Rev';
+  set('fb-grow-m-hd',refMon);
+  set('fb-grow-j-hd',refMon);
+  set('bal-grow-m-hd',refMon);
+  set('bal-grow-j-hd',refMon);
   // MoM growth (penultimate full month vs prior)
   if(fullIdx>=1&&prevIdx>=0){
     const mFull=D.monica_fb[fullIdx],mPrev=D.monica_fb[prevIdx];

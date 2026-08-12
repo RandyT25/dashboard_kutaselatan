@@ -247,49 +247,57 @@ const D = {
       "n": "KIARA BEACHFRONT",
       "cls": "C",
       "g": 999.0,
-      "lat": 1020978
+      "lat": 1020978,
+      "new": true
     },
     {
       "n": "CLUB MED BALI",
       "cls": "C",
       "g": 999.0,
-      "lat": 720102
+      "lat": 720102,
+      "new": true
     },
     {
       "n": "INFINITY8 BALI HOTEL",
       "cls": "C",
       "g": 999.0,
-      "lat": 1100000
+      "lat": 1100000,
+      "new": true
     },
     {
       "n": "THE BALANGAN HOTEL",
       "cls": "C",
       "g": 999.0,
-      "lat": 1220000
+      "lat": 1220000,
+      "new": true
     },
     {
       "n": "RITZ CARLTON",
       "cls": "A",
       "g": 198.3,
-      "lat": 86127131
+      "lat": 86127131,
+      "new": false
     },
     {
       "n": "LE MERIDIEN JIMBARAN",
       "cls": "B",
       "g": 185.5,
-      "lat": 15041320
+      "lat": 15041320,
+      "new": false
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
       "g": 152.0,
-      "lat": 141603266
+      "lat": 141603266,
+      "new": false
     },
     {
       "n": "VOUK HOTEL",
       "cls": "C",
       "g": 148.4,
-      "lat": 2086650
+      "lat": 2086650,
+      "new": false
     }
   ],
   "grow_j": [
@@ -297,49 +305,57 @@ const D = {
       "n": "EL MERKAT RESTO",
       "cls": "C",
       "g": 999.0,
-      "lat": 236000
+      "lat": 236000,
+      "new": true
     },
     {
       "n": "PIZZA MAFIA JIMBARAN",
       "cls": "C",
       "g": 999.0,
-      "lat": 255300
+      "lat": 255300,
+      "new": true
     },
     {
       "n": "BB52 CENTRAL",
       "cls": "C",
       "g": 999.0,
-      "lat": 226200
+      "lat": 226200,
+      "new": true
     },
     {
       "n": "CASHEW TREE RESTAURANT",
       "cls": "C",
       "g": 999.0,
-      "lat": 799200
+      "lat": 799200,
+      "new": true
     },
     {
       "n": "THE MANGGO TREE",
       "cls": "C",
       "g": 999.0,
-      "lat": 268065
+      "lat": 268065,
+      "new": true
     },
     {
       "n": "PHILANTROPY",
       "cls": "C",
       "g": 999.0,
-      "lat": 663015
+      "lat": 663015,
+      "new": true
     },
     {
       "n": "MIMOSA",
       "cls": "C",
       "g": 999.0,
-      "lat": 924000
+      "lat": 924000,
+      "new": true
     },
     {
       "n": "RUPA COFFEE",
       "cls": "C",
       "g": 999.0,
-      "lat": 1584000
+      "lat": 1584000,
+      "new": true
     }
   ],
   "bal_grow_m": [
@@ -347,43 +363,50 @@ const D = {
       "n": "LA JOYA BALANGAN",
       "cls": "C",
       "g": 999.0,
-      "lat": 10442500
+      "lat": 10442500,
+      "new": true
     },
     {
       "n": "THE WESTIN RESORT NUSA DUA",
       "cls": "A",
       "g": 999.0,
-      "lat": 12180000
+      "lat": 12180000,
+      "new": true
     },
     {
       "n": "HILTON HOTEL",
       "cls": "A",
       "g": 121.4,
-      "lat": 23470000
+      "lat": 23470000,
+      "new": false
     },
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "g": 68.7,
-      "lat": 526785981
+      "lat": 526785981,
+      "new": false
     },
     {
       "n": "THE UNGASAN CLIFFTOP RESORT",
       "cls": "A",
       "g": 24.4,
-      "lat": 91199999
+      "lat": 91199999,
+      "new": false
     },
     {
       "n": "FOUR SEASON RESORT BALI",
       "cls": "A",
       "g": 15.5,
-      "lat": 109769999
+      "lat": 109769999,
+      "new": false
     },
     {
       "n": "PT VISTA  PADANG ASRI (SUARGA)",
       "cls": "C",
       "g": 6.2,
-      "lat": 9210000
+      "lat": 9210000,
+      "new": false
     }
   ],
   "bal_grow_j": [
@@ -391,49 +414,57 @@ const D = {
       "n": "SALTWODD BINGIN",
       "cls": "B",
       "g": 999.0,
-      "lat": 64779999
+      "lat": 64779999,
+      "new": true
     },
     {
       "n": "MEXICOLA ULUWATU",
       "cls": "B",
       "g": 999.0,
-      "lat": 46482002
+      "lat": 46482002,
+      "new": true
     },
     {
       "n": "RUPA COFFEE",
       "cls": "C",
       "g": 999.0,
-      "lat": 792000
+      "lat": 792000,
+      "new": true
     },
     {
       "n": "TERRA EDEN",
       "cls": "C",
       "g": 999.0,
-      "lat": 1400000
+      "lat": 1400000,
+      "new": true
     },
     {
       "n": "TEJA ULUWATU",
       "cls": "B",
       "g": 57.7,
-      "lat": 41149999
+      "lat": 41149999,
+      "new": false
     },
     {
       "n": "LOSTERIA LABUAN SAIT",
       "cls": "A",
       "g": 41.3,
-      "lat": 25229999
+      "lat": 25229999,
+      "new": false
     },
     {
       "n": "LOSTERIA JIMBARAN",
       "cls": "B",
       "g": 37.4,
-      "lat": 10194500
+      "lat": 10194500,
+      "new": false
     },
     {
       "n": "KYND ULUWATU",
       "cls": "C",
       "g": 29.7,
-      "lat": 9835000
+      "lat": 9835000,
+      "new": false
     }
   ],
   "dec_m": [
