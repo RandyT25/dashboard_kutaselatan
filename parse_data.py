@@ -9,6 +9,7 @@ Usage:  python3 parse_data.py [path/to/file.xlsx]
 
 import glob, json, os, sys
 from collections import defaultdict
+from datetime import date, datetime
 from pathlib import Path
 
 try:
@@ -59,27 +60,33 @@ header = rows[0]
 ks = [r for r in rows[1:] if r[12] in KS_SALES]
 print(f"  {len(ks):,} rows for Monica + Juni")
 
-# ── Month analysis (use full dataset for reliable partial detection) ───────────
+# ── Month analysis ──────────────────────────────────────────────────────────────
 all_rows     = rows[1:]
-month_counts_all = defaultdict(int)
-month_counts     = defaultdict(int)
-for r in all_rows:
-    if r[14]:
-        month_counts_all[int(r[14])] += 1
+month_counts = defaultdict(int)
+month_years  = {}
 for r in ks:
     if r[14]:
-        month_counts[int(r[14])] += 1
+        m = int(r[14])
+        month_counts[m] += 1
+        if r[17]:
+            month_years[m] = int(r[17])
 
 sorted_months = sorted(month_counts)
 if not sorted_months:
     sys.exit("No month data found.")
 
-# Detect partial (in-progress) month using full-dataset counts (< 75 % of mean)
-all_months_all = sorted(month_counts_all)
-other_all  = [month_counts_all[m] for m in all_months_all[:-1]]
-avg_all    = sum(other_all) / len(other_all) if other_all else month_counts_all[all_months_all[-1]]
+# Detect partial (in-progress) month: the latest month is partial only if it's
+# still the current real-world month/year, i.e. it hasn't finished yet.
+# (A row-count heuristic was tried before but breaks once the month is more
+# than ~1/3 over, since daily transaction volume isn't constant.)
+try:
+    from zoneinfo import ZoneInfo
+    today = datetime.now(ZoneInfo("Asia/Makassar")).date()
+except Exception:
+    today = date.today()
 latest_m   = sorted_months[-1]
-partial_m  = latest_m if month_counts_all.get(latest_m, 0) < avg_all * 0.75 else None
+latest_y   = month_years.get(latest_m)
+partial_m  = latest_m if (latest_y == today.year and latest_m == today.month) else None
 ref_m      = sorted_months[-2] if partial_m and len(sorted_months) >= 2 else latest_m
 prev_m     = (sorted_months[-3] if partial_m and len(sorted_months) >= 3
               else sorted_months[-2] if len(sorted_months) >= 2 else ref_m)
