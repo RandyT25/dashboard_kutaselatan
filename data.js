@@ -17,7 +17,7 @@ const D = {
     1111356492,
     1080217601,
     1485674964,
-    851829969
+    871073070
   ],
   "juni_fb": [
     449346116,
@@ -27,7 +27,7 @@ const D = {
     710219095,
     1022572095,
     1029924329,
-    761632377
+    804104299
   ],
   "monica_bal": [
     0,
@@ -37,7 +37,7 @@ const D = {
     583973644,
     1135732066,
     1324328521,
-    1179364493
+    1186336493
   ],
   "juni_bal": [
     0,
@@ -47,7 +47,7 @@ const D = {
     281825998,
     286677101,
     432601001,
-    338185204
+    364189205
   ],
   "target_h1": 1800000000,
   "target_h2": 2200000000,
@@ -56,19 +56,19 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 2143505780
+      "rev": 2168061245
     },
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1791801411
+      "rev": 1787553410
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1331179712
+      "rev": 1331555934
     },
     {
       "n": "CONRAD HOTEL",
@@ -80,13 +80,13 @@ const D = {
       "n": "PT. GRAHA ALAM LESTARI",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1251613534
+      "rev": 1222653534
     },
     {
       "n": "HILTON HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1210409705
+      "rev": 1215801005
     },
     {
       "n": "TABU ULUWATU",
@@ -104,7 +104,7 @@ const D = {
       "n": "BULGARI",
       "cls": "A",
       "sp": "Monica",
-      "rev": 745937287
+      "rev": 746546677
     },
     {
       "n": "FOUR SEASON RESORT BALI",
@@ -116,76 +116,76 @@ const D = {
   "monica_top5": [
     {
       "n": "INTERCONTINENTAL BALI RESORT",
-      "rev": 1308559712,
-      "pct": 16.16
+      "rev": 1308935934,
+      "pct": 16.12
     },
     {
       "n": "CONRAD HOTEL",
       "rev": 1284232181,
-      "pct": 15.85
+      "pct": 15.82
     },
     {
       "n": "HILTON HOTEL",
-      "rev": 1020071457,
-      "pct": 12.59
+      "rev": 1025132757,
+      "pct": 12.63
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "rev": 742742516,
-      "pct": 9.17
+      "pct": 9.15
     },
     {
       "n": "MOVENPICK",
       "rev": 352950459,
-      "pct": 4.36
+      "pct": 4.35
     }
   ],
   "juni_top5": [
     {
       "n": "BAMBU BALI ULUWATU",
-      "rev": 2111359463,
-      "pct": 38.68
+      "rev": 2135914928,
+      "pct": 38.83
     },
     {
       "n": "TABU ULUWATU",
       "rev": 985983238,
-      "pct": 18.06
+      "pct": 17.93
     },
     {
       "n": "NOURISH UNGASAN",
-      "rev": 438281365,
-      "pct": 8.03
+      "rev": 440821365,
+      "pct": 8.01
     },
     {
       "n": "PT BALI PAWIWAHAN (COCO ROTI)",
       "rev": 241607199,
-      "pct": 4.43
+      "pct": 4.39
     },
     {
       "n": "NOURISH CAFE",
-      "rev": 207772472,
-      "pct": 3.81
+      "rev": 213160652,
+      "pct": 3.88
     }
   ],
   "abc": [
     {
       "cls": "A",
       "accs": 25,
-      "rev": 16002266366,
-      "pct": 0.799,
+      "rev": 16058422372,
+      "pct": 0.797,
       "strat": "Top 20% — Protect & Grow"
     },
     {
       "cls": "B",
       "accs": 35,
-      "rev": 2996072188,
-      "pct": 0.15,
+      "rev": 3033470425,
+      "pct": 0.151,
       "strat": "Middle — Upsell"
     },
     {
       "cls": "C",
       "accs": 143,
-      "rev": 1040413628,
+      "rev": 1048709598,
       "pct": 0.052,
       "strat": "Long tail — Review"
     }
@@ -198,17 +198,17 @@ const D = {
     },
     {
       "n": "Tepung Double Zero @25Kg/Sack",
-      "rev": 1377640099,
-      "cust": 61
+      "rev": 1387126849,
+      "cust": 62
     },
     {
       "n": "Friboi Brazil Tenderloin Whole",
-      "rev": 969372350,
+      "rev": 991677815,
       "cust": 2
     },
     {
       "n": "Tepung Hime @25Kg/Sack",
-      "rev": 611925773,
+      "rev": 618550553,
       "cust": 17
     },
     {
@@ -218,7 +218,7 @@ const D = {
     },
     {
       "n": "MAMAS BELLY RIND ON SB OUT (SKIN ON) 3-5KG/PACK",
-      "rev": 601120821,
+      "rev": 604351701,
       "cust": 6
     },
     {
@@ -228,12 +228,12 @@ const D = {
     },
     {
       "n": "Halal Premium Oxtail Whole Cut 3Cm (2 Kg/Pack)",
-      "rev": 502716046,
+      "rev": 502564268,
       "cust": 4
     },
     {
       "n": "DP Mozzarella 2.5Kg",
-      "rev": 488314981,
+      "rev": 492759981,
       "cust": 2
     },
     {
@@ -769,7 +769,7 @@ const D = {
       "n": "INTERCONTINENTAL BALI RESORT",
       "prod": "Halal Premium Oxtail Whole Cut 3Cm (2 Kg/Pack)",
       "cls": "A",
-      "rev": 1308559712
+      "rev": 1308935934
     },
     {
       "n": "CONRAD HOTEL",
@@ -781,7 +781,7 @@ const D = {
       "n": "HILTON HOTEL",
       "prod": "MAMAS BELLY RIND ON SB OUT (SKIN ON) 3-5KG/PACK",
       "cls": "A",
-      "rev": 1020071457
+      "rev": 1025132757
     },
     {
       "n": "MERUSAKA NUSA DUA",
@@ -813,7 +813,7 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "prod": "Friboi Brazil Tenderloin Whole",
       "cls": "A",
-      "rev": 2111359463
+      "rev": 2135914928
     },
     {
       "n": "TABU ULUWATU",
@@ -825,7 +825,7 @@ const D = {
       "n": "NOURISH UNGASAN",
       "prod": "DP Mozzarella 2.5Kg",
       "cls": "A",
-      "rev": 438281365
+      "rev": 440821365
     },
     {
       "n": "PT BALI PAWIWAHAN (COCO ROTI)",
@@ -837,7 +837,7 @@ const D = {
       "n": "NOURISH CAFE",
       "prod": "Tepung Hime @25Kg/Sack",
       "cls": "A",
-      "rev": 207772472
+      "rev": 213160652
     },
     {
       "n": "VIVRE CATERING",
@@ -868,7 +868,7 @@ const D = {
       "sp": "Juni",
       "cls": "A",
       "skus": 5,
-      "ytd": 438319365,
+      "ytd": 440859365,
       "act": "Expand product range — currently 5 SKUs, pitch new categories"
     },
     {
@@ -895,7 +895,7 @@ const D = {
       "sp": "Juni",
       "cls": "A",
       "skus": 2,
-      "ytd": 207772472,
+      "ytd": 213160652,
       "act": "Expand product range — currently 2 SKUs, pitch new categories"
     }
   ],
