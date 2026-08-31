@@ -47,7 +47,8 @@ FB_CATEGORIES = {
 }
 
 def is_fb(r):
-    return (r[7] or '').strip().upper() in FB_CATEGORIES
+    cat = (r[7] or '').strip().upper()
+    return cat in FB_CATEGORIES or cat == ''
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 wb = openpyxl.load_workbook(XLSX, read_only=True, data_only=True)
