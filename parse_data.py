@@ -374,9 +374,9 @@ for cn, md in combined_md.items():
     
     # 1. Churn Risk (A/B class, drop >20% in last 2 months vs history)
     if cls in ('A', 'B'):
-        active_m = [m for m, v in md.items() if v > 0]
+        active_mons = [m for m, v in md.items() if v > 0]
         recent_2 = sum(md.get(m, 0) for m in (ref_m, prev_m))
-        hist_months = [m for m in active_m if m not in (ref_m, prev_m)]
+        hist_months = [m for m in active_mons if m not in (ref_m, prev_m)]
         if hist_months:
             hist_avg = sum(md[m] for m in hist_months) / len(hist_months)
             recent_avg = recent_2 / 2

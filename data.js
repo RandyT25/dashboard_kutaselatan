@@ -6607,11 +6607,7 @@ const D = {
       "act": "Buys F&B but no Balian - cross-sell opportunity!"
     }
   ],
-  "active_m": [
-    7,
-    8,
-    9
-  ],
+  "active_m": 69,
   "active_j": 142,
   "skus": 255,
   "dormant_cnt": 25,
@@ -6780,7 +6776,7 @@ const D = {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 2265881034.0655737
+      "rev": 2265881034.065574
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
@@ -6792,13 +6788,13 @@ const D = {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1439589183.6212077
+      "rev": 1439589183.621208
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1330572608.4275882
+      "rev": 1330572608.427588
     },
     {
       "n": "HILTON HOTEL",
