@@ -568,26 +568,30 @@ function renderInsightsGrid() {
   const grid = document.getElementById('insights-grid');
   let html = '';
 
+  const trStart = (n) => `<tr style="cursor:pointer" onclick="showCustModal('${n.replace(/'/g, "\\'")}')" onmouseover="this.style.background='var(--hover-row)'" onmouseout="this.style.background='transparent'">`;
+
+  const spBadge = (sp) => sp ? `<span style="font-size:9px;color:${sp==='Monica'?'var(--monica)':'var(--juni)'};border:1px solid ${sp==='Monica'?'var(--monica)':'var(--juni)'}44;padding:1px 3px;border-radius:3px;margin-left:4px">${sp[0]}</span>` : '';
+
   // 1. Churn Risk
   html += createInsightCard('⚠️ Churn Risk (A/B Class)', D.churn_risk, c => `
-    <tr>
-      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+    ${trStart(c.n)}
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}${spBadge(c.sp)}</td>
       <td style="color:var(--red);font-weight:600;text-align:right">-${c.drop}%</td>
     </tr>
   `);
 
   // 2. Recovery / Win-Backs
   html += createInsightCard('🌱 Win-Backs', D.recovery, c => `
-    <tr>
-      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+    ${trStart(c.n)}
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}${spBadge(c.sp)}</td>
       <td style="color:var(--green);font-weight:600;text-align:right">+${idr(c.rev)}</td>
     </tr>
   `);
 
   // 3. High-Dependence
   html += createInsightCard('🎯 Single-Product Risk (>80%)', D.single_prod, c => `
-    <tr>
-      <td style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+    ${trStart(c.n)}
+      <td style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}${spBadge(c.sp)}</td>
       <td style="max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;color:var(--muted)" title="${c.prod}">${c.prod}</td>
       <td style="color:var(--orange);font-weight:600;text-align:right">${c.pct}%</td>
     </tr>
@@ -595,43 +599,43 @@ function renderInsightsGrid() {
 
   // 4. Consistent Buyers
   html += createInsightCard('⭐ Consistent Buyers', D.consistent, c => `
-    <tr>
-      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+    ${trStart(c.n)}
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}${spBadge(c.sp)}</td>
       <td style="text-align:right;font-weight:600">${idr(c.rev)}</td>
     </tr>
   `);
 
   // 5. AOV Drops
   html += createInsightCard('📉 AOV Drops', D.aov_drops, c => `
-    <tr>
-      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+    ${trStart(c.n)}
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}${spBadge(c.sp)}</td>
       <td style="color:var(--orange);font-weight:600;text-align:right">-${c.drop}%</td>
     </tr>
   `);
 
-  // 6. Fast Growing (Combined Monica + Juni FB for now)
-  const allGrow = [...D.grow_m, ...D.grow_j].sort((a,b)=>b.g - a.g);
+  // 6. Fast Growing
+  const allGrow = [...D.grow_m.map(x=>({...x, sp:'Monica'})), ...D.grow_j.map(x=>({...x, sp:'Juni'}))].sort((a,b)=>b.g - a.g);
   html += createInsightCard('📈 Top Growing', allGrow, c => `
-    <tr>
-      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+    ${trStart(c.n)}
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}${spBadge(c.sp)}</td>
       <td style="color:var(--green);font-weight:600;text-align:right">+${c.g}%</td>
     </tr>
   `);
 
   // 7. Sharpest Decline
-  const allDec = [...D.dec_m, ...D.dec_j].sort((a,b)=>a.d - b.d);
+  const allDec = [...D.dec_m.map(x=>({...x, sp:'Monica'})), ...D.dec_j.map(x=>({...x, sp:'Juni'}))].sort((a,b)=>a.d - b.d);
   html += createInsightCard('📉 Top Declining', allDec, c => `
-    <tr>
-      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+    ${trStart(c.n)}
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}${spBadge(c.sp)}</td>
       <td style="color:var(--red);font-weight:600;text-align:right">${c.d}%</td>
     </tr>
   `);
 
   // 8. Longest Dormant
-  const allDorm = [...D.dorm_m, ...D.dorm_j].sort((a,b)=>a.ytd - b.ytd); // sort by YTD to show who we lost most
+  const allDorm = [...D.dorm_m.map(x=>({...x, sp:'Monica'})), ...D.dorm_j.map(x=>({...x, sp:'Juni'}))].sort((a,b)=>a.ytd - b.ytd); 
   html += createInsightCard('🔕 Longest Dormant', allDorm, c => `
-    <tr>
-      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+    ${trStart(c.n)}
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}${spBadge(c.sp)}</td>
       <td style="color:var(--muted);font-size:11px;text-align:right">Since ${c.last}</td>
     </tr>
   `);
