@@ -6830,7 +6830,7 @@ const D = {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 2265881034.065574
+      "rev": 2265881034.0655737
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
@@ -6842,13 +6842,13 @@ const D = {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1439589183.621208
+      "rev": 1439589183.6212077
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1330572608.427588
+      "rev": 1330572608.4275882
     },
     {
       "n": "HILTON HOTEL",
