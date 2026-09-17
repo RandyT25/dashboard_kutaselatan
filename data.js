@@ -222,6 +222,60 @@ const D = {
       "pct": 1.31
     }
   ],
+  "monica_top5": [
+    {
+      "n": "INTERCONTINENTAL BALI RESORT",
+      "rev": 1439589184,
+      "pct": 16.01
+    },
+    {
+      "n": "CONRAD HOTEL",
+      "rev": 1330572608,
+      "pct": 14.79
+    },
+    {
+      "n": "HILTON HOTEL",
+      "rev": 1094848960,
+      "pct": 12.17
+    },
+    {
+      "n": "MERUSAKA NUSA DUA",
+      "rev": 809475892,
+      "pct": 9.0
+    },
+    {
+      "n": "MOVENPICK",
+      "rev": 379602293,
+      "pct": 4.22
+    }
+  ],
+  "juni_top5": [
+    {
+      "n": "BAMBU BALI ULUWATU",
+      "rev": 2424646930,
+      "pct": 39.31
+    },
+    {
+      "n": "TABU ULUWATU",
+      "rev": 986012375,
+      "pct": 15.99
+    },
+    {
+      "n": "NOURISH UNGASAN",
+      "rev": 505034362,
+      "pct": 8.19
+    },
+    {
+      "n": "PT BALI PAWIWAHAN (COCO ROTI)",
+      "rev": 278172349,
+      "pct": 4.51
+    },
+    {
+      "n": "NOURISH CAFE",
+      "rev": 242478141,
+      "pct": 3.93
+    }
+  ],
   "abc": [
     {
       "cls": "A",
@@ -6776,7 +6830,7 @@ const D = {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 2265881034.0655737
+      "rev": 2265881034.065574
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
@@ -6788,13 +6842,13 @@ const D = {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1439589183.6212077
+      "rev": 1439589183.621208
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1330572608.4275882
+      "rev": 1330572608.427588
     },
     {
       "n": "HILTON HOTEL",

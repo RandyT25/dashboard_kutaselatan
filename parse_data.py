@@ -436,6 +436,8 @@ D = {
     'top10':       top10,
     'monica_top10': sp_top10_list(monica_custs),
     'juni_top10':   sp_top10_list(juni_custs),
+    'monica_top5': sp_top10_list(monica_custs)[:5], # backwards compat
+    'juni_top5':   sp_top10_list(juni_custs)[:5],   # backwards compat
     'abc':         abc_list,
     'abc_custs':   abc_custs,
     'cust_top10_items': cust_top10_items,
