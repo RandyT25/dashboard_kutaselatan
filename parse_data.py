@@ -354,6 +354,72 @@ for i, (cn, sp, cls, skus, ytd, act) in enumerate(opp_candidates, 1):
     if len(opps) >= 5:
         break
 
+# ── Advanced Insights ──────────────────────────────────────────────────────────
+combined_md = defaultdict(lambda: defaultdict(float))
+for cn, md in cust_by_m.items():
+    for m, v in md.items():
+        combined_md[cn][m] += v
+for cn, md in cust_by_m_bal.items():
+    for m, v in md.items():
+        combined_md[cn][m] += v
+
+churn_risk = []
+recovery = []
+consistent = []
+aov_drops = []
+
+for cn, md in combined_md.items():
+    cls = cust_cls.get(cn, 'C')
+    sp = cust_sp.get(cn, '')
+    
+    # 1. Churn Risk (A/B class, drop >20% in last 2 months vs history)
+    if cls in ('A', 'B'):
+        active_m = [m for m, v in md.items() if v > 0]
+        recent_2 = sum(md.get(m, 0) for m in (ref_m, prev_m))
+        hist_months = [m for m in active_m if m not in (ref_m, prev_m)]
+        if hist_months:
+            hist_avg = sum(md[m] for m in hist_months) / len(hist_months)
+            recent_avg = recent_2 / 2
+            if hist_avg > 0 and (hist_avg - recent_avg) / hist_avg > 0.2:
+                churn_risk.append({'n': cn, 'cls': cls, 'sp': sp, 'drop': round((hist_avg - recent_avg) / hist_avg * 100)})
+
+    # 2. Recovery / Win-Backs (gap >= 3 months, but active now)
+    if md.get(ref_m, 0) > 0:
+        active_before = [m for m, v in md.items() if v > 0 and m < ref_m]
+        if active_before:
+            gap = ref_m - max(active_before)
+            if gap >= 3:
+                recovery.append({'n': cn, 'cls': cls, 'sp': sp, 'gap': gap, 'rev': md.get(ref_m, 0)})
+    
+    # 4. Consistent Buyers (active in all available months)
+    active_count = len([m for m, v in md.items() if v > 0])
+    if active_count == len(months_labels) or (active_count == len(months_labels)-1 and partial_m):
+        consistent.append({'n': cn, 'cls': cls, 'sp': sp, 'rev': sum(md.values())})
+
+    # 5. AOV Drops (>40% drop in recent month vs historical avg)
+    if md.get(ref_m, 0) > 0:
+        hist_months = [m for m, v in md.items() if v > 0 and m < ref_m]
+        if hist_months:
+            hist_avg = sum(md[m] for m in hist_months) / len(hist_months)
+            cur = md[ref_m]
+            if hist_avg > 0 and (hist_avg - cur) / hist_avg > 0.4:
+                aov_drops.append({'n': cn, 'cls': cls, 'sp': sp, 'drop': round((hist_avg - cur) / hist_avg * 100)})
+
+# 3. High-Dependence Accounts (>80% rev from single product)
+single_prod = []
+for cn, prods in cust_top_prod.items():
+    tot = sum(prods.values())
+    if tot < 5_000_000: continue
+    top_p, top_v = max(prods.items(), key=lambda x: x[1])
+    if top_v / tot > 0.8:
+        single_prod.append({'n': cn, 'cls': cust_cls.get(cn, 'C'), 'sp': cust_sp.get(cn, ''), 'prod': top_p, 'pct': round(top_v/tot*100)})
+
+churn_risk.sort(key=lambda x: -x['drop'])
+recovery.sort(key=lambda x: -x['rev'])
+single_prod.sort(key=lambda x: -x['pct'])
+consistent.sort(key=lambda x: -x['rev'])
+aov_drops.sort(key=lambda x: -x['drop'])
+
 # ── Target ─────────────────────────────────────────────────────────────────────
 TARGET_H1 = 1_800_000_000
 TARGET_H2 = 2_200_000_000
@@ -393,6 +459,11 @@ D = {
     'active_j':    active_j,
     'skus':        total_skus,
     'dormant_cnt': dormant_cnt,
+    'churn_risk':  churn_risk[:10],
+    'recovery':    recovery[:10],
+    'single_prod': single_prod[:10],
+    'consistent':  consistent[:10],
+    'aov_drops':   aov_drops[:10],
 }
 
 # ── Write data.js ──────────────────────────────────────────────────────────────

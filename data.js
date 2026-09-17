@@ -6607,8 +6607,290 @@ const D = {
       "act": "Buys F&B but no Balian - cross-sell opportunity!"
     }
   ],
-  "active_m": 69,
+  "active_m": [
+    7,
+    8,
+    9
+  ],
   "active_j": 142,
   "skus": 255,
-  "dormant_cnt": 25
+  "dormant_cnt": 25,
+  "churn_risk": [
+    {
+      "n": "BALI NUSA DUA CONVENTION CENTER",
+      "cls": "B",
+      "sp": "Monica",
+      "drop": 100
+    },
+    {
+      "n": "PLAGOO HOLIDAY HOTEL",
+      "cls": "B",
+      "sp": "Monica",
+      "drop": 100
+    },
+    {
+      "n": "PT ULU ARTISAN EATS",
+      "cls": "B",
+      "sp": "Juni",
+      "drop": 100
+    },
+    {
+      "n": "THE MULIA HOTEL",
+      "cls": "B",
+      "sp": "Monica",
+      "drop": 83
+    },
+    {
+      "n": "COURTYARD MARRIOT HOTEL",
+      "cls": "B",
+      "sp": "Monica",
+      "drop": 38
+    },
+    {
+      "n": "PT BALI PAWIWAHAN",
+      "cls": "B",
+      "sp": "Juni",
+      "drop": 28
+    }
+  ],
+  "recovery": [
+    {
+      "n": "GELATO FACTORY ULUWATU",
+      "cls": "C",
+      "sp": "Juni",
+      "gap": 3,
+      "rev": 901977.5196
+    },
+    {
+      "n": "NUSA DUA BEACH GRILL",
+      "cls": "C",
+      "sp": "Juni",
+      "gap": 5,
+      "rev": 770000.006989
+    },
+    {
+      "n": "MADE BAKERY",
+      "cls": "C",
+      "sp": "Juni",
+      "gap": 5,
+      "rev": 499500.0
+    },
+    {
+      "n": "BENDEGA RESTAURANT JIMBARAN",
+      "cls": "C",
+      "sp": "Juni",
+      "gap": 5,
+      "rev": 404509.9962
+    },
+    {
+      "n": "ANJA JIMBARAN",
+      "cls": "C",
+      "sp": "Monica",
+      "gap": 3,
+      "rev": 327450.0
+    },
+    {
+      "n": "NUSA BY SUKA",
+      "cls": "C",
+      "sp": "Juni",
+      "gap": 5,
+      "rev": 290000.043
+    }
+  ],
+  "single_prod": [
+    {
+      "n": "ACALA BENOA",
+      "cls": "C",
+      "sp": "Juni",
+      "prod": "Tepung Double Zero @25Kg/Sack",
+      "pct": 100
+    },
+    {
+      "n": "BALKAN SHAWARMA UNGASAN",
+      "cls": "C",
+      "sp": "Juni",
+      "prod": "Tepung Double Zero @25Kg/Sack",
+      "pct": 100
+    },
+    {
+      "n": "BARTOLO LABUAN SAIT",
+      "cls": "C",
+      "sp": "Juni",
+      "prod": "Tepung Double Zero @25Kg/Sack",
+      "pct": 100
+    },
+    {
+      "n": "JIMBARAN BAY BEACH",
+      "cls": "C",
+      "sp": "Monica",
+      "prod": "Tepung Japanese Tempura 1kg/pack",
+      "pct": 100
+    },
+    {
+      "n": "LE YANANDRA RESORT BALI",
+      "cls": "C",
+      "sp": "Juni",
+      "prod": "Tepung Double Zero 1kg/pack",
+      "pct": 100
+    },
+    {
+      "n": "LOLAS ULUWATU",
+      "cls": "C",
+      "sp": "Juni",
+      "prod": "Block Red Cheddar Mix Cheese 5x2kg",
+      "pct": 100
+    },
+    {
+      "n": "MANARAI BEACH HOUSE",
+      "cls": "C",
+      "sp": "Juni",
+      "prod": "Tepung Double Zero @25Kg/Sack",
+      "pct": 100
+    },
+    {
+      "n": "MR SMASH BURGER ULUWATU",
+      "cls": "C",
+      "sp": "Juni",
+      "prod": "Pickled Gherkins (2kg/pack)",
+      "pct": 100
+    },
+    {
+      "n": "MURNI NI KOMANG",
+      "cls": "C",
+      "sp": "Juni",
+      "prod": "Tepung Double Zero @25Kg/Sack",
+      "pct": 100
+    },
+    {
+      "n": "UNO RESTAURANT NUSA DUA",
+      "cls": "C",
+      "sp": "Juni",
+      "prod": "Tepung Double Zero @25Kg/Sack",
+      "pct": 100
+    }
+  ],
+  "consistent": [
+    {
+      "n": "BAMBU BALI ULUWATU",
+      "cls": "A",
+      "sp": "Juni",
+      "rev": 2424646929.824097
+    },
+    {
+      "n": "PARADISUS BY MELIA NUSA DUA",
+      "cls": "A",
+      "sp": "Monica",
+      "rev": 2265881034.065574
+    },
+    {
+      "n": "PT. GRAHA ALAM LESTARI",
+      "cls": "A",
+      "sp": "Monica",
+      "rev": 1480023638.847295
+    },
+    {
+      "n": "INTERCONTINENTAL BALI RESORT",
+      "cls": "A",
+      "sp": "Monica",
+      "rev": 1439589183.621208
+    },
+    {
+      "n": "CONRAD HOTEL",
+      "cls": "A",
+      "sp": "Monica",
+      "rev": 1330572608.427588
+    },
+    {
+      "n": "HILTON HOTEL",
+      "cls": "A",
+      "sp": "Monica",
+      "rev": 1238528961.7381501
+    },
+    {
+      "n": "BULGARI",
+      "cls": "A",
+      "sp": "Monica",
+      "rev": 876836840.251156
+    },
+    {
+      "n": "MERUSAKA NUSA DUA",
+      "cls": "A",
+      "sp": "Monica",
+      "rev": 809475892.303175
+    },
+    {
+      "n": "FOUR SEASON RESORT BALI",
+      "cls": "A",
+      "sp": "Monica",
+      "rev": 542136154.8684
+    },
+    {
+      "n": "NOURISH UNGASAN",
+      "cls": "A",
+      "sp": "Juni",
+      "rev": 505034362.396718
+    }
+  ],
+  "aov_drops": [
+    {
+      "n": "MERUSAKA NUSA DUA",
+      "cls": "A",
+      "sp": "Monica",
+      "drop": 78
+    },
+    {
+      "n": "MADE BAKERY",
+      "cls": "C",
+      "sp": "Juni",
+      "drop": 77
+    },
+    {
+      "n": "SOL BY MELIA BENOA",
+      "cls": "C",
+      "sp": "Monica",
+      "drop": 75
+    },
+    {
+      "n": "NUSA DUA PIZZA",
+      "cls": "C",
+      "sp": "Juni",
+      "drop": 74
+    },
+    {
+      "n": "THUYS LABUAN SAIT",
+      "cls": "C",
+      "sp": "Juni",
+      "drop": 62
+    },
+    {
+      "n": "TABU ULUWATU",
+      "cls": "A",
+      "sp": "Juni",
+      "drop": 60
+    },
+    {
+      "n": "RUPA COFFEE",
+      "cls": "C",
+      "sp": "Juni",
+      "drop": 56
+    },
+    {
+      "n": "GELATO FACTORY ULUWATU",
+      "cls": "C",
+      "sp": "Juni",
+      "drop": 55
+    },
+    {
+      "n": "ARTIKULASI COFFEE",
+      "cls": "C",
+      "sp": "Juni",
+      "drop": 53
+    },
+    {
+      "n": "CASHEW TREE RESTAURANT",
+      "cls": "C",
+      "sp": "Juni",
+      "drop": 52
+    }
+  ]
 };

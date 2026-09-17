@@ -399,88 +399,9 @@ tr:hover td{background:var(--hover-row)}
 
 <!-- CUSTOMER INSIGHTS -->
 <div class="sec" id="s-customers">
-  <div class="sec-title">Customer Insights</div>
-  <div class="card">
-    <!-- Channel toggle -->
-    <div style="display:flex;gap:6px;margin-bottom:16px">
-      <button class="ch-btn act" id="ch-fb"  onclick="switchChannel('fb', this)">🍽 F&amp;B</button>
-      <button class="ch-btn"     id="ch-bal" onclick="switchChannel('bal',this)">💧 Balian</button>
-    </div>
-
-    <!-- ── F&B channel ── -->
-    <div id="ch-panel-fb">
-      <div class="tabs">
-        <button class="tab-btn act" onclick="switchTabCh('fb','growing', this)">📈 Growing</button>
-        <button class="tab-btn"     onclick="switchTabCh('fb','declining',this)">📉 Declining</button>
-        <button class="tab-btn"     onclick="switchTabCh('fb','dormant',  this)">🔕 Dormant (<span id="fb-dorm-count">0</span>)</button>
-        <button class="tab-btn"     onclick="switchTabCh('fb','upsell',   this)">💡 Upsell</button>
-      </div>
-      <div class="tab-panel act" id="tp-fb-growing">
-        <div class="g2">
-          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r" id="fb-grow-m-hd">May Rev</th></tr></thead><tbody id="t-fb-grow-m"></tbody></table></div></div>
-          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r" id="fb-grow-j-hd">May Rev</th></tr></thead><tbody id="t-fb-grow-j"></tbody></table></div></div>
-        </div>
-      </div>
-      <div class="tab-panel" id="tp-fb-declining">
-        <div class="g2">
-          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Change</th><th class="ta-r">Action</th></tr></thead><tbody id="t-fb-dec-m"></tbody></table></div></div>
-          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Change</th><th class="ta-r">Action</th></tr></thead><tbody id="t-fb-dec-j"></tbody></table></div></div>
-        </div>
-      </div>
-      <div class="tab-panel" id="tp-fb-dormant">
-        <div class="g2">
-          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Last Active</th><th class="ta-r">YTD Rev</th></tr></thead><tbody id="t-fb-dorm-m"></tbody></table></div></div>
-          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Last Active</th><th class="ta-r">YTD Rev</th></tr></thead><tbody id="t-fb-dorm-j"></tbody></table></div></div>
-        </div>
-      </div>
-      <div class="tab-panel" id="tp-fb-upsell">
-        <div class="g2">
-          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Product</th><th>Cls</th><th class="ta-r">F&amp;B YTD</th></tr></thead><tbody id="t-ups-m"></tbody></table></div></div>
-          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Product</th><th>Cls</th><th class="ta-r">F&amp;B YTD</th></tr></thead><tbody id="t-ups-j"></tbody></table></div></div>
-        </div>
-      </div>
-    </div><!-- /ch-panel-fb -->
-
-    <!-- ── Balian channel ── -->
-    <div id="ch-panel-bal" style="display:none">
-      <div class="tabs">
-        <button class="tab-btn act" onclick="switchTabCh('bal','growing', this)">📈 Growing</button>
-        <button class="tab-btn"     onclick="switchTabCh('bal','declining',this)">📉 Declining</button>
-        <button class="tab-btn"     onclick="switchTabCh('bal','dormant',  this)">🔕 Dormant (<span id="bal-dorm-count">0</span>)</button>
-      </div>
-      <div class="tab-panel act" id="tp-bal-growing">
-        <div class="g2">
-          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r" id="bal-grow-m-hd">May Rev</th></tr></thead><tbody id="t-bal-grow-m"></tbody></table></div></div>
-          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Growth</th><th class="ta-r" id="bal-grow-j-hd">May Rev</th></tr></thead><tbody id="t-bal-grow-j"></tbody></table></div></div>
-        </div>
-      </div>
-      <div class="tab-panel" id="tp-bal-declining">
-        <div class="g2">
-          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Change</th><th class="ta-r">Action</th></tr></thead><tbody id="t-bal-dec-m"></tbody></table></div></div>
-          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Change</th><th class="ta-r">Action</th></tr></thead><tbody id="t-bal-dec-j"></tbody></table></div></div>
-        </div>
-      </div>
-      <div class="tab-panel" id="tp-bal-dormant">
-        <div class="g2">
-          <div><div style="font-size:12px;color:var(--monica);font-weight:600;margin-bottom:8px">▶ MONICA</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Last Active</th><th class="ta-r">YTD Rev</th></tr></thead><tbody id="t-bal-dorm-m"></tbody></table></div></div>
-          <div><div style="font-size:12px;color:var(--juni);font-weight:600;margin-bottom:8px">▶ JUNI</div>
-            <div class="tbl-wrap"><table><thead><tr><th>Customer</th><th>Cls</th><th>Last Active</th><th class="ta-r">YTD Rev</th></tr></thead><tbody id="t-bal-dorm-j"></tbody></table></div></div>
-        </div>
-      </div>
-    </div><!-- /ch-panel-bal -->
+  <div class="sec-title">Advanced Customer Insights</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px" id="insights-grid">
+    <!-- Insights cards will be injected here via JS -->
   </div>
 </div>
 
@@ -630,92 +551,94 @@ function fillTop10(elId,data,col){
 fillTop10('monica-top10',D.monica_top10,'var(--monica)');
 fillTop10('juni-top10',D.juni_top10,'var(--juni)');
 
-// Growing
-function fillGrow(id,data){
-  const tb=document.getElementById(id);
-  data.forEach(c=>{
-    const pos=c.g>=0;
-    const growthCell=c.new
-      ?`<span class="badge-pill pill-up">NEW</span>`
-      :`<span style="color:${pos?'var(--green)':'var(--red)'};font-weight:600">${gStr(c.g)}</span>`;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
-      <td>${clsBa(c.cls)}</td>
-      <td>${growthCell}</td>
-      <td class="ta-r">${idr(c.lat)}</td>`;
-    tb.appendChild(tr);
+// Advanced Insights Grid Rendering
+function createInsightCard(title, data, renderRow) {
+  if (!data || data.length === 0) return '';
+  let html = `<div class="card" style="display:flex;flex-direction:column">
+    <div class="card-hd" style="font-size:13px;border-bottom:1px solid var(--bord);padding-bottom:8px;margin-bottom:8px">${title}</div>
+    <div class="tbl-wrap" style="flex:1"><table style="width:100%"><tbody>`;
+  data.slice(0, 5).forEach(c => {
+    html += renderRow(c);
   });
+  html += `</tbody></table></div></div>`;
+  return html;
 }
-fillGrow('t-fb-grow-m',D.grow_m);
-fillGrow('t-fb-grow-j',D.grow_j);
-fillGrow('t-bal-grow-m',D.bal_grow_m);
-fillGrow('t-bal-grow-j',D.bal_grow_j);
 
-// Declining
-function fillDec(id,data){
-  const tb=document.getElementById(id);
-  data.forEach(c=>{
-    const pos=c.d>=0;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
-        <div style="font-weight:600">${c.n}</div>
-        <div style="font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${c.top_p||''}">Top: ${c.top_p ? c.top_p.substring(0,20)+'…' : '-'}</div>
-      </td>
-      <td>${clsBa(c.cls)}</td>
-      <td style="color:${pos?'var(--green)':'var(--red)'};font-weight:600">${gStr(c.d)}</td>
-      <td class="ta-r">${actBa(c.act)}</td>`;
-    tb.appendChild(tr);
-  });
-}
-fillDec('t-fb-dec-m',D.dec_m);
-fillDec('t-fb-dec-j',D.dec_j);
-fillDec('t-bal-dec-m',D.bal_dec_m);
-fillDec('t-bal-dec-j',D.bal_dec_j);
+function renderInsightsGrid() {
+  const grid = document.getElementById('insights-grid');
+  let html = '';
 
-// Dormant
-function fillDorm(id,data){
-  const tb=document.getElementById(id);
-  data.forEach(c=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
-        <div style="font-weight:600">${c.n}</div>
-        <div style="font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${c.top_p||''}">Top: ${c.top_p ? c.top_p.substring(0,20)+'…' : '-'}</div>
-      </td>
-      <td>${clsBa(c.cls)}</td>
-      <td style="color:var(--muted);font-size:11px">${c.last}</td>
-      <td class="ta-r">${idr(c.ytd)}</td>`;
-    tb.appendChild(tr);
-  });
-}
-fillDorm('t-fb-dorm-m',D.dorm_m);
-fillDorm('t-fb-dorm-j',D.dorm_j);
-fillDorm('t-bal-dorm-m',D.bal_dorm_m);
-fillDorm('t-bal-dorm-j',D.bal_dorm_j);
-// update dormant counts in tabs
-const fbDormEl=document.getElementById('fb-dorm-count');
-if(fbDormEl) fbDormEl.textContent=D.dorm_m.length+D.dorm_j.length;
-const balDormEl=document.getElementById('bal-dorm-count');
-if(balDormEl) balDormEl.textContent=D.bal_dorm_m.length+D.bal_dorm_j.length;
+  // 1. Churn Risk
+  html += createInsightCard('⚠️ Churn Risk (A/B Class)', D.churn_risk, c => `
+    <tr>
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+      <td style="color:var(--red);font-weight:600;text-align:right">-${c.drop}%</td>
+    </tr>
+  `);
 
-// Upsell
-function fillUps(id,data){
-  const tb=document.getElementById(id);
-  data.forEach(c=>{
-    const p=c.prod.length>18?c.prod.substring(0,18)+'…':c.prod;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500">${c.n}</td>
-      <td style="font-size:11px;color:var(--muted)">${p}</td>
-      <td>${clsBa(c.cls)}</td>
-      <td class="ta-r" style="font-weight:600">${idr(c.rev)}</td>`;
-    tb.appendChild(tr);
-  });
+  // 2. Recovery / Win-Backs
+  html += createInsightCard('🌱 Win-Backs', D.recovery, c => `
+    <tr>
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+      <td style="color:var(--green);font-weight:600;text-align:right">+${idr(c.rev)}</td>
+    </tr>
+  `);
+
+  // 3. High-Dependence
+  html += createInsightCard('🎯 Single-Product Risk (>80%)', D.single_prod, c => `
+    <tr>
+      <td style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+      <td style="max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;color:var(--muted)" title="${c.prod}">${c.prod}</td>
+      <td style="color:var(--orange);font-weight:600;text-align:right">${c.pct}%</td>
+    </tr>
+  `);
+
+  // 4. Consistent Buyers
+  html += createInsightCard('⭐ Consistent Buyers', D.consistent, c => `
+    <tr>
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+      <td style="text-align:right;font-weight:600">${idr(c.rev)}</td>
+    </tr>
+  `);
+
+  // 5. AOV Drops
+  html += createInsightCard('📉 AOV Drops', D.aov_drops, c => `
+    <tr>
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+      <td style="color:var(--orange);font-weight:600;text-align:right">-${c.drop}%</td>
+    </tr>
+  `);
+
+  // 6. Fast Growing (Combined Monica + Juni FB for now)
+  const allGrow = [...D.grow_m, ...D.grow_j].sort((a,b)=>b.g - a.g);
+  html += createInsightCard('📈 Top Growing', allGrow, c => `
+    <tr>
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+      <td style="color:var(--green);font-weight:600;text-align:right">+${c.g}%</td>
+    </tr>
+  `);
+
+  // 7. Sharpest Decline
+  const allDec = [...D.dec_m, ...D.dec_j].sort((a,b)=>a.d - b.d);
+  html += createInsightCard('📉 Top Declining', allDec, c => `
+    <tr>
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+      <td style="color:var(--red);font-weight:600;text-align:right">${c.d}%</td>
+    </tr>
+  `);
+
+  // 8. Longest Dormant
+  const allDorm = [...D.dorm_m, ...D.dorm_j].sort((a,b)=>a.ytd - b.ytd); // sort by YTD to show who we lost most
+  html += createInsightCard('🔕 Longest Dormant', allDorm, c => `
+    <tr>
+      <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}</td>
+      <td style="color:var(--muted);font-size:11px;text-align:right">Since ${c.last}</td>
+    </tr>
+  `);
+
+  grid.innerHTML = html;
 }
-fillUps('t-ups-m',D.ups_m);
-fillUps('t-ups-j',D.ups_j);
+renderInsightsGrid();
 
 // Opportunities
 const oppEl=document.getElementById('opp-list');
