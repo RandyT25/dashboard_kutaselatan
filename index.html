@@ -606,7 +606,7 @@ function renderInsightsGrid() {
   `);
 
   // 5. AOV Drops
-  html += createInsightCard('📉 AOV Drops', D.aov_drops, c => `
+  html += createInsightCard('📉 AOV Drops <span style="font-size:10px;font-weight:normal;color:var(--muted)">(Average Order Value)</span>', D.aov_drops, c => `
     ${trStart(c.n)}
       <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600" title="${c.n}">${c.n}${spBadge(c.sp)}</td>
       <td style="color:var(--orange);font-weight:600;text-align:right">-${c.drop}%</td>
