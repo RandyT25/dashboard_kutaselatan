@@ -348,8 +348,8 @@ tr:hover td{background:var(--hover-row)}
         <div class="card-hd">Monthly (IDR Miliar)</div>
         <div class="ch" style="height:110px"><canvas id="cMonica"></canvas></div>
         <div class="div"></div>
-        <div class="card-hd">Top 5 Customers</div>
-        <div id="monica-top5"></div>
+        <div class="card-hd">Top 10 Customers</div>
+        <div id="monica-top10"></div>
       </div>
     </div>
 
@@ -374,8 +374,8 @@ tr:hover td{background:var(--hover-row)}
         <div class="card-hd">Monthly (IDR Miliar)</div>
         <div class="ch" style="height:110px"><canvas id="cJuni"></canvas></div>
         <div class="div"></div>
-        <div class="card-hd">Top 5 Customers</div>
-        <div id="juni-top5"></div>
+        <div class="card-hd">Top 10 Customers</div>
+        <div id="juni-top10"></div>
       </div>
     </div>
   </div>
@@ -490,20 +490,21 @@ tr:hover td{background:var(--hover-row)}
   <div id="opp-list"></div>
 </div>
 
-<!-- WEEKLY ACTIONS -->
-<div class="sec" id="s-actions">
-  <div class="sec-title">Weekly Action Plan</div>
-  <div class="card">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-      <div class="card-hd" style="margin-bottom:0">Auto-generated from latest data</div>
-      <span id="action-period" style="font-size:11px;color:var(--muted)"></span>
-    </div>
-    <div id="action-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2px"></div>
-  </div>
-</div>
+
 
 </div><!-- /wrap -->
 </div><!-- /main -->
+
+<!-- MODAL -->
+<div id="cust-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:var(--surf);width:100%;max-width:500px;border-radius:12px;border:1px solid var(--bord);box-shadow:0 10px 30px rgba(0,0,0,0.5);display:flex;flex-direction:column;max-height:80vh">
+    <div style="padding:16px;border-bottom:1px solid var(--bord);display:flex;justify-content:space-between;align-items:center">
+      <h3 id="modal-title" style="margin:0;font-size:16px">Customer</h3>
+      <button onclick="document.getElementById('cust-modal').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px">&times;</button>
+    </div>
+    <div id="modal-body" style="padding:16px;overflow-y:auto;flex:1"></div>
+  </div>
+</div>
 
 <!-- MOBILE NAV -->
 <nav class="mob-nav">
@@ -512,7 +513,6 @@ tr:hover td{background:var(--hover-row)}
     <button class="mnav-btn" id="mn-revenue" onclick="mobNav('revenue',this)"><span class="mnav-ico">💰</span>Revenue</button>
     <button class="mnav-btn" id="mn-customers" onclick="mobNav('customers',this)"><span class="mnav-ico">👥</span>Customers</button>
     <button class="mnav-btn" id="mn-products" onclick="mobNav('products',this)"><span class="mnav-ico">📦</span>Products</button>
-    <button class="mnav-btn" id="mn-actions" onclick="mobNav('actions',this)"><span class="mnav-ico">⚡</span>Actions</button>
   </div>
 </nav>
 
@@ -542,6 +542,46 @@ function actBa(a){
 }
 
 // ════════════════════════════════════════════
+// MODALS
+// ════════════════════════════════════════════
+function showModal(title, html) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('cust-modal').style.display = 'flex';
+}
+
+function showCustModal(cn) {
+  const items = D.cust_top10_items[cn] || [];
+  let html = `<div style="font-size:12px;color:var(--muted);margin-bottom:12px">Top 10 Products by Revenue</div>`;
+  if (items.length === 0) {
+    html += `<div style="font-size:13px">No product data available.</div>`;
+  } else {
+    html += `<div class="tbl-wrap"><table><thead><tr><th>Product</th><th class="ta-r">Revenue</th></tr></thead><tbody>`;
+    items.forEach(i => {
+      html += `<tr><td>${i.n}</td><td class="ta-r" style="font-weight:600">${idr(i.rev)}</td></tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+  showModal(cn, html);
+}
+
+function showAbcModal(cls) {
+  const custs = D.abc_custs[cls] || [];
+  let html = `<div style="font-size:12px;color:var(--muted);margin-bottom:12px">All ${cls}-Class Customers</div>`;
+  html += `<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Customer</th><th>SP</th><th class="ta-r">Revenue</th></tr></thead><tbody>`;
+  custs.forEach((c, idx) => {
+    html += `<tr style="cursor:pointer" onclick="showCustModal('${c.n.replace(/'/g, "\\'")}')">
+      <td>${idx+1}</td>
+      <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
+      <td>${spBa(c.sp)}</td>
+      <td class="ta-r" style="font-weight:600">${idr(c.rev)}</td>
+    </tr>`;
+  });
+  html += `</tbody></table></div>`;
+  showModal(`${cls} Segment`, html);
+}
+
+// ════════════════════════════════════════════
 // POPULATE TABLES
 // ════════════════════════════════════════════
 
@@ -550,6 +590,8 @@ const t10=document.getElementById('t-top10');
 D.top10.forEach((c,i)=>{
   const rkCls=i===0?'rk-1':i===1?'rk-2':i===2?'rk-3':'rk';
   const tr=document.createElement('tr');
+  tr.style.cursor='pointer';
+  tr.onclick=()=>showCustModal(c.n);
   tr.innerHTML=`
     <td><span class="${rkCls}">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</span></td>
     <td style="font-weight:${i<3?600:400};max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
@@ -564,7 +606,7 @@ const abcEl=document.getElementById('abc-rows');
 const abcCol=['var(--red)','var(--orange)','var(--muted)'];
 D.abc.forEach((a,i)=>{
   abcEl.innerHTML+=`
-    <div style="margin-bottom:12px">
+    <div style="margin-bottom:12px;cursor:pointer;padding:4px;border-radius:4px" onclick="showAbcModal('${a.cls}')" onmouseover="this.style.background='var(--hover-row)'" onmouseout="this.style.background='transparent'">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
         <span>${clsBa(a.cls)} <span style="font-size:12px;margin-left:6px">${a.accs} accounts</span></span>
         <span style="font-weight:700;color:${abcCol[i]}">${idr(a.rev)}</span>
@@ -574,19 +616,19 @@ D.abc.forEach((a,i)=>{
     </div>`;
 });
 
-// Top5 rows
-function fillTop5(elId,data,col){
+// Top 10 rows
+function fillTop10(elId,data,col){
   const el=document.getElementById(elId);
   data.forEach(c=>{
     el.innerHTML+=`
-      <div class="top5-row">
+      <div class="top5-row" style="cursor:pointer" onclick="showCustModal('${c.n.replace(/'/g, "\\'")}')">
         <span style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60%">${c.n}</span>
         <span style="font-size:12px;font-weight:700;color:${col}">${idr(c.rev)}</span>
       </div>`;
   });
 }
-fillTop5('monica-top5',D.monica_top5,'var(--monica)');
-fillTop5('juni-top5',D.juni_top5,'var(--juni)');
+fillTop10('monica-top10',D.monica_top10,'var(--monica)');
+fillTop10('juni-top10',D.juni_top10,'var(--juni)');
 
 // Growing
 function fillGrow(id,data){
@@ -617,7 +659,10 @@ function fillDec(id,data){
     const pos=c.d>=0;
     const tr=document.createElement('tr');
     tr.innerHTML=`
-      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
+      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        <div style="font-weight:600">${c.n}</div>
+        <div style="font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${c.top_p||''}">Top: ${c.top_p ? c.top_p.substring(0,20)+'…' : '-'}</div>
+      </td>
       <td>${clsBa(c.cls)}</td>
       <td style="color:${pos?'var(--green)':'var(--red)'};font-weight:600">${gStr(c.d)}</td>
       <td class="ta-r">${actBa(c.act)}</td>`;
@@ -635,7 +680,10 @@ function fillDorm(id,data){
   data.forEach(c=>{
     const tr=document.createElement('tr');
     tr.innerHTML=`
-      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.n}</td>
+      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        <div style="font-weight:600">${c.n}</div>
+        <div style="font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${c.top_p||''}">Top: ${c.top_p ? c.top_p.substring(0,20)+'…' : '-'}</div>
+      </td>
       <td>${clsBa(c.cls)}</td>
       <td style="color:var(--muted);font-size:11px">${c.last}</td>
       <td class="ta-r">${idr(c.ytd)}</td>`;
@@ -690,77 +738,7 @@ D.opps.forEach(o=>{
     </div>`;
 });
 
-// ── Dynamic weekly actions ─────────────────────
-function buildActions(){
-  const dormCount = D.dorm_m.length + D.dorm_j.length;
-  const decUrgM   = D.dec_m.filter(c=>c.act==='URGENT');
-  const decUrgJ   = D.dec_j.filter(c=>c.act==='URGENT');
-  const mConc     = top3Conc(D.monica_top5);
-  const jConc     = top3Conc(D.juni_top5);
-  const mYTD      = [...D.monica_fb,...D.monica_bal].reduce((a,b)=>a+b,0);
-  const jYTD      = [...D.juni_fb,  ...D.juni_bal  ].reduce((a,b)=>a+b,0);
-  const topOpp    = D.opps[0];
-  const topGrowM  = D.grow_m[0];
-  const topGrowJ  = D.grow_j[0];
 
-  const acts = [];
-
-  // Monday — P1 urgent
-  acts.push({day:'MON',col:'var(--red)',label:'P1',
-    act:`Review updated data — verify KPIs and flag any anomalies.`,owner:'Manager'});
-  if(dormCount>0) acts.push({day:'MON',col:'var(--red)',label:'P1',
-    act:`${dormCount} dormant accounts — follow up A/B-class first; re-activation call list.`,owner:'Both'});
-  if(decUrgM.length>0) acts.push({day:'MON',col:'var(--red)',label:'P1',
-    act:`Monica: Contact ${decUrgM[0].n}${decUrgM.length>1?' + '+(decUrgM.length-1)+' more':''} — urgent revenue decline.`,owner:'Monica'});
-  if(decUrgJ.length>0) acts.push({day:'MON',col:'var(--red)',label:'P1',
-    act:`Juni: Contact ${decUrgJ[0].n}${decUrgJ.length>1?' + '+(decUrgJ.length-1)+' more':''} — urgent revenue decline.`,owner:'Juni'});
-
-  // Tuesday — P2 concentration & strategy
-  acts.push({day:'TUE',col:'var(--yellow)',label:'P2',
-    act:`Monica top-3 conc. ${mConc}% (YTD ${idr(mYTD)}) — grow pipeline beyond current key accounts.`,owner:'Monica'});
-  acts.push({day:'TUE',col:'var(--yellow)',label:'P2',
-    act:`Juni top-3 conc. ${jConc}% (YTD ${idr(jYTD)}) — pitch 2+ new categories to mid-tier accounts.`,owner:'Juni'});
-
-  // Wednesday — P2 opportunity visit
-  if(topOpp) acts.push({day:'WED',col:'var(--yellow)',label:'P2',
-    act:`Opp #1 — ${topOpp.n} (${topOpp.sp}, ${topOpp.skus} SKUs, YTD ${idr(topOpp.ytd)}): ${topOpp.act}`,owner:topOpp.sp});
-  if(topGrowM) acts.push({day:'WED',col:'var(--yellow)',label:'P2',
-    act:`Monica growth account: ${topGrowM.n} +${topGrowM.g}% — reinforce with new SKU proposal.`,owner:'Monica'});
-  if(topGrowJ) acts.push({day:'WED',col:'var(--yellow)',label:'P2',
-    act:`Juni growth account: ${topGrowJ.n} +${topGrowJ.g}% — lock in next order before month-end.`,owner:'Juni'});
-
-  // Thursday — P2 commercial
-  acts.push({day:'THU',col:'var(--yellow)',label:'P2',
-    act:'Prepare bundle promos: pair slow-moving SKUs with top sellers for next cycle.',owner:'Manager'});
-
-  // Friday — P3 review
-  acts.push({day:'FRI',col:'var(--green)',label:'P3',
-    act:`Weekly KPI review — compare actuals vs ${idr(D.target)} target, set next-week priorities.`,owner:'Manager'});
-
-  return acts;
-}
-
-function renderActions(){
-  const actEl = document.getElementById('action-list');
-  const period = document.getElementById('action-period');
-  actEl.innerHTML='';
-  if(period) period.textContent = D.months[D.months.length-1]+' data';
-  const labelCols={P1:'var(--red)',P2:'var(--yellow)',P3:'var(--green)'};
-  buildActions().forEach(a=>{
-    actEl.innerHTML+=`
-      <div class="action-item">
-        <div style="min-width:40px;padding-top:2px;display:flex;flex-direction:column;align-items:center;gap:4px">
-          <div class="action-day">${a.day}</div>
-          <span style="font-size:9px;font-weight:700;color:${labelCols[a.label]||'var(--muted)'};background:${labelCols[a.label]||'var(--muted)'}22;padding:1px 5px;border-radius:3px;line-height:1.4">${a.label}</span>
-        </div>
-        <div>
-          <div style="font-size:12px">${a.act}</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px">Owner: ${a.owner}</div>
-        </div>
-      </div>`;
-  });
-}
-renderActions();
 
 // ════════════════════════════════════════════
 // CHARTS
@@ -1059,8 +1037,8 @@ function initDynamic(){
     set('monica-cust-sub','F&B + Balian · '+D.active_m+' customers');
     set('juni-cust-sub','F&B + Balian · '+D.active_j+' customers');
   }
-  set('monica-top3-val',top3Conc(D.monica_top5)+'%');
-  set('juni-top3-val',top3Conc(D.juni_top5)+'%');
+  set('monica-top3-val',top3Conc(D.monica_top10)+'%');
+  set('juni-top3-val',top3Conc(D.juni_top10)+'%');
   // Growing table "latest month" column headers track the real reference month
   const refMon = D.months[fullIdx].replace('*','')+' Rev';
   set('fb-grow-m-hd',refMon);

@@ -169,10 +169,12 @@ for cn, rev in sorted_custs:
     cust_cls[cn] = 'A' if frac <= 0.80 else ('B' if frac <= 0.95 else 'C')
 
 abc_buckets = {c: {'accs': 0, 'rev': 0.0} for c in 'ABC'}
-for cn, rev in cust_total.items():
-    b = abc_buckets[cust_cls.get(cn, 'C')]
-    b['accs'] += 1
-    b['rev']  += rev
+abc_custs = {'A': [], 'B': [], 'C': []}
+for cn, rev in sorted_custs:
+    c = cust_cls.get(cn, 'C')
+    abc_buckets[c]['accs'] += 1
+    abc_buckets[c]['rev']  += rev
+    abc_custs[c].append({'n': cn, 'rev': round(rev), 'sp': cust_sp.get(cn, '')})
 
 abc_strat = {'A': 'Top 20% — Protect & Grow',
              'B': 'Middle — Upsell',
@@ -192,7 +194,7 @@ top10 = [
     for cn, rev in sorted_custs[:10]
 ]
 
-# ── Top 5 by salesperson (FB only) ────────────────────────────────────────────
+# ── Top 10 by salesperson (FB only) ───────────────────────────────────────────
 def sp_fb_sorted(sp):
     return sorted(
         ((cn, v) for cn, v in cust_fb.items() if cust_sp.get(cn) == sp),
@@ -202,11 +204,11 @@ def sp_fb_sorted(sp):
 monica_custs = sp_fb_sorted('Monica')
 juni_custs   = sp_fb_sorted('Juni')
 
-def top5_list(custs):
+def sp_top10_list(custs):
     total = sum(v for _, v in custs) if custs else 1
     return [
         {'n': cn, 'rev': round(v), 'pct': round(v / total * 100, 2)}
-        for cn, v in custs[:5]
+        for cn, v in custs[:10]
     ]
 
 # ── Top Products ───────────────────────────────────────────────────────────────
@@ -226,6 +228,12 @@ products_list = [
     {'n': pn, 'rev': round(rev), 'cust': len(prod_custs[pn])}
     for pn, rev in sorted(prod_rev.items(), key=lambda x: -x[1])[:10]
 ]
+
+# ── Top 10 Products per Customer ───────────────────────────────────────────────
+cust_top10_items = {}
+for cn, prods in cust_top_prod.items():
+    sorted_prods = sorted(prods.items(), key=lambda x: -x[1])[:10]
+    cust_top10_items[cn] = [{'n': p, 'rev': round(r)} for p, r in sorted_prods]
 
 # ── Growth / Decline ───────────────────────────────────────────────────────────
 def growth_decline(cust_months_dict, sp):
@@ -247,7 +255,9 @@ def growth_decline(cust_months_dict, sp):
         if g_pct > 5:
             grow.append({'n': cn, 'cls': cls, 'g': g_pct, 'lat': round(lat), 'new': is_new})
         elif g_pct < -5:
-            decl.append({'n': cn, 'cls': cls, 'd': g_pct, 'act': 'URGENT'})
+            prods = cust_top_prod.get(cn, {})
+            top_p = max(prods, key=prods.get) if prods else ''
+            decl.append({'n': cn, 'cls': cls, 'd': g_pct, 'act': 'URGENT', 'top_p': top_p})
     grow.sort(key=lambda x: -x['g'])
     decl.sort(key=lambda x:  x['d'])
     return grow[:8], decl[:8]
@@ -276,11 +286,14 @@ def dormant_list(cust_months_dict, sp):
             continue
         last_m = max(active_months)
         ytd    = sum(md.values())
+        prods = cust_top_prod.get(cn, {})
+        top_p = max(prods, key=prods.get) if prods else ''
         out.append({
             'n':    cn,
             'cls':  cust_cls.get(cn, 'C'),
             'last': MONTH_NAMES.get(last_m, str(last_m)),
-            'ytd':  round(ytd)
+            'ytd':  round(ytd),
+            'top_p': top_p
         })
     out.sort(key=lambda x: -x['ytd'])
     return out[:15]
@@ -307,24 +320,39 @@ def upsell_list(custs):
 ups_m = upsell_list(monica_custs)
 ups_j = upsell_list(juni_custs)
 
-# ── Opportunities (high-rev, low-SKU accounts) ────────────────────────────────
+# ── Opportunities (Dynamic Insights) ──────────────────────────────────────────
 opp_candidates = []
+# Find top accounts with low SKUs or missing cross-sell (FB vs Balian)
 for cn, rev in sorted_custs:
     cls  = cust_cls.get(cn, 'C')
     skus = len(cust_skus.get(cn, set()))
     sp   = cust_sp.get(cn, '')
-    if cls in ('A', 'B') and skus <= 8 and rev > 50_000_000:
-        opp_candidates.append((cn, sp, cls, skus, round(rev)))
+    fb_rev = cust_fb.get(cn, 0)
+    bal_rev = cust_bal.get(cn, 0)
+    
+    if cls in ('A', 'B'):
+        # Check cross sell
+        if fb_rev > 10_000_000 and bal_rev == 0:
+            opp_candidates.append((cn, sp, cls, skus, round(rev), 'Buys F&B but no Balian - cross-sell opportunity!'))
+        elif bal_rev > 10_000_000 and fb_rev == 0:
+            opp_candidates.append((cn, sp, cls, skus, round(rev), 'Buys Balian but no F&B - pitch food catalog!'))
+        # Check low SKUs for A/B class
+        elif skus <= 5:
+            opp_candidates.append((cn, sp, cls, skus, round(rev), f'Only {skus} SKUs for {cls}-class account. Upsell new categories.'))
 
-# Sort: A-class first, then by revenue descending
-opp_candidates.sort(key=lambda x: (x[2] == 'B', -x[4]))
+# Sort by revenue descending
+opp_candidates.sort(key=lambda x: -x[4])
 
 opps = []
-for i, (cn, sp, cls, skus, ytd) in enumerate(opp_candidates[:5], 1):
-    act = (f'Expand product range — currently {skus} SKU{"s" if skus != 1 else ""}, '
-           'pitch new categories')
-    opps.append({'rank': i, 'n': cn, 'sp': sp, 'cls': cls,
+seen_opps = set()
+for i, (cn, sp, cls, skus, ytd, act) in enumerate(opp_candidates, 1):
+    if cn in seen_opps:
+        continue
+    seen_opps.add(cn)
+    opps.append({'rank': len(opps) + 1, 'n': cn, 'sp': sp, 'cls': cls,
                  'skus': skus, 'ytd': ytd, 'act': act})
+    if len(opps) >= 5:
+        break
 
 # ── Target ─────────────────────────────────────────────────────────────────────
 TARGET_H1 = 1_800_000_000
@@ -340,9 +368,11 @@ D = {
     'target_h1':   TARGET_H1,
     'target_h2':   TARGET_H2,
     'top10':       top10,
-    'monica_top5': top5_list(monica_custs),
-    'juni_top5':   top5_list(juni_custs),
+    'monica_top10': sp_top10_list(monica_custs),
+    'juni_top10':   sp_top10_list(juni_custs),
     'abc':         abc_list,
+    'abc_custs':   abc_custs,
+    'cust_top10_items': cust_top10_items,
     'products':    products_list,
     'grow_m':      grow_m,
     'grow_j':      grow_j,
