@@ -21,7 +21,7 @@ const D = {
     1520470566,
     1155948317,
     934769140,
-    329454844
+    374840179
   ],
   "juni_fb": [
     449369426,
@@ -33,7 +33,7 @@ const D = {
     1048517902,
     1014500135,
     716246165,
-    181705570
+    205370455
   ],
   "monica_bal": [
     0,
@@ -45,7 +45,7 @@ const D = {
     1324328521,
     1591090491,
     1114838988,
-    437040000
+    557929999
   ],
   "juni_bal": [
     0,
@@ -57,7 +57,7 @@ const D = {
     432601001,
     485194706,
     480105109,
-    106974802
+    120303203
   ],
   "target_h1": 1800000000,
   "target_h2": 2200000000,
@@ -66,13 +66,13 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 2679603150
+      "rev": 2698316150
     },
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 2609774810
+      "rev": 2664414808
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
@@ -84,13 +84,13 @@ const D = {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1622878786
+      "rev": 1643751402
     },
     {
       "n": "HILTON HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1453251717
+      "rev": 1458510217
     },
     {
       "n": "CONRAD HOTEL",
@@ -108,103 +108,103 @@ const D = {
       "n": "BULGARI",
       "cls": "A",
       "sp": "Monica",
-      "rev": 970335042
+      "rev": 978349042
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 938521150
+      "rev": 938902990
     },
     {
       "n": "FOUR SEASON RESORT BALI",
       "cls": "A",
       "sp": "Monica",
-      "rev": 608238474
+      "rev": 629238474
     }
   ],
   "monica_top10": [
     {
       "n": "INTERCONTINENTAL BALI RESORT",
-      "rev": 1599108786,
-      "pct": 16.41
+      "rev": 1619981402,
+      "pct": 16.55
     },
     {
       "n": "CONRAD HOTEL",
       "rev": 1361582608,
-      "pct": 13.97
+      "pct": 13.91
     },
     {
       "n": "HILTON HOTEL",
-      "rev": 1168176224,
+      "rev": 1173434724,
       "pct": 11.99
     },
     {
       "n": "MERUSAKA NUSA DUA",
-      "rev": 837776152,
-      "pct": 8.6
+      "rev": 838157992,
+      "pct": 8.56
     },
     {
       "n": "MOVENPICK",
-      "rev": 398106293,
+      "rev": 400606293,
       "pct": 4.09
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
       "rev": 390642617,
-      "pct": 4.01
+      "pct": 3.99
     },
     {
       "n": "THE LAGUNA",
-      "rev": 359067018,
-      "pct": 3.68
+      "rev": 361201018,
+      "pct": 3.69
     },
     {
       "n": "RITZ CARLTON",
-      "rev": 342783563,
+      "rev": 344211563,
       "pct": 3.52
     },
     {
       "n": "NUSA DUA BEACH HOTEL",
-      "rev": 337155650,
-      "pct": 3.46
+      "rev": 339795650,
+      "pct": 3.47
     },
     {
       "n": "GRAND HYATT NUSA DUA",
-      "rev": 267692796,
-      "pct": 2.75
+      "rev": 269983596,
+      "pct": 2.76
     }
   ],
   "juni_top10": [
     {
       "n": "BAMBU BALI ULUWATU",
-      "rev": 2662828150,
-      "pct": 40.04
+      "rev": 2681541150,
+      "pct": 40.18
     },
     {
       "n": "TABU ULUWATU",
       "rev": 986012375,
-      "pct": 14.83
+      "pct": 14.77
     },
     {
       "n": "NOURISH UNGASAN",
-      "rev": 552054361,
-      "pct": 8.3
+      "rev": 552689361,
+      "pct": 8.28
     },
     {
       "n": "PT BALI PAWIWAHAN (COCO ROTI)",
       "rev": 296469139,
-      "pct": 4.46
+      "pct": 4.44
     },
     {
       "n": "NOURISH CAFE",
-      "rev": 258887796,
-      "pct": 3.89
+      "rev": 261264386,
+      "pct": 3.91
     },
     {
       "n": "VIVRE CATERING",
       "rev": 243184501,
-      "pct": 3.66
+      "pct": 3.64
     },
     {
       "n": "ART CAFE BUMBU BALI",
@@ -214,93 +214,93 @@ const D = {
     {
       "n": "PT BALI PAWIWAHAN",
       "rev": 141076804,
-      "pct": 2.12
+      "pct": 2.11
     },
     {
       "n": "LOSTERIA LABUAN SAIT",
       "rev": 96424999,
-      "pct": 1.45
+      "pct": 1.44
     },
     {
       "n": "PT. KHARISMA ANUGRAH JAWARA ABADI (SAVAYA BALI)",
-      "rev": 88015590,
-      "pct": 1.32
+      "rev": 89104500,
+      "pct": 1.34
     }
   ],
   "monica_top5": [
     {
       "n": "INTERCONTINENTAL BALI RESORT",
-      "rev": 1599108786,
-      "pct": 16.41
+      "rev": 1619981402,
+      "pct": 16.55
     },
     {
       "n": "CONRAD HOTEL",
       "rev": 1361582608,
-      "pct": 13.97
+      "pct": 13.91
     },
     {
       "n": "HILTON HOTEL",
-      "rev": 1168176224,
+      "rev": 1173434724,
       "pct": 11.99
     },
     {
       "n": "MERUSAKA NUSA DUA",
-      "rev": 837776152,
-      "pct": 8.6
+      "rev": 838157992,
+      "pct": 8.56
     },
     {
       "n": "MOVENPICK",
-      "rev": 398106293,
+      "rev": 400606293,
       "pct": 4.09
     }
   ],
   "juni_top5": [
     {
       "n": "BAMBU BALI ULUWATU",
-      "rev": 2662828150,
-      "pct": 40.04
+      "rev": 2681541150,
+      "pct": 40.18
     },
     {
       "n": "TABU ULUWATU",
       "rev": 986012375,
-      "pct": 14.83
+      "pct": 14.77
     },
     {
       "n": "NOURISH UNGASAN",
-      "rev": 552054361,
-      "pct": 8.3
+      "rev": 552689361,
+      "pct": 8.28
     },
     {
       "n": "PT BALI PAWIWAHAN (COCO ROTI)",
       "rev": 296469139,
-      "pct": 4.46
+      "pct": 4.44
     },
     {
       "n": "NOURISH CAFE",
-      "rev": 258887796,
-      "pct": 3.89
+      "rev": 261264386,
+      "pct": 3.91
     }
   ],
   "abc": [
     {
       "cls": "A",
       "accs": 25,
-      "rev": 20189862219,
+      "rev": 20359371564,
       "pct": 0.791,
       "strat": "Top 20% — Protect & Grow"
     },
     {
       "cls": "B",
       "accs": 36,
-      "rev": 4033611461,
+      "rev": 4059863352,
       "pct": 0.158,
       "strat": "Middle — Upsell"
     },
     {
       "cls": "C",
       "accs": 156,
-      "rev": 1315885757,
-      "pct": 0.052,
+      "rev": 1324558142,
+      "pct": 0.051,
       "strat": "Long tail — Review"
     }
   ],
@@ -308,12 +308,12 @@ const D = {
     "A": [
       {
         "n": "BAMBU BALI ULUWATU",
-        "rev": 2679603150,
+        "rev": 2698316150,
         "sp": "Juni"
       },
       {
         "n": "PARADISUS BY MELIA NUSA DUA",
-        "rev": 2609774810,
+        "rev": 2664414808,
         "sp": "Monica"
       },
       {
@@ -323,12 +323,12 @@ const D = {
       },
       {
         "n": "INTERCONTINENTAL BALI RESORT",
-        "rev": 1622878786,
+        "rev": 1643751402,
         "sp": "Monica"
       },
       {
         "n": "HILTON HOTEL",
-        "rev": 1453251717,
+        "rev": 1458510217,
         "sp": "Monica"
       },
       {
@@ -343,52 +343,52 @@ const D = {
       },
       {
         "n": "BULGARI",
-        "rev": 970335042,
+        "rev": 978349042,
         "sp": "Monica"
       },
       {
         "n": "MERUSAKA NUSA DUA",
-        "rev": 938521150,
+        "rev": 938902990,
         "sp": "Monica"
       },
       {
         "n": "FOUR SEASON RESORT BALI",
-        "rev": 608238474,
+        "rev": 629238474,
         "sp": "Monica"
       },
       {
         "n": "NOURISH UNGASAN",
-        "rev": 552054361,
+        "rev": 552689361,
         "sp": "Juni"
       },
       {
         "n": "MOVENPICK",
-        "rev": 469057298,
+        "rev": 471557298,
         "sp": "Monica"
       },
       {
         "n": "THE WESTIN RESORT NUSA DUA",
-        "rev": 403228511,
+        "rev": 413728511,
         "sp": "Monica"
       },
       {
         "n": "THE UNGASAN CLIFFTOP RESORT",
-        "rev": 393984356,
+        "rev": 409284355,
         "sp": "Monica"
       },
       {
         "n": "THE LAGUNA",
-        "rev": 359067018,
+        "rev": 361201018,
         "sp": "Monica"
       },
       {
         "n": "RITZ CARLTON",
-        "rev": 356820563,
+        "rev": 358248563,
         "sp": "Monica"
       },
       {
         "n": "NUSA DUA BEACH HOTEL",
-        "rev": 351586648,
+        "rev": 354226648,
         "sp": "Monica"
       },
       {
@@ -413,7 +413,7 @@ const D = {
       },
       {
         "n": "SOFITEL BALI ND BEACH RESORT",
-        "rev": 287870500,
+        "rev": 288695500,
         "sp": "Monica"
       },
       {
@@ -423,12 +423,12 @@ const D = {
       },
       {
         "n": "GRAND HYATT NUSA DUA",
-        "rev": 268202526,
+        "rev": 270493326,
         "sp": "Monica"
       },
       {
         "n": "NOURISH CAFE",
-        "rev": 258887796,
+        "rev": 261264386,
         "sp": "Juni"
       }
     ],
@@ -455,12 +455,17 @@ const D = {
       },
       {
         "n": "OSTERIA LUNA ULUWATU",
-        "rev": 172321904,
+        "rev": 174550304,
         "sp": "Juni"
       },
       {
         "n": "TEJA ULUWATU",
-        "rev": 159590003,
+        "rev": 165890004,
+        "sp": "Juni"
+      },
+      {
+        "n": "MEXICOLA ULUWATU",
+        "rev": 145806009,
         "sp": "Juni"
       },
       {
@@ -474,13 +479,8 @@ const D = {
         "sp": "Juni"
       },
       {
-        "n": "MEXICOLA ULUWATU",
-        "rev": 140346009,
-        "sp": "Juni"
-      },
-      {
         "n": "ST REGIS",
-        "rev": 139938930,
+        "rev": 140853930,
         "sp": "Monica"
       },
       {
@@ -495,23 +495,23 @@ const D = {
       },
       {
         "n": "THE BENCH BREWERY ULUWATU",
-        "rev": 124828619,
+        "rev": 127228619,
         "sp": "Juni"
       },
       {
         "n": "LE MERIDIEN JIMBARAN",
-        "rev": 118281298,
+        "rev": 120616038,
+        "sp": "Monica"
+      },
+      {
+        "n": "KARMA KANDARA",
+        "rev": 119955798,
         "sp": "Monica"
       },
       {
         "n": "KLIVE BEACH CLUB",
-        "rev": 115612502,
+        "rev": 110932502,
         "sp": "Juni"
-      },
-      {
-        "n": "KARMA KANDARA",
-        "rev": 115155798,
-        "sp": "Monica"
       },
       {
         "n": "PENINSULA BEACH RESORT",
@@ -520,7 +520,7 @@ const D = {
       },
       {
         "n": "PLATINUM HOTEL JIMBARAN BEACH BAR",
-        "rev": 94947073,
+        "rev": 95106913,
         "sp": "Monica"
       },
       {
@@ -534,13 +534,13 @@ const D = {
         "sp": "Monica"
       },
       {
-        "n": "PT. KHARISMA ANUGRAH JAWARA ABADI (SAVAYA BALI)",
-        "rev": 88015590,
+        "n": "ZALI ULUWATU",
+        "rev": 89318502,
         "sp": "Juni"
       },
       {
-        "n": "ZALI ULUWATU",
-        "rev": 87698502,
+        "n": "PT. KHARISMA ANUGRAH JAWARA ABADI (SAVAYA BALI)",
+        "rev": 89104500,
         "sp": "Juni"
       },
       {
@@ -594,14 +594,14 @@ const D = {
         "sp": "Juni"
       },
       {
+        "n": "PT. GEMILANG KARYA KULINER (PLAGOO)",
+        "rev": 58123650,
+        "sp": "Monica"
+      },
+      {
         "n": "LA TERAZA",
         "rev": 55899600,
         "sp": "Juni"
-      },
-      {
-        "n": "PT. GEMILANG KARYA KULINER (PLAGOO)",
-        "rev": 54498650,
-        "sp": "Monica"
       },
       {
         "n": "ARTIKULASI COFFEE",
@@ -632,7 +632,7 @@ const D = {
       },
       {
         "n": "PIZZERIA ITALIA LABUAN SAIT",
-        "rev": 45831873,
+        "rev": 46471873,
         "sp": "Juni"
       },
       {
@@ -696,6 +696,11 @@ const D = {
         "sp": "Juni"
       },
       {
+        "n": "RADISSON BLU BALI ULUWATU",
+        "rev": 21690203,
+        "sp": "Monica"
+      },
+      {
         "n": "CASHEW TREE RESTAURANT",
         "rev": 21111200,
         "sp": "Juni"
@@ -736,11 +741,6 @@ const D = {
         "sp": "Juni"
       },
       {
-        "n": "RADISSON BLU BALI ULUWATU",
-        "rev": 15390203,
-        "sp": "Monica"
-      },
-      {
         "n": "THE SAKALA RESORT",
         "rev": 15170000,
         "sp": "Monica"
@@ -771,13 +771,13 @@ const D = {
         "sp": "Monica"
       },
       {
-        "n": "SEVIGNE COOKIES & COFFEE",
-        "rev": 13203062,
+        "n": "TT BEACH CLUB",
+        "rev": 13251720,
         "sp": "Juni"
       },
       {
-        "n": "TT BEACH CLUB",
-        "rev": 12797175,
+        "n": "SEVIGNE COOKIES & COFFEE",
+        "rev": 13203062,
         "sp": "Juni"
       },
       {
@@ -807,7 +807,7 @@ const D = {
       },
       {
         "n": "COCO BISTRO NUSA DUA",
-        "rev": 11291475,
+        "rev": 11315895,
         "sp": "Juni"
       },
       {
@@ -856,13 +856,13 @@ const D = {
         "sp": "Juni"
       },
       {
-        "n": "REINISA HEALTY DRINK",
-        "rev": 8960401,
+        "n": "CENDOL RATU",
+        "rev": 9019001,
         "sp": "Juni"
       },
       {
-        "n": "CENDOL RATU",
-        "rev": 8671001,
+        "n": "REINISA HEALTY DRINK",
+        "rev": 8960401,
         "sp": "Juni"
       },
       {
@@ -967,7 +967,7 @@ const D = {
       },
       {
         "n": "NECTAR COFFEE & VIENNOISERIE",
-        "rev": 5356620,
+        "rev": 5601620,
         "sp": "Juni"
       },
       {
@@ -1091,6 +1091,11 @@ const D = {
         "sp": "Juni"
       },
       {
+        "n": "PT KAYU MAMA BALI",
+        "rev": 2424000,
+        "sp": "Monica"
+      },
+      {
         "n": "THUYS LABUAN SAIT",
         "rev": 2418560,
         "sp": "Juni"
@@ -1146,11 +1151,6 @@ const D = {
         "sp": "Juni"
       },
       {
-        "n": "PT KAYU MAMA BALI",
-        "rev": 1788000,
-        "sp": "Monica"
-      },
-      {
         "n": "PHILANTROPY",
         "rev": 1753005,
         "sp": "Juni"
@@ -1172,7 +1172,7 @@ const D = {
       },
       {
         "n": "AYU BAKERY",
-        "rev": 1551699,
+        "rev": 1576119,
         "sp": "Juni"
       },
       {
@@ -1555,7 +1555,7 @@ const D = {
     "BAMBU BALI ULUWATU": [
       {
         "n": "Friboi Brazil Tenderloin Whole",
-        "rev": 1427325620
+        "rev": 1444538620
       },
       {
         "n": "ECT Tenderloin Import",
@@ -1563,7 +1563,7 @@ const D = {
       },
       {
         "n": "Premium Minced Beef (2.5kg/pack)",
-        "rev": 303258000
+        "rev": 304758000
       },
       {
         "n": "Mcphee Tenderloin Import",
@@ -1621,35 +1621,35 @@ const D = {
     "BULGARI": [
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
-        "rev": 498036171
+        "rev": 499356171
       },
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 201455992
+        "rev": 203183992
       },
       {
         "n": "BALIAN Crate Still 330 ml (Deposit)",
-        "rev": 66290000
+        "rev": 66990000
       },
       {
         "n": "BALIAN Return Bottle Glass 330 ml (Deposit)",
-        "rev": 43410000
+        "rev": 43860000
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 42119994
+        "rev": 43055994
       },
       {
         "n": "BALIAN Crate Still 750 ml (Deposit)",
-        "rev": 31220000
+        "rev": 32060000
       },
       {
         "n": "BALIAN Glass Sparkling (330 ml x 20)",
-        "rev": 28762015
+        "rev": 29492015
       },
       {
         "n": "BALIAN Return Bottle Glass 750 ml (Deposit)",
-        "rev": 19160000
+        "rev": 19700000
       },
       {
         "n": "Tepung Ninja @25Kg/Sack",
@@ -1657,7 +1657,7 @@ const D = {
       },
       {
         "n": "BALIAN Crate Sparkling 330 ml (Deposit)",
-        "rev": 9660000
+        "rev": 10010000
       }
     ],
     "CAFE MADE BAKERY": [
@@ -1723,7 +1723,7 @@ const D = {
       },
       {
         "n": "Inofa Heat Treated Wheat Flour SF 346 @1kg/pack",
-        "rev": 813075
+        "rev": 837495
       }
     ],
     "CONRAD HOTEL": [
@@ -1813,11 +1813,11 @@ const D = {
     "FOUR SEASON RESORT BALI": [
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 266399996
+        "rev": 273599996
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 117899998
+        "rev": 123299998
       },
       {
         "n": "Master House Blend 04 (60:40) M",
@@ -1825,7 +1825,7 @@ const D = {
       },
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
-        "rev": 30780000
+        "rev": 31680000
       },
       {
         "n": "BALIAN Glass Sparkling (330 ml x 20)",
@@ -1833,7 +1833,7 @@ const D = {
       },
       {
         "n": "BALIAN Crate Still 750 ml (Deposit)",
-        "rev": 17290000
+        "rev": 20090000
       },
       {
         "n": "Tepung Double Zero @25Kg/Sack",
@@ -1841,15 +1841,15 @@ const D = {
       },
       {
         "n": "BALIAN Return Bottle Glass 750 ml (Deposit)",
-        "rev": 10860000
+        "rev": 12960000
       },
       {
         "n": "BALIAN Crate Sparkling 750 ml (Deposit)",
-        "rev": 10150000
+        "rev": 12250000
       },
       {
         "n": "BALIAN Crate Still 330 ml (Deposit)",
-        "rev": 5250000
+        "rev": 5600000
       }
     ],
     "GORGONZOLA RESTAURANT": [
@@ -1899,7 +1899,7 @@ const D = {
     "GRAND HYATT NUSA DUA": [
       {
         "n": "Tepung 00 Fusion @25Kg",
-        "rev": 63220000
+        "rev": 64090000
       },
       {
         "n": "English Breakfast@50TB/Box",
@@ -1919,7 +1919,7 @@ const D = {
       },
       {
         "n": "Tepung Hime @25Kg/Sack",
-        "rev": 4262400
+        "rev": 5683200
       },
       {
         "n": "Inofa Heat Treated Wheat Flour SF 346 @25kg/sack",
@@ -1963,7 +1963,7 @@ const D = {
       },
       {
         "n": "Bergold Shredded Pizza Topping Mozzarella",
-        "rev": 389241993
+        "rev": 393140493
       },
       {
         "n": "Borello Rump",
@@ -2049,11 +2049,11 @@ const D = {
       },
       {
         "n": "Allana Tenderloin Whole",
-        "rev": 227475613
+        "rev": 237691644
       },
       {
         "n": "Isabi Smoked Salmon Slice 1Kg/Pack",
-        "rev": 198468000
+        "rev": 203796000
       },
       {
         "n": "Traditional Smoked Salmon Slice",
@@ -2065,7 +2065,7 @@ const D = {
       },
       {
         "n": "THE ALTERNATIVE Barista Almond Milk 1 Lt",
-        "rev": 78309945
+        "rev": 79976610
       },
       {
         "n": "Tepung Ninja @25Kg/Sack",
@@ -2125,7 +2125,7 @@ const D = {
     "KARMA KANDARA": [
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
-        "rev": 49599999
+        "rev": 54399998
       },
       {
         "n": "Tepung Double Zero @25Kg/Sack",
@@ -2175,7 +2175,7 @@ const D = {
       },
       {
         "n": "Chuck Tenderloin Whole",
-        "rev": 18688592
+        "rev": 20743332
       },
       {
         "n": "Allana Tenderloin Whole",
@@ -2191,7 +2191,7 @@ const D = {
       },
       {
         "n": "O Sole Olive Nere Denocciolate 4.1 Kg",
-        "rev": 1680000
+        "rev": 1960000
       },
       {
         "n": "Masterista Syrup Vanilla Tradition 850ml",
@@ -2411,7 +2411,7 @@ const D = {
       },
       {
         "n": "RICH CREME WHIPING CREAM 800G POUCH",
-        "rev": 20125680
+        "rev": 20507520
       },
       {
         "n": "Halal Premium Oxtail Whole Cut 3Cm (2 Kg/Pack)",
@@ -2429,7 +2429,7 @@ const D = {
     "MOVENPICK": [
       {
         "n": "Gold Box Melange Butter MP331",
-        "rev": 175000000
+        "rev": 177500000
       },
       {
         "n": "Allana Tenderloin Whole",
@@ -2493,7 +2493,7 @@ const D = {
       },
       {
         "n": "Garam Halus Beryodium 25Kg/Sack",
-        "rev": 1470000
+        "rev": 1715000
       },
       {
         "n": "THE ALTERNATIVE Barista Almond Milk 1 Lt",
@@ -2509,17 +2509,17 @@ const D = {
     "NOURISH CAFE": [
       {
         "n": "Tepung Hime @25Kg/Sack",
-        "rev": 150937800
+        "rev": 152679390
       },
       {
         "n": "DP Mozzarella 2.5Kg",
-        "rev": 107949996
+        "rev": 108584996
       }
     ],
     "NOURISH UNGASAN": [
       {
         "n": "DP Mozzarella 2.5Kg",
-        "rev": 505777480
+        "rev": 506412480
       },
       {
         "n": "Tepung Double Zero @25Kg/Sack",
@@ -2565,15 +2565,15 @@ const D = {
     "PARADISUS BY MELIA NUSA DUA": [
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 835065588
+        "rev": 849705588
       },
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
-        "rev": 793439940
+        "rev": 804959940
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 326105987
+        "rev": 332585986
       },
       {
         "n": "Tepung Double Zero @25Kg/Sack",
@@ -2585,23 +2585,23 @@ const D = {
       },
       {
         "n": "BALIAN Crate Still 330 ml (Deposit)",
-        "rev": 61110000
+        "rev": 66710000
       },
       {
         "n": "BALIAN Crate Still 750 ml (Deposit)",
-        "rev": 54600000
+        "rev": 61600000
       },
       {
         "n": "BALIAN Return Bottle Glass 330 ml (Deposit)",
-        "rev": 39480000
+        "rev": 41880000
       },
       {
         "n": "BALIAN Return Bottle Glass 750 ml (Deposit)",
-        "rev": 32442500
+        "rev": 36642500
       },
       {
         "n": "BALIAN Crate Sparkling 750 ml (Deposit)",
-        "rev": 26040000
+        "rev": 28840000
       }
     ],
     "PASTA MARCO JIMBARAN": [
@@ -2801,7 +2801,7 @@ const D = {
       },
       {
         "n": "EMBORG Brie Cheese 125 Gr",
-        "rev": 3436560
+        "rev": 3596400
       },
       {
         "n": "Emborg Pizza Topping 2.3 Kg",
@@ -2919,7 +2919,7 @@ const D = {
     "PT. KHARISMA ANUGRAH JAWARA ABADI (SAVAYA BALI)": [
       {
         "n": "Tepung Japanese Tempura 1kg/pack",
-        "rev": 47548990
+        "rev": 48637900
       },
       {
         "n": "Tepung Double Zero @25Kg/Sack",
@@ -2932,20 +2932,20 @@ const D = {
         "rev": 8290803
       },
       {
+        "n": "BALIAN Glass Still (750 ml x 12)",
+        "rev": 4500000
+      },
+      {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 1800000
+        "rev": 2700000
       },
       {
         "n": "BALIAN Glass Sparkling (330 ml x 20)",
-        "rev": 900000
+        "rev": 1800000
       },
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
-        "rev": 900000
-      },
-      {
-        "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 900000
+        "rev": 1800000
       },
       {
         "n": "Tepung Yokozuna Fusion 5Kg",
@@ -3159,7 +3159,7 @@ const D = {
       },
       {
         "n": "Bergold Shredded Pizza Topping Mozzarella",
-        "rev": 25410000
+        "rev": 26235000
       },
       {
         "n": "Allana Tenderloin Whole",
@@ -3193,7 +3193,7 @@ const D = {
     "ST REGIS": [
       {
         "n": "Tepung Hime @25Kg/Sack",
-        "rev": 78384999
+        "rev": 79299999
       },
       {
         "n": "Tepung Double Zero @25Kg/Sack",
@@ -3247,11 +3247,11 @@ const D = {
     "THE LAGUNA": [
       {
         "n": "Tepung Pita Emas @25Kg/Sack",
-        "rev": 159407999
+        "rev": 160391999
       },
       {
         "n": "Emborg Pizza Topping 2.3 Kg",
-        "rev": 150649620
+        "rev": 151799620
       },
       {
         "n": "Tepung 00 Fusion @25Kg",
@@ -3299,15 +3299,15 @@ const D = {
     "THE WESTIN RESORT NUSA DUA": [
       {
         "n": "BALIAN Glass Still (750 ml x 6)",
-        "rev": 87885002
-      },
-      {
-        "n": "Tepung Hime @25Kg/Sack",
-        "rev": 60228000
+        "rev": 94845003
       },
       {
         "n": "BALIAN Glass Still (330 ml x 12)",
-        "rev": 57720001
+        "rev": 60960001
+      },
+      {
+        "n": "Tepung Hime @25Kg/Sack",
+        "rev": 60528000
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 6)",
@@ -3765,7 +3765,7 @@ const D = {
       },
       {
         "n": "Bottegaio Umbro Olio Evo Cucina 5Lt",
-        "rev": 8320000
+        "rev": 8960000
       },
       {
         "n": "Tepung Double Zero @25Kg/Sack",
@@ -3945,7 +3945,7 @@ const D = {
       },
       {
         "n": "Borello Topside",
-        "rev": 50296098
+        "rev": 51724098
       },
       {
         "n": "EMBORG Brie Cheese 125 Gr",
@@ -3983,11 +3983,11 @@ const D = {
     "TT BEACH CLUB": [
       {
         "n": "THE ALTERNATIVE Barista Oat Milk 1 Lt",
-        "rev": 6818175
+        "rev": 7121205
       },
       {
         "n": "THE ALTERNATIVE Barista Almond Milk 1 Lt",
-        "rev": 4630920
+        "rev": 4782435
       },
       {
         "n": "Masterista Original Matcha 800Gr",
@@ -4125,15 +4125,15 @@ const D = {
     "KLIVE BEACH CLUB": [
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 66240001
+        "rev": 64080001
       },
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
-        "rev": 17820000
+        "rev": 17100000
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 17100000
+        "rev": 15300000
       },
       {
         "n": "BALIAN Glass Sparkling (330 ml x 20)",
@@ -4175,7 +4175,7 @@ const D = {
       },
       {
         "n": "IQF FF Shoestring 10Kg/Ctn",
-        "rev": 76889998
+        "rev": 79529998
       },
       {
         "n": "Maestro FF Shoestring 7x7mm 10Kg/Ctn",
@@ -4209,11 +4209,11 @@ const D = {
     "OSTERIA LUNA ULUWATU": [
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 88192804
+        "rev": 89377204
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 39779999
+        "rev": 40319999
       },
       {
         "n": "Tepung Double Zero @25Kg/Sack",
@@ -4221,11 +4221,11 @@ const D = {
       },
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
-        "rev": 12348000
+        "rev": 12672000
       },
       {
         "n": "BALIAN Glass Sparkling (330 ml x 20)",
-        "rev": 5760000
+        "rev": 5940000
       },
       {
         "n": "BALIAN Crate Still 750 ml (Deposit)",
@@ -4497,11 +4497,11 @@ const D = {
     "THE BENCH BREWERY ULUWATU": [
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 89388000
+        "rev": 90948000
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 25704000
+        "rev": 26544000
       },
       {
         "n": "BALIAN Crate Still 750 ml (Deposit)",
@@ -4662,6 +4662,10 @@ const D = {
         "rev": 4290000
       },
       {
+        "n": "Gold Box Extra Butter MP341",
+        "rev": 3625000
+      },
+      {
         "n": "Emborg Pizza Topping 2.3 Kg",
         "rev": 2656500
       },
@@ -4687,11 +4691,11 @@ const D = {
     "TEJA ULUWATU": [
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 98100002
+        "rev": 102600002
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 35640001
+        "rev": 37440001
       },
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
@@ -4739,19 +4743,19 @@ const D = {
     "THE UNGASAN CLIFFTOP RESORT": [
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 237719998
+        "rev": 246119998
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 62639999
+        "rev": 66239999
       },
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
-        "rev": 46879999
+        "rev": 49279999
       },
       {
         "n": "BALIAN Glass Sparkling (330 ml x 20)",
-        "rev": 11520000
+        "rev": 12420000
       },
       {
         "n": "BALIAN Return Bottle Glass 750 ml (Deposit)",
@@ -4781,19 +4785,19 @@ const D = {
     "ZALI ULUWATU": [
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 47340001
+        "rev": 47880001
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 17640000
+        "rev": 18180000
       },
       {
         "n": "BALIAN Glass Still (330 ml x 20)",
-        "rev": 12240000
+        "rev": 12600000
       },
       {
         "n": "BALIAN Glass Sparkling (330 ml x 20)",
-        "rev": 5580000
+        "rev": 5760000
       },
       {
         "n": "BALIAN Crate Sparkling 750 ml (Deposit)",
@@ -4937,11 +4941,11 @@ const D = {
     "MEXICOLA ULUWATU": [
       {
         "n": "BALIAN Glass Still (750 ml x 12)",
-        "rev": 106236007
+        "rev": 110916007
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 12)",
-        "rev": 21060001
+        "rev": 21840001
       },
       {
         "n": "BALIAN Crate Still 750 ml (Deposit)",
@@ -5216,6 +5220,10 @@ const D = {
       {
         "n": "Gold Box Melange Butter MP331 250 Gr - Sample",
         "rev": 150960
+      },
+      {
+        "n": "Tepung Stupa Hijau 1Kg",
+        "rev": 24420
       }
     ],
     "BB52 LABUAN SAIT": [
@@ -5305,11 +5313,11 @@ const D = {
     "PT KAYU MAMA BALI": [
       {
         "n": "BALIAN Glass Still (330 ml x 12)",
-        "rev": 924000
+        "rev": 1452000
       },
       {
         "n": "BALIAN Glass Sparkling (750 ml x 6)",
-        "rev": 864000
+        "rev": 972000
       }
     ],
     "SEA BREEZE BY TEBA CAFE": [
@@ -5973,7 +5981,7 @@ const D = {
     "CENDOL RATU": [
       {
         "n": "Masterista Creamer Base (Creamy)",
-        "rev": 8671001
+        "rev": 9019001
       }
     ],
     "LILY'S KOREAN BBQ": [
@@ -6148,7 +6156,7 @@ const D = {
   "products": [
     {
       "n": "Allana Tenderloin Whole",
-      "rev": 1819842107,
+      "rev": 1830058137,
       "cust": 13
     },
     {
@@ -6158,17 +6166,17 @@ const D = {
     },
     {
       "n": "Friboi Brazil Tenderloin Whole",
-      "rev": 1442704820,
+      "rev": 1461465820,
       "cust": 2
     },
     {
       "n": "Tepung Hime @25Kg/Sack",
-      "rev": 768832598,
+      "rev": 773209988,
       "cust": 17
     },
     {
       "n": "Tepung 00 Fusion @25Kg",
-      "rev": 658362301,
+      "rev": 659232301,
       "cust": 18
     },
     {
@@ -6178,7 +6186,7 @@ const D = {
     },
     {
       "n": "DP Mozzarella 2.5Kg",
-      "rev": 613727476,
+      "rev": 614997476,
       "cust": 2
     },
     {
@@ -6188,7 +6196,7 @@ const D = {
     },
     {
       "n": "Isabi Smoked Salmon Slice 1Kg/Pack",
-      "rev": 598803997,
+      "rev": 604131997,
       "cust": 8
     },
     {
@@ -6849,7 +6857,7 @@ const D = {
       "n": "INTERCONTINENTAL BALI RESORT",
       "prod": "Halal Premium Oxtail Whole Cut 3Cm (2 Kg/Pack)",
       "cls": "A",
-      "rev": 1599108786
+      "rev": 1619981402
     },
     {
       "n": "CONRAD HOTEL",
@@ -6861,19 +6869,19 @@ const D = {
       "n": "HILTON HOTEL",
       "prod": "MAMAS BELLY RIND ON SB OUT (SKIN ON) 3-5KG/PACK",
       "cls": "A",
-      "rev": 1168176224
+      "rev": 1173434724
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "prod": "Allana Tenderloin Whole",
       "cls": "A",
-      "rev": 837776152
+      "rev": 838157992
     },
     {
       "n": "MOVENPICK",
       "prod": "Gold Box Melange Butter MP331",
       "cls": "A",
-      "rev": 398106293
+      "rev": 400606293
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
@@ -6885,7 +6893,7 @@ const D = {
       "n": "THE LAGUNA",
       "prod": "Tepung Pita Emas @25Kg/Sack",
       "cls": "A",
-      "rev": 359067018
+      "rev": 361201018
     }
   ],
   "ups_j": [
@@ -6893,7 +6901,7 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "prod": "Friboi Brazil Tenderloin Whole",
       "cls": "A",
-      "rev": 2662828150
+      "rev": 2681541150
     },
     {
       "n": "TABU ULUWATU",
@@ -6905,7 +6913,7 @@ const D = {
       "n": "NOURISH UNGASAN",
       "prod": "DP Mozzarella 2.5Kg",
       "cls": "A",
-      "rev": 552054361
+      "rev": 552689361
     },
     {
       "n": "PT BALI PAWIWAHAN (COCO ROTI)",
@@ -6917,7 +6925,7 @@ const D = {
       "n": "NOURISH CAFE",
       "prod": "Tepung Hime @25Kg/Sack",
       "cls": "A",
-      "rev": 258887796
+      "rev": 261264386
     },
     {
       "n": "VIVRE CATERING",
@@ -6939,7 +6947,7 @@ const D = {
       "sp": "Juni",
       "cls": "A",
       "skus": 22,
-      "ytd": 2679603150,
+      "ytd": 2698316150,
       "act": "Buys F&B but no Balian - cross-sell opportunity!"
     },
     {
@@ -6948,7 +6956,7 @@ const D = {
       "sp": "Monica",
       "cls": "A",
       "skus": 36,
-      "ytd": 1622878786,
+      "ytd": 1643751402,
       "act": "Buys F&B but no Balian - cross-sell opportunity!"
     },
     {
@@ -6975,13 +6983,13 @@ const D = {
       "sp": "Monica",
       "cls": "A",
       "skus": 27,
-      "ytd": 938521150,
+      "ytd": 938902990,
       "act": "Buys F&B but no Balian - cross-sell opportunity!"
     }
   ],
   "active_m": 71,
   "active_j": 146,
-  "skus": 265,
+  "skus": 266,
   "dormant_cnt": 28,
   "churn_risk": [
     {
@@ -7018,7 +7026,7 @@ const D = {
       "n": "GRAND HYATT NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "drop": 50
+      "drop": 51
     },
     {
       "n": "CONRAD HOTEL",
@@ -7039,10 +7047,10 @@ const D = {
       "drop": 26
     },
     {
-      "n": "MOVENPICK",
-      "cls": "A",
-      "sp": "Monica",
-      "drop": 21
+      "n": "THE BENCH BREWERY ULUWATU",
+      "cls": "B",
+      "sp": "Juni",
+      "drop": 22
     }
   ],
   "recovery": [
@@ -7180,13 +7188,13 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 2662828149.824097
+      "rev": 2681541149.824097
     },
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 2609774809.826967
+      "rev": 2664414808.488967
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
@@ -7198,7 +7206,7 @@ const D = {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1599108786.3950238
+      "rev": 1619981401.8590238
     },
     {
       "n": "CONRAD HOTEL",
@@ -7210,31 +7218,31 @@ const D = {
       "n": "HILTON HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1340656226.78685
+      "rev": 1345914726.86745
     },
     {
       "n": "BULGARI",
       "cls": "A",
       "sp": "Monica",
-      "rev": 970335041.9773489
+      "rev": 978349042.2361419
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 837776152.2167369
+      "rev": 838157992.2167369
     },
     {
       "n": "FOUR SEASON RESORT BALI",
       "cls": "A",
       "sp": "Monica",
-      "rev": 608238474.2456
+      "rev": 629238474.0656
     },
     {
       "n": "NOURISH UNGASAN",
       "cls": "A",
       "sp": "Juni",
-      "rev": 552054360.753506
+      "rev": 552689360.7290059
     }
   ],
   "aov_drops": [
