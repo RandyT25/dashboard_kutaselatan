@@ -7246,7 +7246,7 @@ const D = {
       "n": "HILTON HOTEL",
       "cls": "A",
       "sp": "Monica",
-      "rev": 1308914301.075
+      "rev": 1308914301.0749998
     },
     {
       "n": "CONRAD HOTEL",
@@ -7264,7 +7264,7 @@ const D = {
       "n": "MERUSAKA NUSA DUA",
       "cls": "A",
       "sp": "Monica",
-      "rev": 815566280.8952371
+      "rev": 815566280.895237
     },
     {
       "n": "FOUR SEASON RESORT BALI",
@@ -7276,7 +7276,7 @@ const D = {
       "n": "NOURISH UNGASAN",
       "cls": "A",
       "sp": "Juni",
-      "rev": 508219405.664859
+      "rev": 508219405.66485906
     }
   ],
   "aov_drops": [
