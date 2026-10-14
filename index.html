@@ -71,13 +71,15 @@ html,body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkM
 /* ── Grids ── */
 .g6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
 .g7{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.kpi-row-fin{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.kpi-row-ops{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .g21{display:grid;grid-template-columns:2fr 1fr;gap:16px}
 .g12{display:grid;grid-template-columns:1fr 2fr;gap:16px}
 
 /* ── KPI Cards ── */
-.kpi{background:var(--surf);border:1px solid var(--bord);border-radius:8px;padding:14px;position:relative;overflow:hidden}
+.kpi{background:var(--surf);border:1px solid var(--bord);border-radius:8px;padding:14px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:102px}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
 .kpi.g::before{background:var(--green)}
 .kpi.b::before{background:var(--blue)}
@@ -197,6 +199,8 @@ tr:hover td{background:var(--hover-row)}
 @media(max-width:1100px){
   .g6{grid-template-columns:repeat(3,minmax(0,1fr))}
   .g7{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .kpi-row-fin{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi-row-ops{grid-template-columns:repeat(3,minmax(0,1fr))}
   .g21{grid-template-columns:minmax(0,1fr)}
   .g12{grid-template-columns:minmax(0,1fr)}
 }
@@ -218,8 +222,11 @@ tr:hover td{background:var(--hover-row)}
 
   .g6{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .g7{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .g7 .kpi:first-child{grid-column:1 / -1;padding:14px 16px;background:linear-gradient(135deg, var(--surf) 0%, rgba(63,185,80,0.08) 100%)}
-  .g7 .kpi:first-child .kpi-val{font-size:24px}
+  .kpi-row-fin{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:10px}
+  .kpi-row-fin .kpi:first-child{grid-column:1 / -1;padding:14px 16px;background:linear-gradient(135deg, var(--surf) 0%, rgba(63,185,80,0.08) 100%)}
+  .kpi-row-fin .kpi:first-child .kpi-val{font-size:24px}
+  .kpi-row-ops{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .kpi-row-ops .kpi:last-child{grid-column:1 / -1}
   .g2{grid-template-columns:minmax(0,1fr);gap:14px}
   .g3{grid-template-columns:minmax(0,1fr);gap:14px}
   .g21{grid-template-columns:minmax(0,1fr);gap:14px}
@@ -252,7 +259,7 @@ tr:hover td{background:var(--hover-row)}
 @media(max-width:480px){
   .wrap{padding:0 10px}
   .kpi-val{font-size:16.5px}
-  .g7 .kpi:first-child .kpi-val{font-size:22px}
+  .g7 .kpi:first-child .kpi-val, .kpi-row-fin .kpi:first-child .kpi-val{font-size:22px}
 }
 </style>
 </head>
@@ -289,44 +296,69 @@ tr:hover td{background:var(--hover-row)}
 <div class="main">
 <div class="wrap">
 
-<!-- KPI STRIP -->
+<!-- KPI STRIP (Two-Tier Layout) -->
 <div class="sec" id="s-kpi">
-  <div class="g7">
+  <!-- Tier 1: Financial Performance -->
+  <div class="kpi-row-fin">
     <div class="kpi g">
-      <div class="kpi-lbl">Revenue YTD</div>
-      <div class="kpi-val g" id="kpi-ytd-val">IDR 8.15 M</div>
+      <div>
+        <div class="kpi-lbl">Revenue YTD</div>
+        <div class="kpi-val g" id="kpi-ytd-val">IDR 8.15 M</div>
+      </div>
       <div class="kpi-sub" id="kpi-ytd-sub">Jan – Jun 2026 · F&amp;B only</div>
     </div>
     <div class="kpi b">
-      <div class="kpi-lbl" id="kpi-lastmon-lbl">May Revenue</div>
-      <div class="kpi-val b" id="kpi-lastmon-val">—</div>
-      <span class="badge-pill" id="kpi-lastmon-badge" style="display:none"></span>
+      <div>
+        <div class="kpi-lbl" id="kpi-lastmon-lbl">May Revenue</div>
+        <div class="kpi-val b" id="kpi-lastmon-val">—</div>
+      </div>
+      <div>
+        <span class="badge-pill" id="kpi-lastmon-badge" style="display:none"></span>
+      </div>
     </div>
     <div class="kpi o">
-      <div class="kpi-lbl" id="kpi-vstarget-lbl">vs Target</div>
-      <div class="kpi-val o" id="kpi-vs-target">—</div>
+      <div>
+        <div class="kpi-lbl" id="kpi-vstarget-lbl">vs Target</div>
+        <div class="kpi-val o" id="kpi-vs-target">—</div>
+      </div>
       <div class="kpi-sub">H1 <span style="color:var(--orange)">1.8M</span> · H2 <span style="color:var(--orange)">2.0M</span> · <span id="target-display">—</span></div>
     </div>
     <div class="kpi y">
-      <div class="kpi-lbl" id="kpi-currmonth-lbl">Jun Revenue (MTD)</div>
-      <div class="kpi-val y" id="kpi-currmonth-val">—</div>
-      <div class="kpi-sub" id="kpi-currmonth-sub">excl. Balian</div>
-      <span class="badge-pill" id="kpi-currmonth-est" style="display:none"></span>
+      <div>
+        <div class="kpi-lbl" id="kpi-currmonth-lbl">Jun Revenue (MTD)</div>
+        <div class="kpi-val y" id="kpi-currmonth-val">—</div>
+      </div>
+      <div>
+        <div class="kpi-sub" id="kpi-currmonth-sub">excl. Balian</div>
+        <span class="badge-pill" id="kpi-currmonth-est" style="display:none"></span>
+      </div>
     </div>
+  </div>
+
+  <!-- Tier 2: Operations & Accounts -->
+  <div class="kpi-row-ops">
     <div class="kpi c">
-      <div class="kpi-lbl">Active Customers</div>
-      <div class="kpi-val c" id="kpi-cust-val">174</div>
+      <div>
+        <div class="kpi-lbl">Active Customers</div>
+        <div class="kpi-val c" id="kpi-cust-val">174</div>
+      </div>
       <div class="kpi-sub" id="kpi-cust-sub">58 Monica · 116 Juni</div>
     </div>
     <div class="kpi p">
-      <div class="kpi-lbl">SKUs Sold</div>
-      <div class="kpi-val p" id="kpi-skus-val">205</div>
+      <div>
+        <div class="kpi-lbl">SKUs Sold</div>
+        <div class="kpi-val p" id="kpi-skus-val">205</div>
+      </div>
       <div class="kpi-sub">Unique products</div>
     </div>
     <div class="kpi r">
-      <div class="kpi-lbl">Dormant</div>
-      <div class="kpi-val r" id="kpi-dorm-val">34</div>
-      <span class="badge-pill pill-down" id="kpi-dorm-badge">No order May/Jun</span>
+      <div>
+        <div class="kpi-lbl">Dormant Accounts</div>
+        <div class="kpi-val r" id="kpi-dorm-val">34</div>
+      </div>
+      <div>
+        <span class="badge-pill pill-down" id="kpi-dorm-badge">No order May/Jun</span>
+      </div>
     </div>
   </div>
 </div>
@@ -483,7 +515,7 @@ tr:hover td{background:var(--hover-row)}
   </div>
 </nav>
 
-<script src="data.js?v=3"></script>
+<script src="data.js?v=4"></script>
 <script>
 // ════════════════════════════════════════════
 // HELPERS
