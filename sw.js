@@ -1,4 +1,4 @@
-const CACHE = 'horeca-ks-v5';
+const CACHE = 'horeca-ks-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -23,7 +23,7 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  const isData = e.request.url.endsWith('/data.js');
+  const isData = e.request.url.includes('data.js');
   if (isData) {
     // Network-first for data.js — always load fresh, fall back to cache offline
     e.respondWith(

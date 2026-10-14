@@ -25,8 +25,9 @@ else:
     if not candidates:
         sys.exit("No .xlsx file found in current directory.")
     import re as _re
-    _MON = {'jan':1,'feb':2,'mar':3,'apr':4,'may':5,'jun':6,
-            'jul':7,'aug':8,'sep':9,'oct':10,'nov':11,'dec':12}
+    _MON = {'jan':1,'feb':2,'mar':3,'apr':4,'may':5,'mei':5,'jun':6,
+            'jul':7,'aug':8,'agu':8,'agt':8,'sep':9,'oct':10,'okt':10,
+            'nov':11,'nop':11,'dec':12,'des':12}
     def _xlsx_key(p):
         m = _re.search(r'jan-(\w{3})', Path(p).name.lower())
         return _MON.get(m.group(1), 0) if m else 0
@@ -92,15 +93,34 @@ ref_m      = sorted_months[-2] if partial_m and len(sorted_months) >= 2 else lat
 prev_m     = (sorted_months[-3] if partial_m and len(sorted_months) >= 3
               else sorted_months[-2] if len(sorted_months) >= 2 else ref_m)
 
+import calendar
+partial_day = None
+days_in_month = None
+if partial_m:
+    file_dt = datetime.fromtimestamp(XLSX.stat().st_mtime)
+    try:
+        if wb.properties and wb.properties.modified:
+            file_dt = wb.properties.modified
+    except Exception:
+        pass
+    if file_dt.month == partial_m:
+        partial_day = file_dt.day
+    else:
+        partial_day = today.day if today.month == partial_m else 1
+    days_in_month = calendar.monthrange(latest_y or today.year, partial_m)[1]
+
 print(f"  Months in data: {sorted_months}")
-print(f"  Partial month:  {partial_m} ({MONTH_NAMES.get(partial_m,'?') if partial_m else 'none'})")
+print(f"  Partial month:  {partial_m} ({MONTH_NAMES.get(partial_m,'?') if partial_m else 'none'}), Day: {partial_day}/{days_in_month}")
 print(f"  Reference month (growth compare): {MONTH_NAMES.get(ref_m,'?')} vs {MONTH_NAMES.get(prev_m,'?')}")
 
 def is_balian(r):
     return 'BALIAN' in (r[7] or '').upper()
 
+dpp_idx = header.index('DPP') if 'DPP' in header else 9
+
 def grand(r):
-    return float(r[11] or 0)
+    # DPP is net revenue without tax (PPN)
+    return float(r[dpp_idx] or 0)
 
 # ── Monthly revenue ────────────────────────────────────────────────────────────
 monica_fb  = defaultdict(float)
@@ -422,7 +442,7 @@ aov_drops.sort(key=lambda x: -x['drop'])
 
 # ── Target ─────────────────────────────────────────────────────────────────────
 TARGET_H1 = 1_800_000_000
-TARGET_H2 = 2_200_000_000
+TARGET_H2 = 2_000_000_000
 
 # ── Assemble D ─────────────────────────────────────────────────────────────────
 D = {
@@ -433,6 +453,8 @@ D = {
     'juni_bal':    month_series(juni_bal),
     'target_h1':   TARGET_H1,
     'target_h2':   TARGET_H2,
+    'partial_day': partial_day,
+    'days_in_month': days_in_month,
     'top10':       top10,
     'monica_top10': sp_top10_list(monica_custs),
     'juni_top10':   sp_top10_list(juni_custs),
