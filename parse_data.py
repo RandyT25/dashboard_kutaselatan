@@ -41,15 +41,11 @@ MONTH_NAMES = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',
 
 KS_SALES = {'Monica', 'Juni'}
 
-FB_CATEGORIES = {
-    'BEVERAGE', 'DAIRY', 'FLOUR MIP', 'FLOUR SRIBOGA',
-    'BAKERY', 'FROZEN BAKERY', 'FROZEN FRIES', 'FROZEN MEAT', 'FROZEN SEA FOOD',
-    'PIZZA',
-}
+def is_balian(r):
+    return 'BALIAN' in (r[7] or '').upper()
 
 def is_fb(r):
-    cat = (r[7] or '').strip().upper()
-    return cat in FB_CATEGORIES or cat == ''
+    return not is_balian(r)
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 wb = openpyxl.load_workbook(XLSX, read_only=True, data_only=True)
@@ -59,8 +55,8 @@ rows = list(ws.iter_rows(values_only=True))
 #          Kat_Brg  Qty DPP PPN Grand_Total Sales Tipe_Order bulan nama_bulan
 #          Nama_Div tahun
 header = rows[0]
-ks = [r for r in rows[1:] if r[12] in KS_SALES]
-print(f"  {len(ks):,} rows for Monica + Juni")
+ks = [r for r in rows[1:] if r[12] in KS_SALES and r[13] in ('Invoice', 'Retur')]
+print(f"  {len(ks):,} rows for Monica + Juni (Invoices & Retur)")
 
 # ── Month analysis ──────────────────────────────────────────────────────────────
 all_rows     = rows[1:]
