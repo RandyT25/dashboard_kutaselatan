@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>MKU/MKS Sales Command Center</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sales Command">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="command-center-data.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117;
+      --surf: #161b22;
+      --surf2: #21262d;
+      --bord: #30363d;
+      --txt: #e6edf3;
+      --muted: #8b949e;
+      --subtle: #6e7681;
+      --green: #3fb950;
+      --gdim: rgba(63, 185, 80, 0.15);
+      --blue: #58a6ff;
+      --bdim: rgba(88, 166, 255, 0.15);
+      --orange: #f0883e;
+      --odim: rgba(240, 136, 62, 0.15);
+      --red: #f85149;
+      --rdim: rgba(248, 81, 73, 0.15);
+      --purple: #bc8cff;
+      --pdim: rgba(188, 140, 255, 0.15);
+      --yellow: #e3b341;
+      --ydim: rgba(227, 179, 65, 0.15);
+      --cyan: #39c5cf;
+      --cdim: rgba(57, 197, 207, 0.15);
+      --card-radius: 12px;
+      --nav-height: 60px;
+    }
+    [data-theme="light"] {
+      --bg: #f6f8fa;
+      --surf: #ffffff;
+      --surf2: #eaeef2;
+      --bord: #d0d7de;
+      --txt: #1f2328;
+      --muted: #57606a;
+      --subtle: #6e7781;
+      --green: #1a7f37;
+      --gdim: #d4edda;
+      --blue: #0969da;
+      --bdim: #dbeafe;
+      --orange: #bc4c00;
+      --odim: #fed7aa;
+      --red: #cf222e;
+      --rdim: #ffebe9;
+      --purple: #8250df;
+      --pdim: #f3e8ff;
+      --yellow: #7d4e00;
+      --ydim: #fef3c7;
+      --cyan: #0a7fc4;
+      --cdim: #cffafe;
+    }
+    body {
+      background: var(--bg);
+      color: var(--txt);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 75px;
+    }
+    @media (min-width: 900px) {
+      body { padding-bottom: 24px; }
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    /* Top Header */
+    .hdr {
+      background: var(--surf);
+      border-bottom: 1px solid var(--bord);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 10px 16px;
+    }
+    .hdr-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #1f6feb, #8250df);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 16px;
+    }
+    .brand-text h1 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .brand-text p {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .hdr-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--bord);
+      background: var(--surf2);
+      color: var(--txt);
+      transition: all 0.15s ease;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+    .btn-wa {
+      background: #25d366;
+      border-color: #25d366;
+      color: #fff;
+    }
+    .btn-pill {
+      border-radius: 20px;
+      font-size: 11px;
+      padding: 4px 10px;
+    }
+    /* Desktop Nav */
+    .desktop-nav {
+      display: none;
+      background: var(--surf);
+      border-bottom: 1px solid var(--bord);
+      padding: 0 16px;
+    }
+    .desktop-nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+    }
+    .nav-tab {
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .nav-tab:hover { color: var(--txt); }
+    .nav-tab.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+    @media (min-width: 900px) {
+      .desktop-nav { display: block; }
+    }
+
+    /* Main Container */
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Views */
+    .view-pane { display: none; }
+    .view-pane.active { display: block; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Cards & Grids */
+    .g-kpi-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .g-kpi-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .g-2 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 900px) {
+      .g-2 { grid-template-columns: 1fr 1fr; }
+      .g-21 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+    }
+    .card {
+      background: var(--surf);
+      border: 1px solid var(--bord);
+      border-radius: var(--card-radius);
+      padding: 16px;
+      position: relative;
+    }
+    .card-hd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .kpi {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 104px;
+    }
+    .kpi::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .kpi.g::before { background: var(--green); }
+    .kpi.b::before { background: var(--blue); }
+    .kpi.o::before { background: var(--orange); }
+    .kpi.p::before { background: var(--purple); }
+    .kpi.r::before { background: var(--red); }
+    .kpi.y::before { background: var(--yellow); }
+    .kpi-lbl {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .kpi-val {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 4px 0;
+    }
+    .kpi-val.g { color: var(--green); }
+    .kpi-val.b { color: var(--blue); }
+    .kpi-val.o { color: var(--orange); }
+    .kpi-val.p { color: var(--purple); }
+    .kpi-val.r { color: var(--red); }
+    .kpi-val.y { color: var(--yellow); }
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-g { background: var(--gdim); color: var(--green); }
+    .badge-b { background: var(--bdim); color: var(--blue); }
+    .badge-o { background: var(--odim); color: var(--orange); }
+    .badge-r { background: var(--rdim); color: var(--red); }
+    .badge-p { background: var(--pdim); color: var(--purple); }
+    .badge-y { background: var(--ydim); color: var(--yellow); }
+
+    /* Tables */
+    .tbl-wrap {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--bord);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      text-align: left;
+    }
+    th {
+      background: var(--surf2);
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 10.5px;
+      letter-spacing: 0.05em;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--bord);
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--bord);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surf2); }
+    .ta-r { text-align: right; }
+    .ta-c { text-align: center; }
+
+    /* Search & Filter Bar */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 8px 12px 8px 32px;
+      background: var(--surf2);
+      border: 1px solid var(--bord);
+      border-radius: 8px;
+      color: var(--txt);
+      font-size: 13px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+    .pill-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--surf2);
+      border: 1px solid var(--bord);
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .pill-btn.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    /* Mobile Bottom Navigation */
+    @media (min-width: 900px) { .mobile-bar { display: none !important; } }
+    .mobile-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surf);
+      border-top: 1px solid var(--bord);
+      display: flex;
+      justify-content: space-around;
+      padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+      z-index: 200;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .mob-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 8px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      flex: 1;
+    }
+    .mob-tab svg { width: 20px; height: 20px; }
+    .mob-tab.active { color: var(--blue); }
+
+    /* Drawer / Modal */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 300;
+      display: none;
+      backdrop-filter: blur(4px);
+    }
+    .drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surf);
+      border-top: 1px solid var(--bord);
+      border-radius: 16px 16px 0 0;
+      padding: 16px;
+      z-index: 310;
+      transform: translateY(100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .drawer.open { transform: translateY(0); }
+    .drawer-handle {
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--bord);
+      margin: 0 auto 16px;
+    }
+    .drawer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .drawer-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 8px;
+      background: var(--surf2);
+      border: 1px solid var(--bord);
+      border-radius: 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+    }
+    .drawer-item svg { width: 24px; height: 24px; color: var(--blue); }
+
+    /* Pulse dot */
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+      box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7);
+      animation: pulse-ring 1.8s infinite;
+    }
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(63, 185, 80, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- Top Sticky Header -->
+  <header class="hdr">
+    <div class="hdr-inner">
+      <div class="brand">
+        <div class="brand-icon">M</div>
+        <div class="brand-text">
+          <h1>MKU/MKS Command Center</h1>
+          <p><span class="pulse-dot"></span> Randy · Area Manager Bali</p>
+        </div>
+      </div>
+      <div class="hdr-actions">
+        <button class="btn btn-wa btn-pill" onclick="generateWhatsAppRecap()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.679-.702c.97.533 1.77.82 2.78.821 3.18 0 5.767-2.587 5.768-5.766.001-3.182-2.585-5.77-5.767-5.775zm7.394 5.767c-.002 4.073-3.32 7.391-7.394 7.391-1.22 0-2.378-.302-3.411-.861l-4.62 1.211 1.233-4.51c-.657-1.077-1.022-2.338-1.022-3.631.002-4.074 3.321-7.392 7.394-7.392 4.075 0 7.395 3.318 7.396 7.392z"/></svg>
+          WA Recap
+        </button>
+        <button class="btn btn-pill" id="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light">
+          🌓
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Desktop Tabs Navigation (≥900px) -->
+  <nav class="desktop-nav">
+    <div class="desktop-nav-inner">
+      <div class="nav-tab active" onclick="switchView('my-day')">📊 My Day</div>
+      <div class="nav-tab" onclick="switchView('customers')">👥 Customer Directory (2,217)</div>
+      <div class="nav-tab" onclick="switchView('customer-360')">🏨 Padma 360</div>
+      <div class="nav-tab" onclick="switchView('pipeline')">📈 Deal Pipeline</div>
+      <div class="nav-tab" onclick="switchView('issues')">🚨 Operational Blockers</div>
+      <div class="nav-tab" onclick="switchView('reports')">📑 Quota & Retention</div>
+      <div class="nav-tab" onclick="switchView('team')">👥 Team Workload</div>
+      <div class="nav-tab" onclick="switchView('calendar')">📅 Calendar & Visits</div>
+      <div class="nav-tab" onclick="switchView('tasks')">✅ Tasks</div>
+      <div class="nav-tab" onclick="switchView('notes')">📝 Notes</div>
+    </div>
+  </nav>
+
+  <!-- Main Views Container -->
+  <main class="wrap">
+
+    <!-- VIEW 1: MY DAY DASHBOARD -->
+    <section id="view-my-day" class="view-pane active">
+      <!-- Greeting banner -->
+      <div style="margin-bottom: 16px;">
+        <h2 style="font-size: 18px; font-weight: 800;">Good afternoon, Randy</h2>
+        <p style="font-size: 12px; color: var(--muted);" id="live-time-str">Commercial Status · Bali Foodservice & Balian Mineral Water</p>
+      </div>
+
+      <!-- Financial KPIs -->
+      <div class="g-kpi-4">
+        <div class="card kpi g">
+          <div>
+            <div class="kpi-lbl">Net Revenue YTD (DPP)</div>
+            <div class="kpi-val g" id="kpi-total-dpp">Rp 48.29B</div>
+          </div>
+          <div class="kpi-sub">11,600 verified invoices · Net of returns</div>
+        </div>
+        <div class="card kpi b">
+          <div>
+            <div class="kpi-lbl">Core Foodservice</div>
+            <div class="kpi-val b" id="kpi-core-dpp">Rp 38.41B</div>
+          </div>
+          <div class="kpi-sub">79.5% share · Dairy, Meat, Bakery, Pastry</div>
+        </div>
+        <div class="card kpi c">
+          <div>
+            <div class="kpi-lbl">Balian Mineral Water</div>
+            <div class="kpi-val c" id="kpi-balian-dpp">Rp 9.89B</div>
+          </div>
+          <div class="kpi-sub">20.5% share · Natural Still & Sparkling</div>
+        </div>
+        <div class="card kpi o">
+          <div>
+            <div class="kpi-lbl">KLS Monthly Target Ramp</div>
+            <div class="kpi-val o">Rp 1.00B</div>
+          </div>
+          <div class="kpi-sub">Target Quota for 76 Key KLS Hotel Accounts</div>
+        </div>
+      </div>
+
+      <!-- Operational KPIs -->
+      <div class="g-kpi-3">
+        <div class="card kpi p">
+          <div>
+            <div class="kpi-lbl">Total Master Customers</div>
+            <div class="kpi-val p" id="kpi-cust-count">2,217</div>
+          </div>
+          <div class="kpi-sub">BKT & BSM Territories · 76 KLS Hotels</div>
+        </div>
+        <div class="card kpi r">
+          <div>
+            <div class="kpi-lbl">Action Required (Dormant)</div>
+            <div class="kpi-val r" id="kpi-dormant-count">14 Accounts</div>
+          </div>
+          <div class="kpi-sub">No invoice &gt;60 days in priority portfolio</div>
+        </div>
+        <div class="card kpi y">
+          <div>
+            <div class="kpi-lbl">Operational Blockers</div>
+            <div class="kpi-val y" id="kpi-blocker-count">4 Issues</div>
+          </div>
+          <div class="kpi-sub">2 Critical Delivery · 1 Credit Limit · 1 Stock</div>
+        </div>
+      </div>
+
+      <!-- Action Queue & Highlights -->
+      <div class="g-2" style="margin-bottom: 16px;">
+        <div class="card">
+          <div class="card-hd">
+            <span class="card-title">⚡ Immediate Action Queue</span>
+            <span class="badge badge-r">Priority First</span>
+          </div>
+          <div id="action-queue-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd">
+            <span class="card-title">📈 Monthly Revenue Trajectory</span>
+            <span class="badge badge-b">2026 YTD</span>
+          </div>
+          <div style="height: 220px;">
+            <canvas id="chart-monthly-rev"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Accounts Snapshot -->
+      <div class="card">
+        <div class="card-hd">
+          <span class="card-title">🏆 Top Revenue Accounts (KLS / HORECA)</span>
+          <button class="btn btn-pill" onclick="switchView('customers')">View All 2,217 &rarr;</button>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Area</th>
+                <th>Tier</th>
+                <th class="ta-r">Invoices</th>
+                <th class="ta-r">Net DPP (IDR)</th>
+                <th class="ta-r">Balian DPP</th>
+                <th class="ta-c">Action</th>
+              </tr>
+            </thead>
+            <tbody id="top-accounts-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: CUSTOMER DIRECTORY -->
+    <section id="view-customers" class="view-pane">
+      <div class="card-hd" style="margin-bottom: 12px;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800;">Customer Directory</h2>
+          <p style="font-size: 12px; color: var(--muted);">Real-time search and commercial tiering across 2,217 accounts</p>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="cust-search-input" class="search-input" placeholder="Search customer name, area code, or tier..." oninput="handleCustomerSearch()">
+        </div>
+        <button class="pill-btn active" onclick="filterCustomerTier('ALL', this)">All</button>
+        <button class="pill-btn" onclick="filterCustomerTier('KLS', this)">KLS Hotels</button>
+        <button class="pill-btn" onclick="filterCustomerTier('A', this)">Tier A</button>
+        <button class="pill-btn" onclick="filterCustomerTier('B', this)">Tier B</button>
+        <button class="pill-btn" onclick="filterCustomerTier('DORMANT', this)">Dormant (&gt;60d)</button>
+      </div>
+
+      <div class="card">
+        <div style="font-size: 12px; color: var(--muted); margin-bottom: 10px;" id="cust-result-count">Showing 2,217 accounts</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>Area</th>
+                <th>Group</th>
+                <th>Tier</th>
+                <th class="ta-r">Net DPP Pre-VAT</th>
+                <th class="ta-c">Last Order</th>
+                <th class="ta-c">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="customers-full-tbody"></tbody>
+          </table>
+        </div>
+        <div style="text-align: center; margin-top: 14px;">
+          <button class="btn btn-pill" id="load-more-cust-btn" onclick="renderMoreCustomers()">Load More Accounts</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: CUSTOMER 360 (PADMA BALI RESORT) -->
+    <section id="view-customer-360" class="view-pane">
+      <div id="c360-container">
+        <!-- Dynamically rendered -->
+      </div>
+    </section>
+
+    <!-- VIEW 4: DEAL PIPELINE -->
+    <section id="view-pipeline" class="view-pane">
+      <div class="card-hd" style="margin-bottom: 12px;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800;">9-Stage Deal Pipeline</h2>
+          <p style="font-size: 12px; color: var(--muted);">Opportunities, product trials, and expected commercial value</p>
+        </div>
+      </div>
+      <div id="pipeline-board" style="display: flex; gap: 14px; overflow-x: auto; padding-bottom: 16px;">
+        <!-- 9 stages rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- VIEW 5: OPERATIONAL BLOCKERS -->
+    <section id="view-issues" class="view-pane">
+      <div class="card-hd" style="margin-bottom: 12px;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800;">Operational Blockers & SLA Cockpit</h2>
+          <p style="font-size: 12px; color: var(--muted);">Logistics, delivery, stock, and credit issues with SLA deadlines</p>
+        </div>
+      </div>
+      <div id="issues-list" class="g-2">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- VIEW 6: REPORTS & RETENTION -->
+    <section id="view-reports" class="view-pane">
+      <div class="card-hd" style="margin-bottom: 12px;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800;">Commercial Quota & Retention Reports</h2>
+          <p style="font-size: 12px; color: var(--muted);">Trajectory, product mix, and account retention cohorts</p>
+        </div>
+      </div>
+      <div class="g-2" style="margin-bottom: 16px;">
+        <div class="card">
+          <div class="card-hd">
+            <span class="card-title">Category Revenue Split</span>
+          </div>
+          <div style="height: 240px;">
+            <canvas id="chart-cat-split"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd">
+            <span class="card-title">Monthly Core vs Balian Trajectory</span>
+          </div>
+          <div style="height: 240px;">
+            <canvas id="chart-stack-rev"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd">
+          <span class="card-title">Dormancy & Retention Cohort Analysis</span>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Cohort</th>
+                <th>Dormancy Window</th>
+                <th class="ta-r">Account Count</th>
+                <th class="ta-r">Estimated Revenue at Risk</th>
+                <th>Recommended Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-g">Active</span></td>
+                <td>Ordered within last 30 days</td>
+                <td class="ta-r" id="cohort-30">1,820</td>
+                <td class="ta-r">Low Risk</td>
+                <td>Maintain regular visit cadence and cross-sell Balian</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-y">Watchlist</span></td>
+                <td>31 – 60 days without order</td>
+                <td class="ta-r" id="cohort-60">240</td>
+                <td class="ta-r">IDR 1.25 B</td>
+                <td>Schedule sales rep check-in visit and tasting session</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-r">Critical Dormant</span></td>
+                <td>61 – 90 days without order</td>
+                <td class="ta-r" id="cohort-90">110</td>
+                <td class="ta-r">IDR 850 M</td>
+                <td>Area Manager personal visit with chef / purchasing review</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-r">Churned</span></td>
+                <td>&gt;90 days inactive</td>
+                <td class="ta-r" id="cohort-90plus">47</td>
+                <td class="ta-r">IDR 420 M</td>
+                <td>Formal win-back proposal with updated product pricing</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 7: TEAM WORKLOAD -->
+    <section id="view-team" class="view-pane">
+      <div class="card-hd" style="margin-bottom: 12px;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800;">Team Workload & Supervisory Cockpit</h2>
+          <p style="font-size: 12px; color: var(--muted);">Area manager supervisory view across sales representatives</p>
+        </div>
+      </div>
+      <div class="g-2" id="team-rep-cards">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- VIEW 8: CALENDAR & VISITS -->
+    <section id="view-calendar" class="view-pane">
+      <div class="card-hd" style="margin-bottom: 12px;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800;">Field Calendar & Scheduled Visits</h2>
+          <p style="font-size: 12px; color: var(--muted);">Client audits, tastings, and scheduled field meetings</p>
+        </div>
+      </div>
+      <div class="card" id="calendar-events-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- VIEW 9: TASKS -->
+    <section id="view-tasks" class="view-pane">
+      <div class="card-hd" style="margin-bottom: 12px;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800;">Personal Tasks Board</h2>
+          <p style="font-size: 12px; color: var(--muted);">Operational and strategic follow-ups</p>
+        </div>
+      </div>
+      <div class="card" id="tasks-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- VIEW 10: NOTES -->
+    <section id="view-notes" class="view-pane">
+      <div class="card-hd" style="margin-bottom: 12px;">
+        <div>
+          <h2 style="font-size: 18px; font-weight: 800;">Field & Meeting Notes</h2>
+          <p style="font-size: 12px; color: var(--muted);">Client feedback, culinary tastings, and operational logs</p>
+        </div>
+      </div>
+      <div class="g-2" id="notes-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bar">
+    <button class="mob-tab active" onclick="switchView('my-day')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <span>My Day</span>
+    </button>
+    <button class="mob-tab" onclick="switchView('customers')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span>Customers</span>
+    </button>
+    <button class="mob-tab" onclick="switchView('customer-360')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-3"/></svg>
+      <span>Padma 360</span>
+    </button>
+    <button class="mob-tab" onclick="switchView('pipeline')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      <span>Pipeline</span>
+    </button>
+    <button class="mob-tab" onclick="openDrawer()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+      <span>More</span>
+    </button>
+  </nav>
+
+  <!-- Mobile "More" Drawer -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="mobile-drawer">
+    <div class="drawer-handle"></div>
+    <div style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">More Command Center Tools</div>
+    <p style="font-size: 11px; color: var(--muted);">Direct access to all 10 operational modules</p>
+    <div class="drawer-grid">
+      <div class="drawer-item" onclick="switchView('issues'); closeDrawer();">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Blockers (4)</span>
+      </div>
+      <div class="drawer-item" onclick="switchView('reports'); closeDrawer();">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>Reports</span>
+      </div>
+      <div class="drawer-item" onclick="switchView('team'); closeDrawer();">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Team</span>
+      </div>
+      <div class="drawer-item" onclick="switchView('calendar'); closeDrawer();">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Calendar</span>
+      </div>
+      <div class="drawer-item" onclick="switchView('tasks'); closeDrawer();">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Tasks</span>
+      </div>
+      <div class="drawer-item" onclick="switchView('notes'); closeDrawer();">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <span>Notes</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global State
+    const DATA = window.COMMAND_CENTER_DATA || {};
+    let currentFilterTier = 'ALL';
+    let searchQuery = '';
+    let displayedCustomerCount = 40;
+    let selectedCustomerId = '7c45fce1-bade-57ca-b9cf-2890255e575a'; // Default to Padma Bali Resort
+    let chartMonthly = null;
+    let chartCat = null;
+    let chartStack = null;
+
+    // Helpers
+    function fmtIDR(num) {
+      if (!num && num !== 0) return 'Rp 0';
+      if (num >= 1e12) return 'Rp ' + (num / 1e12).toFixed(2) + 'T';
+      if (num >= 1e9) return 'Rp ' + (num / 1e9).toFixed(2) + 'B';
+      if (num >= 1e6) return 'Rp ' + (num / 1e6).toFixed(1) + 'M';
+      return 'Rp ' + Math.round(num).toLocaleString('id-ID');
+    }
+
+    function toggleTheme() {
+      const b = document.body;
+      const isDark = b.getAttribute('data-theme') === 'dark';
+      b.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('cmd_theme', isDark ? 'light' : 'dark');
+    }
+
+    function switchView(viewId) {
+      document.querySelectorAll('.view-pane').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById('view-' + viewId);
+      if (target) target.classList.add('active');
+
+      // Sync Desktop tabs
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      const activeDesk = Array.from(document.querySelectorAll('.nav-tab')).find(t => t.getAttribute('onclick').includes(viewId));
+      if (activeDesk) activeDesk.classList.add('active');
+
+      // Sync Mobile tabs
+      document.querySelectorAll('.mob-tab').forEach(t => t.classList.remove('active'));
+      const activeMob = Array.from(document.querySelectorAll('.mob-tab')).find(t => t.getAttribute('onclick') && t.getAttribute('onclick').includes(viewId));
+      if (activeMob) activeMob.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Trigger chart renders if visible
+      if (viewId === 'my-day' && !chartMonthly) initMonthlyChart();
+      if (viewId === 'reports' && !chartCat) initReportCharts();
+      if (viewId === 'customer-360') renderCustomer360(selectedCustomerId);
+    }
+
+    function openDrawer() {
+      document.getElementById('drawer-overlay').style.display = 'block';
+      document.getElementById('mobile-drawer').classList.add('open');
+    }
+
+    function closeDrawer() {
+      document.getElementById('drawer-overlay').style.display = 'none';
+      document.getElementById('mobile-drawer').classList.remove('open');
+    }
+
+    // 1-Click WhatsApp Recap Generator
+    function generateWhatsAppRecap() {
+      const s = DATA.summary || {};
+      const dateStr = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      
+      const text = `*MKU/MKS SALES COMMAND CENTER — DAILY EXECUTIVE RECAP*
+📅 *Tanggal:* ${dateStr}
+👤 *Area Manager:* Randy (Bali Foodservice & Balian)
+🎯 *Reporting Scope:* Randy KLS / HORECA Foodservice Portfolio
+
+━━━━━━━━━━━━━━━━━━━━
+💰 *FINANCIAL TRAJECTORY (DPP PRE-VAT):*
+• *Total Net Revenue YTD:* ${fmtIDR(s.total_net_dpp || 48290907133)}
+• *Core Foodservice (79.5%):* ${fmtIDR(s.core_dpp || 38405387833)}
+• *Balian Mineral Water (20.5%):* ${fmtIDR(s.balian_dpp || 9885519300)}
+• *Verified Invoices:* ${(s.total_invoices || 11600).toLocaleString('id-ID')}
+• *Monthly Target Quota:* IDR 1.000.000.000 / bln (76 KLS Hotels Ramp)
+
+━━━━━━━━━━━━━━━━━━━━
+🏨 *PRIORITY ACCOUNTS & DORMANT COHORTS:*
+• *Padma Bali Resort:* IDR 1.015.109.463 DPP (Active - 10 Invoices)
+• *Active Portfolio:* ${(DATA.customers || []).length} Master Accounts
+• *Action Required:* 14 Accounts dormant >60d
+
+━━━━━━━━━━━━━━━━━━━━
+🚨 *OPERATIONAL BLOCKERS & SLA (4 ISSUES):*
+• 2 Critical Delivery Blockers (Balian 330ml Glass & Heavy Traffic Nusa Dua)
+• 1 Credit Limit Hold (Discovery Kartika Plaza)
+• 1 Meat Portioning Specification (Ayana Resort)
+
+_Generated automatically via MKU/MKS Sales Command Center._`;
+
+      const encoded = encodeURIComponent(text);
+      window.open('https://wa.me/?text=' + encoded, '_blank');
+    }
+
+    // Initialize Dashboard
+    function initDashboard() {
+      const s = DATA.summary || {};
+      document.getElementById('kpi-total-dpp').textContent = fmtIDR(s.total_net_dpp);
+      document.getElementById('kpi-core-dpp').textContent = fmtIDR(s.core_dpp);
+      document.getElementById('kpi-balian-dpp').textContent = fmtIDR(s.balian_dpp);
+      document.getElementById('kpi-cust-count').textContent = (DATA.customers || []).length.toLocaleString('id-ID');
+
+      // Populate Top Accounts
+      const top10 = (DATA.customers || []).slice(0, 10);
+      const topTbody = document.getElementById('top-accounts-tbody');
+      topTbody.innerHTML = top10.map(c => `
+        <tr>
+          <td>
+            <div style="font-weight: 700;">${c.name}</div>
+            <div style="font-size: 11px; color: var(--muted);">${c.group} · ${c.rep_name}</div>
+          </td>
+          <td><span class="badge badge-b">${c.area}</span></td>
+          <td><span class="badge ${c.tier === 'A' ? 'badge-g' : c.tier === 'B' ? 'badge-y' : 'badge-p'}">${c.tier || 'C'}</span></td>
+          <td class="ta-r">${c.invoices}</td>
+          <td class="ta-r" style="font-weight: 700; color: var(--green);">${fmtIDR(c.total_dpp)}</td>
+          <td class="ta-r" style="color: var(--cyan);">${fmtIDR(c.balian_dpp)}</td>
+          <td class="ta-c">
+            <button class="btn btn-pill" onclick="openCustomer360('${c.id}')">360 View</button>
+          </td>
+        </tr>
+      `).join('');
+
+      // Populate Action Queue
+      const queueContainer = document.getElementById('action-queue-list');
+      queueContainer.innerHTML = `
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid var(--bord);">
+          <div style="background:var(--rdim); color:var(--red); padding:6px; border-radius:8px; font-weight:800;">🚨</div>
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:13px;">Delivery SLA Critical: Balian Glass 330ml</div>
+            <div style="font-size:11.5px; color:var(--muted);">Padma Bali Resort shipment held at warehouse due to packaging inspection. SLA expires in 3h.</div>
+          </div>
+          <button class="btn btn-pill" onclick="switchView('issues')">Resolve</button>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid var(--bord);">
+          <div style="background:var(--ydim); color:var(--yellow); padding:6px; border-radius:8px; font-weight:800;">⚠️</div>
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:13px;">Discovery Kartika Plaza Credit Limit</div>
+            <div style="font-size:11.5px; color:var(--muted);">Pending Rp 45M invoice exceeds current credit term. Requires Area Manager commercial approval.</div>
+          </div>
+          <button class="btn btn-pill" onclick="switchView('issues')">Review</button>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:10px 0;">
+          <div style="background:var(--bdim); color:var(--blue); padding:6px; border-radius:8px; font-weight:800;">📅</div>
+          <div style="flex:1;">
+            <div style="font-weight:700; font-size:13px;">Tasting & Review with Executive Chef I Made</div>
+            <div style="font-size:11.5px; color:var(--muted);">Padma Bali Resort Main Kitchen at 14:00 WITA. Sample pack: Anchor Butter & Australian Wagyu MB5+.</div>
+          </div>
+          <button class="btn btn-pill" onclick="switchView('calendar')">View</button>
+        </div>
+      `;
+
+      initMonthlyChart();
+      renderCustomerDirectory();
+      renderPipelineBoard();
+      renderIssuesList();
+      renderTeamCockpit();
+      renderCalendar();
+      renderTasks();
+      renderNotes();
+      renderCustomer360(selectedCustomerId);
+    }
+
+    // Chart: Monthly Revenue
+    function initMonthlyChart() {
+      const ctx = document.getElementById('chart-monthly-rev');
+      if (!ctx) return;
+      const monthly = DATA.monthly || [];
+      const labels = monthly.map(m => m.month);
+      const coreData = monthly.map(m => m.core / 1e9);
+      const balianData = monthly.map(m => m.balian / 1e9);
+
+      chartMonthly = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Core Foodservice (M)',
+              data: coreData,
+              backgroundColor: '#1f6feb',
+              borderRadius: 4
+            },
+            {
+              label: 'Balian Mineral Water (M)',
+              data: balianData,
+              backgroundColor: '#39c5cf',
+              borderRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } }
+          },
+          scales: {
+            x: { stacked: true, grid: { display: false } },
+            y: { stacked: true, grid: { color: 'rgba(255,255,255,0.06)' }, title: { display: true, text: 'IDR Miliar' } }
+          }
+        }
+      });
+    }
+
+    // Chart: Report Charts
+    function initReportCharts() {
+      const ctx1 = document.getElementById('chart-cat-split');
+      if (ctx1) {
+        const cats = DATA.categories || [];
+        const topCats = cats.slice(0, 6);
+        chartCat = new Chart(ctx1, {
+          type: 'doughnut',
+          data: {
+            labels: topCats.map(c => c.name),
+            datasets: [{
+              data: topCats.map(c => c.total_dpp / 1e9),
+              backgroundColor: ['#1f6feb', '#39c5cf', '#238636', '#f0883e', '#bc8cff', '#e3b341']
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } }
+          }
+        });
+      }
+
+      const ctx2 = document.getElementById('chart-stack-rev');
+      if (ctx2) {
+        const monthly = DATA.monthly || [];
+        chartStack = new Chart(ctx2, {
+          type: 'line',
+          data: {
+            labels: monthly.map(m => m.month),
+            datasets: [{
+              label: 'Total Net Commercial Revenue (M)',
+              data: monthly.map(m => m.total / 1e9),
+              borderColor: '#3fb950',
+              backgroundColor: 'rgba(63, 185, 80, 0.1)',
+              fill: true,
+              tension: 0.3
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { y: { title: { display: true, text: 'IDR Miliar' } } }
+          }
+        });
+      }
+    }
+
+    // Customer Directory Rendering & Filtering
+    function renderCustomerDirectory() {
+      const tbody = document.getElementById('customers-full-tbody');
+      const all = DATA.customers || [];
+      
+      let filtered = all.filter(c => {
+        const matchesSearch = !searchQuery || 
+          c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          c.area.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (c.group && c.group.toLowerCase().includes(searchQuery.toLowerCase()));
+        
+        if (!matchesSearch) return false;
+
+        if (currentFilterTier === 'KLS') return c.is_kls;
+        if (currentFilterTier === 'A') return c.tier === 'A';
+        if (currentFilterTier === 'B') return c.tier === 'B';
+        if (currentFilterTier === 'DORMANT') {
+          if (!c.last_order) return true;
+          const diffDays = (new Date('2026-10-30') - new Date(c.last_order)) / (1000 * 60 * 60 * 24);
+          return diffDays > 60;
+        }
+        return true;
+      });
+
+      document.getElementById('cust-result-count').textContent = `Showing ${Math.min(displayedCustomerCount, filtered.length)} of ${filtered.length} matching accounts`;
+
+      const pageSlice = filtered.slice(0, displayedCustomerCount);
+      tbody.innerHTML = pageSlice.map(c => `
+        <tr>
+          <td>
+            <div style="font-weight: 700;">${c.name}</div>
+            <div style="font-size: 11px; color: var(--muted);">${c.rep_name} ${c.is_kls ? '· <span style="color:var(--orange)">★ KLS Hotel</span>' : ''}</div>
+          </td>
+          <td><span class="badge badge-b">${c.area}</span></td>
+          <td>${c.group || 'Foodservice'}</td>
+          <td><span class="badge ${c.tier === 'A' ? 'badge-g' : c.tier === 'B' ? 'badge-y' : 'badge-p'}">${c.tier || 'C'}</span></td>
+          <td class="ta-r" style="font-weight: 700; color: var(--green);">${fmtIDR(c.total_dpp)}</td>
+          <td class="ta-c" style="font-size: 11px; color: var(--muted);">${c.last_order || 'No orders'}</td>
+          <td class="ta-c">
+            <button class="btn btn-pill" onclick="openCustomer360('${c.id}')">360 View</button>
+          </td>
+        </tr>
+      `).join('');
+
+      document.getElementById('load-more-cust-btn').style.display = displayedCustomerCount >= filtered.length ? 'none' : 'inline-block';
+    }
+
+    function renderMoreCustomers() {
+      displayedCustomerCount += 50;
+      renderCustomerDirectory();
+    }
+
+    function handleCustomerSearch() {
+      searchQuery = document.getElementById('cust-search-input').value.trim();
+      displayedCustomerCount = 40;
+      renderCustomerDirectory();
+    }
+
+    function filterCustomerTier(tier, btn) {
+      currentFilterTier = tier;
+      document.querySelectorAll('.filter-bar .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      displayedCustomerCount = 40;
+      renderCustomerDirectory();
+    }
+
+    function openCustomer360(customerId) {
+      selectedCustomerId = customerId;
+      switchView('customer-360');
+      renderCustomer360(customerId);
+    }
+
+    // Render Customer 360 Workspace
+    function renderCustomer360(customerId) {
+      const container = document.getElementById('c360-container');
+      const cust = (DATA.customers || []).find(c => c.id === customerId) || (DATA.customers || [])[0];
+      if (!cust) return;
+
+      const padmaDetail = DATA.padma_detail || {};
+      const isPadma = cust.id === '7c45fce1-bade-57ca-b9cf-2890255e575a';
+      const invoices = isPadma ? padmaDetail.invoices : [];
+
+      container.innerHTML = `
+        <div class="card-hd" style="margin-bottom: 16px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h2 style="font-size: 20px; font-weight: 800;">${cust.name}</h2>
+              <span class="badge ${cust.tier === 'A' ? 'badge-g' : 'badge-b'}">Tier ${cust.tier || 'A'}</span>
+              ${cust.is_kls ? '<span class="badge badge-o">KLS Hotel Allowlist</span>' : ''}
+            </div>
+            <p style="font-size: 12px; color: var(--muted);">Area: ${cust.area} · Representative: ${cust.rep_name} · Group: ${cust.group || 'Hospitality'}</p>
+          </div>
+          <button class="btn btn-wa btn-pill" onclick="generateWhatsAppRecap()">Share Recap</button>
+        </div>
+
+        <div class="g-kpi-4">
+          <div class="card kpi g">
+            <div>
+              <div class="kpi-lbl">Total Net Revenue (DPP)</div>
+              <div class="kpi-val g">${fmtIDR(cust.total_dpp)}</div>
+            </div>
+            <div class="kpi-sub">Pre-VAT commercial sales</div>
+          </div>
+          <div class="kpi-sub card kpi b">
+            <div>
+              <div class="kpi-lbl">Balian Mineral Water</div>
+              <div class="kpi-val b">${fmtIDR(cust.balian_dpp)}</div>
+            </div>
+            <div class="kpi-sub">${cust.total_dpp > 0 ? ((cust.balian_dpp / cust.total_dpp) * 100).toFixed(1) : 0}% portfolio share</div>
+          </div>
+          <div class="card kpi p">
+            <div>
+              <div class="kpi-lbl">Total Invoices</div>
+              <div class="kpi-val p">${cust.invoices || (isPadma ? 10 : 0)} Orders</div>
+            </div>
+            <div class="kpi-sub">Verified commercial transactions</div>
+          </div>
+          <div class="card kpi o">
+            <div>
+              <div class="kpi-lbl">Last Order Date</div>
+              <div class="kpi-val o" style="font-size: 18px;">${cust.last_order || '2026-10-15'}</div>
+            </div>
+            <div class="kpi-sub">Active ordering cadence</div>
+          </div>
+        </div>
+
+        <!-- Decision Makers & Contact Roster -->
+        <div class="g-2" style="margin-bottom: 16px;">
+          <div class="card">
+            <div class="card-hd">
+              <span class="card-title">👥 Key Decision Makers</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--bord); padding-bottom:8px;">
+                <div>
+                  <div style="font-weight:700;">I Made Sudarma</div>
+                  <div style="font-size:11px; color:var(--muted);">Executive Chef · Culinary Decision Maker</div>
+                </div>
+                <span class="badge badge-g">Primary</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--bord); padding-bottom:8px;">
+                <div>
+                  <div style="font-weight:700;">Ketut Wijaya</div>
+                  <div style="font-size:11px; color:var(--muted);">Director of F&B · Commercial Sponsor</div>
+                </div>
+                <span class="badge badge-b">Commercial</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <div style="font-weight:700;">Ni Luh Putu Ari</div>
+                  <div style="font-size:11px; color:var(--muted);">Purchasing Manager · PO Approver</div>
+                </div>
+                <span class="badge badge-p">Purchasing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-hd">
+              <span class="card-title">📝 Account Context & Opportunities</span>
+            </div>
+            <div style="font-size: 12.5px; line-height: 1.6; color: var(--txt);">
+              <p><strong>Culinary Profile:</strong> 5-star beachfront resort in Legian with 432 rooms, 5 dining outlets (Don Biu, Tenkai Japanese, The Deli, S.K.A.I. Beach Club, Infinity Pool Bar). High weekly consumption of unsalted French butter, whipping cream, and Balian 330ml Glass.</p>
+              <div style="margin-top: 10px;">
+                <span class="badge badge-g">Active Contract</span>
+                <span class="badge badge-b">High Balian Penetration</span>
+                <span class="badge badge-o">Annual Review Nov 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoices Ledger -->
+        <div class="card">
+          <div class="card-hd">
+            <span class="card-title">🧾 Recent Transaction Ledger (${isPadma ? invoices.length : 0} Rows)</span>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Date</th>
+                  <th>SKU / Product Description</th>
+                  <th>Category</th>
+                  <th class="ta-r">DPP Pre-VAT</th>
+                  <th class="ta-r">Gross (Incl. 11% PPN)</th>
+                  <th class="ta-c">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${isPadma && invoices.length > 0 ? invoices.map(inv => `
+                  <tr>
+                    <td style="font-weight: 700; font-family: monospace;">${inv.invoice_number}</td>
+                    <td>${inv.date}</td>
+                    <td>${inv.product_name || inv.sku_code}</td>
+                    <td><span class="badge ${inv.is_balian ? 'badge-c' : 'badge-b'}">${inv.category}</span></td>
+                    <td class="ta-r" style="font-weight: 700; color: var(--green);">${fmtIDR(inv.dpp)}</td>
+                    <td class="ta-r">${fmtIDR(inv.gross)}</td>
+                    <td class="ta-c"><span class="badge badge-g">Settled</span></td>
+                  </tr>
+                `).join('') : `<tr><td colspan="7" class="ta-c" style="padding: 20px; color: var(--muted);">Select Padma Bali Resort to view verified item-level ledger</td></tr>`}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render Deal Pipeline Board
+    function renderPipelineBoard() {
+      const container = document.getElementById('pipeline-board');
+      const opps = DATA.opportunities || [];
+      const stages = [
+        { id: 1, name: '1. Prospecting' },
+        { id: 2, name: '2. Initial Contact' },
+        { id: 3, name: '3. Needs Analysis' },
+        { id: 4, name: '4. Product Presentation' },
+        { id: 5, name: '5. Sampling / Trial' },
+        { id: 6, name: '6. Proposal / Quotation' },
+        { id: 7, name: '7. Negotiation' },
+        { id: 8, name: '8. Credit Approval' },
+        { id: 9, name: '9. Closed Won' }
+      ];
+
+      container.innerHTML = stages.map(stage => {
+        const stageOpps = opps.filter(o => o.stage_id === stage.id);
+        const stageTotal = stageOpps.reduce((sum, o) => sum + o.expected_value, 0);
+
+        return `
+          <div style="min-width: 250px; width: 250px; background: var(--surf); border: 1px solid var(--bord); border-radius: 10px; padding: 12px; display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <div style="font-weight: 700; font-size: 12px; text-transform: uppercase;">${stage.name}</div>
+              <span class="badge badge-b">${stageOpps.length}</span>
+            </div>
+            <div style="font-size: 11px; color: var(--muted); margin-bottom: 12px;">Total: ${fmtIDR(stageTotal)}</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
+              ${stageOpps.length === 0 ? '<div style="font-size: 11px; color: var(--muted); text-align: center; padding: 20px 0;">No active deals</div>' : ''}
+              ${stageOpps.map(o => `
+                <div style="background: var(--surf2); border: 1px solid var(--bord); border-radius: 8px; padding: 10px;">
+                  <div style="font-weight: 700; font-size: 12.5px; margin-bottom: 4px;">${o.title}</div>
+                  <div style="font-size: 11px; color: var(--blue); margin-bottom: 6px;">${o.customer_name}</div>
+                  <div style="font-size: 13px; font-weight: 800; color: var(--green); margin-bottom: 6px;">${fmtIDR(o.expected_value)}</div>
+                  <div style="font-size: 10.5px; color: var(--muted);">Next: ${o.next_action || 'Follow up'}</div>
+                  ${o.due_date ? `<div style="font-size: 10.5px; color: var(--orange); margin-top: 4px;">Due: ${o.due_date}</div>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render Operational Blockers
+    function renderIssuesList() {
+      const container = document.getElementById('issues-list');
+      const issues = DATA.issues || [];
+      container.innerHTML = issues.map(iss => `
+        <div class="card" style="border-left: 4px solid ${iss.priority === 'Critical' ? 'var(--red)' : iss.priority === 'High' ? 'var(--orange)' : 'var(--blue)'};">
+          <div class="card-hd">
+            <span class="card-title">${iss.title}</span>
+            <span class="badge ${iss.priority === 'Critical' ? 'badge-r' : 'badge-o'}">${iss.priority}</span>
+          </div>
+          <div style="font-size: 12.5px; line-height: 1.5; margin-bottom: 10px;">${iss.description || 'Operational investigation in progress.'}</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--muted); border-top: 1px solid var(--bord); padding-top: 8px;">
+            <div>Dept: <strong>${iss.dept}</strong> · Target: <strong>${iss.customer_name}</strong></div>
+            <div style="color: var(--orange); font-weight: 600;">SLA: ${iss.sla_deadline ? iss.sla_deadline.substring(0, 16) : 'Under Review'}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Team Cockpit
+    function renderTeamCockpit() {
+      const container = document.getElementById('team-rep-cards');
+      const roster = DATA.roster || [];
+      container.innerHTML = roster.map(r => `
+        <div class="card">
+          <div class="card-hd">
+            <div>
+              <div style="font-weight: 800; font-size: 15px;">${r.name}</div>
+              <div style="font-size: 11px; color: var(--muted);">${r.role} · Code: ${r.code}</div>
+            </div>
+            <span class="badge ${r.active ? 'badge-g' : 'badge-r'}">${r.active ? 'Active' : 'Inactive'}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; text-align: center;">
+            <div style="background: var(--surf2); padding: 8px; border-radius: 6px;">
+              <div style="font-size: 10px; color: var(--muted);">AREA</div>
+              <div style="font-weight: 700; font-size: 13px;">${r.area || 'ALL'}</div>
+            </div>
+            <div style="background: var(--surf2); padding: 8px; border-radius: 6px;">
+              <div style="font-size: 10px; color: var(--muted);">ROLE</div>
+              <div style="font-weight: 700; font-size: 13px;">${r.role === 'area_manager' ? 'Manager' : 'Rep'}</div>
+            </div>
+            <div style="background: var(--surf2); padding: 8px; border-radius: 6px;">
+              <div style="font-size: 10px; color: var(--muted);">STATUS</div>
+              <div style="font-weight: 700; font-size: 13px; color: var(--green);">Ready</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Calendar
+    function renderCalendar() {
+      const container = document.getElementById('calendar-events-container');
+      const events = DATA.calendar || [];
+      container.innerHTML = `
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Event Title</th>
+                <th>Type</th>
+                <th>Client / Location</th>
+                <th>Start Time</th>
+                <th class="ta-c">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${events.map(ev => `
+                <tr>
+                  <td style="font-weight: 700;">${ev.title}</td>
+                  <td><span class="badge badge-b">${ev.type}</span></td>
+                  <td>${ev.customer_name || 'Bali Field'} · ${ev.location || 'On-site'}</td>
+                  <td style="font-family: monospace;">${ev.start ? ev.start.substring(0, 16) : 'Scheduled'}</td>
+                  <td class="ta-c"><span class="badge badge-g">${ev.status || 'Scheduled'}</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // Render Tasks
+    function renderTasks() {
+      const container = document.getElementById('tasks-container');
+      const tasks = DATA.tasks || [];
+      container.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          ${tasks.map(t => `
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--surf2); border: 1px solid var(--bord); border-radius: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" ${t.status === 'completed' ? 'checked' : ''} style="width: 16px; height: 16px;">
+                <div>
+                  <div style="font-weight: 600; font-size: 13px; ${t.status === 'completed' ? 'text-decoration: line-through; color: var(--muted);' : ''}">${t.title}</div>
+                  <div style="font-size: 11px; color: var(--muted);">${t.description || 'High-priority task'}</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="badge ${t.priority === 'High' ? 'badge-r' : 'badge-y'}">${t.priority}</span>
+                <span style="font-size: 11px; color: var(--muted);">${t.due_date || 'Due Today'}</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // Render Notes
+    function renderNotes() {
+      const container = document.getElementById('notes-container');
+      const notes = DATA.notes || [];
+      container.innerHTML = notes.map(n => `
+        <div class="card">
+          <div class="card-hd">
+            <span class="card-title">${n.title}</span>
+            <span class="badge badge-p">${n.scope || 'Customer'}</span>
+          </div>
+          <div style="font-size: 12.5px; line-height: 1.6; margin-bottom: 12px; color: var(--txt);">${n.content}</div>
+          <div style="font-size: 11px; color: var(--muted); border-top: 1px solid var(--bord); padding-top: 8px;">
+            Target: <strong>${n.customer_name || 'General Field'}</strong> · ${n.created_at ? n.created_at.substring(0, 10) : 'Recent'}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // DOM Ready
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('cmd_theme') || 'dark';
+      document.body.setAttribute('data-theme', savedTheme);
+      initDashboard();
+    });
+  </script>
+</body>
+</html>
