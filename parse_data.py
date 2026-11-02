@@ -39,7 +39,12 @@ print(f"Reading: {XLSX}")
 MONTH_NAMES = {1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',
                7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'}
 
-KS_SALES = {'Monica', 'Juni'}
+KS_SALES = {'Monica', 'Dewi', 'Juni'}
+
+def normalize_sp(name):
+    if name in ('Monica', 'Dewi'):
+        return 'Dewi'
+    return name
 
 def is_balian(r):
     return 'BALIAN' in (r[7] or '').upper()
@@ -56,7 +61,7 @@ rows = list(ws.iter_rows(values_only=True))
 #          Nama_Div tahun
 header = rows[0]
 ks = [r for r in rows[1:] if r[12] in KS_SALES and r[13] in ('Invoice', 'Retur')]
-print(f"  {len(ks):,} rows for Monica + Juni (Invoices & Retur)")
+print(f"  {len(ks):,} rows for Dewi + Juni (Invoices & Retur)")
 
 # ── Month analysis ──────────────────────────────────────────────────────────────
 all_rows     = rows[1:]
@@ -119,20 +124,21 @@ def grand(r):
     return float(r[dpp_idx] or 0)
 
 # ── Monthly revenue ────────────────────────────────────────────────────────────
-monica_fb  = defaultdict(float)
-monica_bal = defaultdict(float)
-juni_fb    = defaultdict(float)
-juni_bal   = defaultdict(float)
+dewi_fb   = defaultdict(float)
+dewi_bal  = defaultdict(float)
+juni_fb   = defaultdict(float)
+juni_bal  = defaultdict(float)
 
 for r in ks:
     m = int(r[14] or 0)
     if not m:
         continue
     g = grand(r)
+    sp = normalize_sp(r[12])
     if is_balian(r):
-        (monica_bal if r[12] == 'Monica' else juni_bal)[m] += g
+        (dewi_bal if sp == 'Dewi' else juni_bal)[m] += g
     elif is_fb(r):
-        (monica_fb  if r[12] == 'Monica' else juni_fb )[m] += g
+        (dewi_fb  if sp == 'Dewi' else juni_fb )[m] += g
 
 def month_series(d):
     return [round(d.get(m, 0)) for m in sorted_months]
@@ -158,7 +164,7 @@ for r in ks:
     pn = (r[6] or '').strip()
     kb = (r[5] or '').strip()
     g  = grand(r)
-    sp = r[12]
+    sp = normalize_sp(r[12])
     if not cn:
         continue
     cust_total[cn] += g
@@ -217,8 +223,8 @@ def sp_fb_sorted(sp):
         key=lambda x: -x[1]
     )
 
-monica_custs = sp_fb_sorted('Monica')
-juni_custs   = sp_fb_sorted('Juni')
+dewi_custs = sp_fb_sorted('Dewi')
+juni_custs = sp_fb_sorted('Juni')
 
 def sp_top10_list(custs):
     total = sum(v for _, v in custs) if custs else 1
@@ -278,9 +284,9 @@ def growth_decline(cust_months_dict, sp):
     decl.sort(key=lambda x:  x['d'])
     return grow[:8], decl[:8]
 
-grow_m,  dec_m  = growth_decline(cust_by_m,     'Monica')
+grow_d,  dec_d  = growth_decline(cust_by_m,     'Dewi')
 grow_j,  dec_j  = growth_decline(cust_by_m,     'Juni')
-grow_bm, dec_bm = growth_decline(cust_by_m_bal, 'Monica')
+grow_bd, dec_bd = growth_decline(cust_by_m_bal, 'Dewi')
 grow_bj, dec_bj = growth_decline(cust_by_m_bal, 'Juni')
 
 # ── Dormant ────────────────────────────────────────────────────────────────────
@@ -314,15 +320,15 @@ def dormant_list(cust_months_dict, sp):
     out.sort(key=lambda x: -x['ytd'])
     return out[:15]
 
-dorm_m  = dormant_list(cust_by_m,     'Monica')
+dorm_d  = dormant_list(cust_by_m,     'Dewi')
 dorm_j  = dormant_list(cust_by_m,     'Juni')
-dorm_bm = dormant_list(cust_by_m_bal, 'Monica')
+dorm_bd = dormant_list(cust_by_m_bal, 'Dewi')
 dorm_bj = dormant_list(cust_by_m_bal, 'Juni')
 
-active_m    = sum(1 for cn in cust_total if cust_sp.get(cn) == 'Monica')
+active_d    = sum(1 for cn in cust_total if cust_sp.get(cn) == 'Dewi')
 active_j    = sum(1 for cn in cust_total if cust_sp.get(cn) == 'Juni')
 total_skus  = len(prod_rev)
-dormant_cnt = len(dorm_m) + len(dorm_j)
+dormant_cnt = len(dorm_d) + len(dorm_j)
 
 # ── Upsell (top account + their top product) ──────────────────────────────────
 def upsell_list(custs):
@@ -333,7 +339,7 @@ def upsell_list(custs):
         out.append({'n': cn, 'prod': top_p, 'cls': cust_cls.get(cn, 'C'), 'rev': round(rev)})
     return out
 
-ups_m = upsell_list(monica_custs)
+ups_d = upsell_list(dewi_custs)
 ups_j = upsell_list(juni_custs)
 
 # ── Opportunities (Dynamic Insights) ──────────────────────────────────────────
@@ -443,39 +449,51 @@ TARGET_H2 = 2_000_000_000
 # ── Assemble D ─────────────────────────────────────────────────────────────────
 D = {
     'months':      months_labels,
-    'monica_fb':   month_series(monica_fb),
+    'dewi_fb':     month_series(dewi_fb),
+    'monica_fb':   month_series(dewi_fb), # backwards compat
     'juni_fb':     month_series(juni_fb),
-    'monica_bal':  month_series(monica_bal),
+    'dewi_bal':    month_series(dewi_bal),
+    'monica_bal':  month_series(dewi_bal), # backwards compat
     'juni_bal':    month_series(juni_bal),
     'target_h1':   TARGET_H1,
     'target_h2':   TARGET_H2,
     'partial_day': partial_day,
     'days_in_month': days_in_month,
     'top10':       top10,
-    'monica_top10': sp_top10_list(monica_custs),
+    'dewi_top10':  sp_top10_list(dewi_custs),
+    'monica_top10': sp_top10_list(dewi_custs), # backwards compat
     'juni_top10':   sp_top10_list(juni_custs),
-    'monica_top5': sp_top10_list(monica_custs)[:5], # backwards compat
+    'dewi_top5':   sp_top10_list(dewi_custs)[:5], # backwards compat
+    'monica_top5': sp_top10_list(dewi_custs)[:5], # backwards compat
     'juni_top5':   sp_top10_list(juni_custs)[:5],   # backwards compat
     'abc':         abc_list,
     'abc_custs':   abc_custs,
     'cust_top10_items': cust_top10_items,
     'products':    products_list,
-    'grow_m':      grow_m,
+    'grow_d':      grow_d,
+    'grow_m':      grow_d, # backwards compat
     'grow_j':      grow_j,
-    'bal_grow_m':  grow_bm,
+    'bal_grow_d':  grow_bd,
+    'bal_grow_m':  grow_bd, # backwards compat
     'bal_grow_j':  grow_bj,
-    'dec_m':       dec_m,
+    'dec_d':       dec_d,
+    'dec_m':       dec_d, # backwards compat
     'dec_j':       dec_j,
-    'bal_dec_m':   dec_bm,
+    'bal_dec_d':   dec_bd,
+    'bal_dec_m':   dec_bd, # backwards compat
     'bal_dec_j':   dec_bj,
-    'dorm_m':      dorm_m,
+    'dorm_d':      dorm_d,
+    'dorm_m':      dorm_d, # backwards compat
     'dorm_j':      dorm_j,
-    'bal_dorm_m':  dorm_bm,
+    'bal_dorm_d':  dorm_bd,
+    'bal_dorm_m':  dorm_bd, # backwards compat
     'bal_dorm_j':  dorm_bj,
-    'ups_m':       ups_m,
+    'ups_d':       ups_d,
+    'ups_m':       ups_d, # backwards compat
     'ups_j':       ups_j,
     'opps':        opps,
-    'active_m':    active_m,
+    'active_d':    active_d,
+    'active_m':    active_d, # backwards compat
     'active_j':    active_j,
     'skus':        total_skus,
     'dormant_cnt': dormant_cnt,
@@ -491,12 +509,12 @@ js = 'const D = ' + json.dumps(D, ensure_ascii=False, indent=2) + ';\n'
 OUT.write_text(js, encoding='utf-8')
 print(f"✓ Written {OUT}  ({len(js):,} bytes)")
 print(f"  months:     {months_labels}")
-print(f"  monica_fb:  {month_series(monica_fb)}")
+print(f"  dewi_fb:    {month_series(dewi_fb)}")
 print(f"  juni_fb:    {month_series(juni_fb)}")
-print(f"  monica_bal: {month_series(monica_bal)}")
+print(f"  dewi_bal:   {month_series(dewi_bal)}")
 print(f"  juni_bal:   {month_series(juni_bal)}")
 print(f"  top10:      {[x['n'] for x in top10]}")
 print(f"  abc:        A={abc_list[0]['accs']} accs, B={abc_list[1]['accs']} accs, C={abc_list[2]['accs']} accs")
-print(f"  grow_m:     {[x['n'] for x in grow_m]}")
-print(f"  dec_m:      {[x['n'] for x in dec_m]}")
-print(f"  dorm_m:     {[x['n'] for x in dorm_m[:5]]}")
+print(f"  grow_d:     {[x['n'] for x in grow_d]}")
+print(f"  dec_d:      {[x['n'] for x in dec_d]}")
+print(f"  dorm_d:     {[x['n'] for x in dorm_d[:5]]}")

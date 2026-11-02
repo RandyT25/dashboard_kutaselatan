@@ -20,7 +20,7 @@
   --blue:#58a6ff;--bdim:#1f6feb;
   --orange:#f0883e;--red:#f85149;--purple:#bc8cff;
   --yellow:#e3b341;--cyan:#39c5cf;
-  --monica:#58a6ff;--juni:#3fb950;
+  --monica:#58a6ff;--dewi:#58a6ff;--juni:#3fb950;
   --shadow:0 1px 3px rgba(0,0,0,.5);
   --hover-row:rgba(255,255,255,.03);
   --chart-grid:rgba(255,255,255,0.06);
@@ -32,7 +32,7 @@
   --blue:#0969da;--bdim:#dbeafe;
   --orange:#bc4c00;--red:#cf222e;--purple:#8250df;
   --yellow:#7d4e00;--cyan:#0a7fc4;
-  --monica:#0969da;--juni:#1a7f37;
+  --monica:#0969da;--dewi:#0969da;--juni:#1a7f37;
   --shadow:0 1px 3px rgba(0,0,0,.15);
   --hover-row:rgba(0,0,0,.04);
   --chart-grid:rgba(0,0,0,0.07);
@@ -114,14 +114,14 @@ tr:hover td{background:var(--hover-row)}
 .ba-A{background:rgba(248,81,73,.15);color:#f85149}
 .ba-B{background:rgba(240,136,62,.15);color:#f0883e}
 .ba-C{background:rgba(139,148,158,.15);color:#8b949e}
-.ba-M{background:rgba(88,166,255,.15);color:var(--monica)}
+.ba-M,.ba-D{background:rgba(88,166,255,.15);color:var(--dewi)}
 .ba-J{background:rgba(63,185,80,.15);color:var(--juni)}
 
 /* ── Salesperson cards ── */
 .sp-card{background:var(--surf);border:1px solid var(--bord);border-radius:8px;overflow:hidden}
 .sp-hd{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bord)}
 .sp-name{font-size:17px;font-weight:800}
-.sp-name.m{color:var(--monica)}.sp-name.j{color:var(--juni)}
+.sp-name.m,.sp-name.d{color:var(--dewi)}.sp-name.j{color:var(--juni)}
 .sp-body{padding:16px}
 .sp-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
 .sp-ml{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
@@ -271,7 +271,7 @@ tr:hover td{background:var(--hover-row)}
     <div class="hdr-inner">
       <div class="hdr-left">
         <div class="hdr-title">MKS Bali Horeca · Kuta Selatan</div>
-        <div class="hdr-sub" id="hdr-period">Salesperson: Monica &amp; Juni &nbsp;|&nbsp; Jan – Jun 2026</div>
+        <div class="hdr-sub" id="hdr-period">Salesperson: Dewi &amp; Juni &nbsp;|&nbsp; Jan – Nov 2026</div>
       </div>
       <div class="hdr-right">
         <a href="command-center.html" class="live-badge" style="text-decoration:none; background:rgba(88,166,255,0.25); color:#58a6ff; font-weight:700; border:1px solid rgba(88,166,255,0.4);">⚡ Sales Command Center</a>
@@ -343,7 +343,7 @@ tr:hover td{background:var(--hover-row)}
         <div class="kpi-lbl">Active Customers</div>
         <div class="kpi-val c" id="kpi-cust-val">174</div>
       </div>
-      <div class="kpi-sub" id="kpi-cust-sub">58 Monica · 116 Juni</div>
+      <div class="kpi-sub" id="kpi-cust-sub">58 Dewi · 116 Juni</div>
     </div>
     <div class="kpi p">
       <div>
@@ -371,10 +371,10 @@ tr:hover td{background:var(--hover-row)}
 
     <!-- Revenue chart -->
     <div class="card">
-      <div class="card-hd">Monthly F&amp;B Revenue · Monica &amp; Juni (IDR)</div>
+      <div class="card-hd">Monthly F&amp;B Revenue · Dewi &amp; Juni (IDR)</div>
       <div class="ch" style="height:250px"><canvas id="cRevenue"></canvas></div>
       <div style="display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px;font-size:11px;color:var(--muted)">
-        <span><span style="display:inline-block;width:14px;height:3px;background:var(--monica);border-radius:2px;vertical-align:middle;margin-right:4px"></span>Monica</span>
+        <span><span style="display:inline-block;width:14px;height:3px;background:var(--dewi);border-radius:2px;vertical-align:middle;margin-right:4px"></span>Dewi</span>
         <span><span style="display:inline-block;width:14px;height:3px;background:var(--juni);border-radius:2px;vertical-align:middle;margin-right:4px"></span>Juni</span>
         <span><span style="display:inline-block;width:14px;height:3px;background:#a371f7;border-radius:2px;vertical-align:middle;margin-right:4px"></span>Combined</span>
         <span><span style="display:inline-block;width:14px;height:0;border-top:2px dashed var(--orange);vertical-align:middle;margin-right:4px"></span>Team Target</span>
@@ -395,7 +395,7 @@ tr:hover td{background:var(--hover-row)}
 
   <!-- Balian chart -->
   <div class="card">
-    <div class="card-hd">Balian Revenue Trend · Monica vs Juni (IDR)</div>
+    <div class="card-hd">Balian Revenue Trend · Dewi vs Juni (IDR)</div>
     <div class="ch" style="height:150px"><canvas id="cBalian"></canvas></div>
   </div>
 </div>
@@ -405,21 +405,21 @@ tr:hover td{background:var(--hover-row)}
   <div class="sec-title">Salesperson Performance</div>
   <div class="g2">
 
-    <!-- Monica -->
-    <div class="sp-card" style="border-top:3px solid var(--monica)">
+    <!-- Dewi -->
+    <div class="sp-card" style="border-top:3px solid var(--dewi)">
       <div class="sp-hd">
         <div>
-          <div class="sp-name m">Monica</div>
+          <div class="sp-name d">Dewi</div>
           <div id="monica-cust-sub" style="font-size:12px;color:var(--muted)">F&amp;B + Balian · 58 customers</div>
         </div>
         <div style="text-align:right">
-          <div id="monica-ytd-val" style="font-size:20px;font-weight:800;color:var(--monica)">IDR 5.13 M</div>
+          <div id="monica-ytd-val" style="font-size:20px;font-weight:800;color:var(--dewi)">IDR 5.13 M</div>
           <div style="font-size:11px;color:var(--muted)">F&amp;B Revenue YTD</div>
         </div>
       </div>
       <div class="sp-body">
         <div class="sp-metrics">
-          <div><div class="sp-ml">Avg Order Val</div><div class="sp-mv" style="color:var(--monica)">5.64 Jt</div></div>
+          <div><div class="sp-ml">Avg Order Val</div><div class="sp-mv" style="color:var(--dewi)">5.64 Jt</div></div>
           <div><div class="sp-ml">Top-3 Conc.</div><div class="sp-mv" id="monica-top3-val" style="color:var(--orange)">46.7%</div></div>
           <div><div id="monica-mom-lbl" class="sp-ml">May vs Apr</div><div id="monica-mom-val" class="sp-mv" style="color:var(--green)">+35.6%</div></div>
         </div>
@@ -516,7 +516,7 @@ tr:hover td{background:var(--hover-row)}
   </div>
 </nav>
 
-<script src="data.js?v=6"></script>
+<script src="data.js?v=7"></script>
 <script>
 // ════════════════════════════════════════════
 // HELPERS
@@ -534,7 +534,7 @@ function pct(v){return(v*100).toFixed(1)+'%'}
 function gStr(v){const s=v>=0?'+':'';return s+v.toFixed(1)+'%'}
 function top3Conc(top5){return top5.slice(0,3).reduce((s,c)=>s+c.pct,0).toFixed(1)}
 function clsBa(c){return`<span class="ba ba-${c}">${c}</span>`}
-function spBa(s){return s==='Monica'?`<span class="ba ba-M">Monica</span>`:`<span class="ba ba-J">Juni</span>`}
+function spBa(s){return (s==='Dewi'||s==='Monica')?`<span class="ba ba-D">Dewi</span>`:`<span class="ba ba-J">Juni</span>`}
 function actBa(a){
   if(a==='URGENT')return`<span style="color:var(--red);font-weight:700;font-size:11px">URGENT</span>`;
   if(a==='Call')return`<span style="color:var(--orange);font-size:11px">Call</span>`;
@@ -627,7 +627,7 @@ function fillTop10(elId,data,col){
       </div>`;
   });
 }
-fillTop10('monica-top10',D.monica_top10,'var(--monica)');
+fillTop10('monica-top10',D.dewi_top10 || D.monica_top10,'var(--dewi)');
 fillTop10('juni-top10',D.juni_top10,'var(--juni)');
 
 // Advanced Insights Grid Rendering
@@ -649,7 +649,7 @@ function renderInsightsGrid() {
 
   const trStart = (n) => `<tr style="cursor:pointer" onclick="showCustModal('${n.replace(/'/g, "\\'")}')" onmouseover="this.style.background='var(--hover-row)'" onmouseout="this.style.background='transparent'">`;
 
-  const spBadge = (sp) => sp ? `<span style="font-size:9px;color:${sp==='Monica'?'var(--monica)':'var(--juni)'};border:1px solid ${sp==='Monica'?'var(--monica)':'var(--juni)'}44;padding:1px 3px;border-radius:3px;margin-left:4px;flex-shrink:0">${sp[0]}</span>` : '';
+  const spBadge = (sp) => sp ? `<span style="font-size:9px;color:${(sp==='Dewi'||sp==='Monica')?'var(--dewi)':'var(--juni)'};border:1px solid ${(sp==='Dewi'||sp==='Monica')?'var(--dewi)':'var(--juni)'}44;padding:1px 3px;border-radius:3px;margin-left:4px;flex-shrink:0">${sp[0]==='M'||sp[0]==='D'?'D':'J'}</span>` : '';
 
   const nameCell = (n, sp) => `<td style="max-width:140px"><div style="display:flex;align-items:center;font-weight:600" title="${n}"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${n}</span>${spBadge(sp)}</div></td>`;
   const nameCellShort = (n, sp) => `<td style="max-width:110px"><div style="display:flex;align-items:center;font-weight:600" title="${n}"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${n}</span>${spBadge(sp)}</div></td>`;
@@ -696,7 +696,7 @@ function renderInsightsGrid() {
   `);
 
   // 6. Fast Growing
-  const allGrow = [...D.grow_m.map(x=>({...x, sp:'Monica'})), ...D.grow_j.map(x=>({...x, sp:'Juni'}))].sort((a,b)=>b.g - a.g);
+  const allGrow = [...(D.grow_d||D.grow_m).map(x=>({...x, sp: x.sp==='Monica'?'Dewi':x.sp})), ...D.grow_j.map(x=>({...x, sp:'Juni'}))].sort((a,b)=>b.g - a.g);
   html += createInsightCard('📈 Top Growing', allGrow, c => `
     ${trStart(c.n)}
       ${nameCell(c.n, c.sp)}
@@ -705,7 +705,7 @@ function renderInsightsGrid() {
   `);
 
   // 7. Sharpest Decline
-  const allDec = [...D.dec_m.map(x=>({...x, sp:'Monica'})), ...D.dec_j.map(x=>({...x, sp:'Juni'}))].sort((a,b)=>a.d - b.d);
+  const allDec = [...(D.dec_d||D.dec_m).map(x=>({...x, sp: x.sp==='Monica'?'Dewi':x.sp})), ...D.dec_j.map(x=>({...x, sp:'Juni'}))].sort((a,b)=>a.d - b.d);
   html += createInsightCard('📉 Top Declining', allDec, c => `
     ${trStart(c.n)}
       ${nameCell(c.n, c.sp)}
@@ -714,7 +714,7 @@ function renderInsightsGrid() {
   `);
 
   // 8. Longest Dormant
-  const allDorm = [...D.dorm_m.map(x=>({...x, sp:'Monica'})), ...D.dorm_j.map(x=>({...x, sp:'Juni'}))].sort((a,b)=>a.ytd - b.ytd); 
+  const allDorm = [...(D.dorm_d||D.dorm_m).map(x=>({...x, sp: x.sp==='Monica'?'Dewi':x.sp})), ...D.dorm_j.map(x=>({...x, sp:'Juni'}))].sort((a,b)=>a.ytd - b.ytd); 
   html += createInsightCard('🔕 Longest Dormant', allDorm, c => `
     ${trStart(c.n)}
       ${nameCell(c.n, c.sp)}
@@ -730,7 +730,7 @@ renderInsightsGrid();
 const oppEl=document.getElementById('opp-list');
 D.opps.forEach(o=>{
   const oc={'A':'var(--red)','B':'var(--orange)','C':'var(--muted)'}[o.cls];
-  const sc=o.sp==='Monica'?'var(--monica)':'var(--juni)';
+  const sc=(o.sp==='Dewi'||o.sp==='Monica')?'var(--dewi)':'var(--juni)';
   oppEl.innerHTML+=`
     <div class="opp">
       <div class="opp-rank" style="color:${oc}">#${o.rank}</div>
@@ -829,9 +829,9 @@ allCharts.push(new Chart(document.getElementById('cRevenue'),{
   data:{
     labels:D.months,
     datasets:[
-      {label:'Monica F&B',data:D.monica_fb,borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.05)',tension:.35,fill:true,borderWidth:1.5,pointRadius:partialPointRadius(3),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#58a6ff'),pointBorderColor:'#58a6ff',segment:partialSegment()},
+      {label:'Dewi F&B',data:(D.dewi_fb||D.monica_fb),borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.05)',tension:.35,fill:true,borderWidth:1.5,pointRadius:partialPointRadius(3),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#58a6ff'),pointBorderColor:'#58a6ff',segment:partialSegment()},
       {label:'Juni F&B',  data:D.juni_fb,  borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.05)',  tension:.35,fill:true,borderWidth:1.5,pointRadius:partialPointRadius(3),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#3fb950'),pointBorderColor:'#3fb950',segment:partialSegment()},
-      {label:'Combined',  data:D.monica_fb.map((v,i)=>v+D.juni_fb[i]),borderColor:'#a371f7',backgroundColor:'rgba(163,113,247,0.08)',tension:.35,fill:false,borderWidth:2.5,pointRadius:partialPointRadius(5),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#a371f7'),pointBorderColor:'#a371f7',segment:partialSegment()},
+      {label:'Combined',  data:(D.dewi_fb||D.monica_fb).map((v,i)=>v+D.juni_fb[i]),borderColor:'#a371f7',backgroundColor:'rgba(163,113,247,0.08)',tension:.35,fill:false,borderWidth:2.5,pointRadius:partialPointRadius(5),pointBorderWidth:partialPointBorderW(1),pointBackgroundColor:partialPointBg('#a371f7'),pointBorderColor:'#a371f7',segment:partialSegment()},
       {label:'Team Target',data:D.months.map(l=>monthNum(l)<=6?D.target_h1:D.target_h2),borderColor:'#f0883e',borderDash:[5,5],borderWidth:2,pointRadius:0,fill:false}
     ]
   },
@@ -845,7 +845,7 @@ allCharts.push(new Chart(document.getElementById('cBalian'),{
   data:{
     labels:D.months,
     datasets:[
-      {label:'Monica Balian',data:D.monica_bal,backgroundColor:'rgba(88,166,255,0.65)',borderRadius:4},
+      {label:'Dewi Balian',data:(D.dewi_bal||D.monica_bal),backgroundColor:'rgba(88,166,255,0.65)',borderRadius:4},
       {label:'Juni Balian',  data:D.juni_bal,  backgroundColor:'rgba(63,185,80,0.65)', borderRadius:4}
     ]
   },
@@ -853,14 +853,14 @@ allCharts.push(new Chart(document.getElementById('cBalian'),{
     legend:{display:true,position:'top',labels:{color:cv('--muted'),font:{size:11},boxWidth:12,padding:10}}}};})()
 }));
 
-// Monica monthly
+// Dewi monthly
 allCharts.push(new Chart(document.getElementById('cMonica'),{
   type:'bar',
   data:{
     labels:D.months,
     datasets:[{
-      data:D.monica_fb.map(v=>v/1e9),
-      backgroundColor:D.monica_fb.map((_,i)=>i===D.monica_fb.length-1?'#58a6ff':'rgba(88,166,255,0.4)'),
+      data:(D.dewi_fb||D.monica_fb).map(v=>v/1e9),
+      backgroundColor:(D.dewi_fb||D.monica_fb).map((_,i)=>i===(D.dewi_fb||D.monica_fb).length-1?'#58a6ff':'rgba(88,166,255,0.4)'),
       borderRadius:4
     }]
   },
@@ -1012,9 +1012,9 @@ initTarget();
   const estEl = document.getElementById('kpi-currmonth-est');
   if(lbl) lbl.textContent = lastMon + ' Revenue (MTD)';
   if(el) el.textContent = idr(total);
-  // short format: "M 440Jt · J 283Jt" — no "IDR" prefix to avoid wrapping
+  // short format: "D 440Jt · J 283Jt" — no "IDR" prefix to avoid wrapping
   function shortJt(v){return Math.round(v/1e6)+'Jt';}
-  if(sub) sub.textContent = 'M '+shortJt(mVal)+' · J '+shortJt(jVal)+' · excl. Balian';
+  if(sub) sub.textContent = 'D '+shortJt(mVal)+' · J '+shortJt(jVal)+' · excl. Balian';
 
   if(estEl && isPartial){
     const monNum = monthNum(lastMon);
@@ -1049,14 +1049,15 @@ function initDynamic(){
   function set(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
   function pct(a,b){return b>0?((a/b-1)*100).toFixed(1):'0.0';}
   // Header
-  set('hdr-period','Salesperson: Monica & Juni  |  '+period);
+  set('hdr-period','Salesperson: Dewi & Juni  |  '+period);
   set('hdr-asof','As of '+D.months[last]+' 2026');
   // KPI strip
   set('kpi-ytd-val',idr(ytdFB));
   set('kpi-ytd-sub',period+' · F&B only');
-  if(D.active_m!==undefined){
-    set('kpi-cust-val',String(D.active_m+D.active_j));
-    set('kpi-cust-sub',D.active_m+' Monica · '+D.active_j+' Juni');
+  const dAct = D.active_d !== undefined ? D.active_d : D.active_m;
+  if(dAct!==undefined){
+    set('kpi-cust-val',String(dAct+D.active_j));
+    set('kpi-cust-sub',dAct+' Dewi · '+D.active_j+' Juni');
     set('kpi-skus-val',String(D.skus));
     set('kpi-dorm-val',String(D.dormant_cnt));
   }
@@ -1065,11 +1066,11 @@ function initDynamic(){
   // Salesperson cards
   set('monica-ytd-val',idr(mYtd));
   set('juni-ytd-val',idr(jYtd));
-  if(D.active_m!==undefined){
-    set('monica-cust-sub','F&B + Balian · '+D.active_m+' customers');
+  if(dAct!==undefined){
+    set('monica-cust-sub','F&B + Balian · '+dAct+' customers');
     set('juni-cust-sub','F&B + Balian · '+D.active_j+' customers');
   }
-  set('monica-top3-val',top3Conc(D.monica_top10)+'%');
+  set('monica-top3-val',top3Conc(D.dewi_top10 || D.monica_top10)+'%');
   set('juni-top3-val',top3Conc(D.juni_top10)+'%');
   // Growing table "latest month" column headers track the real reference month
   const refMon = D.months[fullIdx].replace('*','')+' Rev';

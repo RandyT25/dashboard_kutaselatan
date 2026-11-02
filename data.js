@@ -12,6 +12,19 @@ const D = {
     "Oct",
     "Nov*"
   ],
+  "dewi_fb": [
+    780417402,
+    771588227,
+    817094798,
+    1089642873,
+    1071330756,
+    1073340333,
+    1479302748,
+    1138343989,
+    910005600,
+    1009843931,
+    44870592
+  ],
   "monica_fb": [
     780417402,
     771588227,
@@ -37,6 +50,19 @@ const D = {
     720312363,
     664177158,
     17554735
+  ],
+  "dewi_bal": [
+    0,
+    0,
+    0,
+    149630963,
+    533354454,
+    1049362042,
+    1207750050,
+    1432008384,
+    982889268,
+    1336537607,
+    74362161
   ],
   "monica_bal": [
     0,
@@ -78,31 +104,31 @@ const D = {
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 2792534565
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 1749806885
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 1693553326
     },
     {
       "n": "HILTON HOTEL",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 1495304331
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 1301348916
     },
     {
@@ -114,20 +140,72 @@ const D = {
     {
       "n": "MERUSAKA NUSA DUA",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 972857087
     },
     {
       "n": "BULGARI",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 958066211
     },
     {
       "n": "FOUR SEASON RESORT BALI",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 628289246
+    }
+  ],
+  "dewi_top10": [
+    {
+      "n": "INTERCONTINENTAL BALI RESORT",
+      "rev": 1693553326,
+      "pct": 16.63
+    },
+    {
+      "n": "CONRAD HOTEL",
+      "rev": 1301348916,
+      "pct": 12.78
+    },
+    {
+      "n": "HILTON HOTEL",
+      "rev": 1287935948,
+      "pct": 12.64
+    },
+    {
+      "n": "MERUSAKA NUSA DUA",
+      "rev": 972857087,
+      "pct": 9.55
+    },
+    {
+      "n": "MOVENPICK",
+      "rev": 490557004,
+      "pct": 4.82
+    },
+    {
+      "n": "PT. GRAHA ALAM LESTARI",
+      "rev": 381715992,
+      "pct": 3.75
+    },
+    {
+      "n": "NUSA DUA BEACH HOTEL",
+      "rev": 351816210,
+      "pct": 3.45
+    },
+    {
+      "n": "THE LAGUNA",
+      "rev": 348889161,
+      "pct": 3.43
+    },
+    {
+      "n": "RITZ CARLTON",
+      "rev": 340980846,
+      "pct": 3.35
+    },
+    {
+      "n": "SOFITEL BALI ND BEACH RESORT",
+      "rev": 279523578,
+      "pct": 2.74
     }
   ],
   "monica_top10": [
@@ -234,6 +312,33 @@ const D = {
       "pct": 1.21
     }
   ],
+  "dewi_top5": [
+    {
+      "n": "INTERCONTINENTAL BALI RESORT",
+      "rev": 1693553326,
+      "pct": 16.63
+    },
+    {
+      "n": "CONRAD HOTEL",
+      "rev": 1301348916,
+      "pct": 12.78
+    },
+    {
+      "n": "HILTON HOTEL",
+      "rev": 1287935948,
+      "pct": 12.64
+    },
+    {
+      "n": "MERUSAKA NUSA DUA",
+      "rev": 972857087,
+      "pct": 9.55
+    },
+    {
+      "n": "MOVENPICK",
+      "rev": 490557004,
+      "pct": 4.82
+    }
+  ],
   "monica_top5": [
     {
       "n": "INTERCONTINENTAL BALI RESORT",
@@ -321,27 +426,27 @@ const D = {
       {
         "n": "PARADISUS BY MELIA NUSA DUA",
         "rev": 2792534565,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PT. GRAHA ALAM LESTARI",
         "rev": 1749806885,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "INTERCONTINENTAL BALI RESORT",
         "rev": 1693553326,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "HILTON HOTEL",
         "rev": 1495304331,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "CONRAD HOTEL",
         "rev": 1301348916,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "TABU ULUWATU",
@@ -351,17 +456,17 @@ const D = {
       {
         "n": "MERUSAKA NUSA DUA",
         "rev": 972857087,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "BULGARI",
         "rev": 958066211,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "FOUR SEASON RESORT BALI",
         "rev": 628289246,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "NOURISH UNGASAN",
@@ -371,32 +476,32 @@ const D = {
       {
         "n": "MOVENPICK",
         "rev": 490557004,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "THE WESTIN RESORT NUSA DUA",
         "rev": 467963391,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "THE UNGASAN CLIFFTOP RESORT",
         "rev": 441912337,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "NUSA DUA BEACH HOTEL",
         "rev": 351816210,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "THE LAGUNA",
         "rev": 348889161,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "RITZ CARLTON",
         "rev": 340980846,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "YUKI ULUWATU",
@@ -421,12 +526,12 @@ const D = {
       {
         "n": "SOFITEL BALI ND BEACH RESORT",
         "rev": 279523578,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "UMANA BALI HOTEL RESORT",
         "rev": 276931127,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PETRA BINGIN",
@@ -436,7 +541,7 @@ const D = {
       {
         "n": "GRAND HYATT NUSA DUA",
         "rev": 250788465,
-        "sp": "Monica"
+        "sp": "Dewi"
       }
     ],
     "B": [
@@ -453,7 +558,7 @@ const D = {
       {
         "n": "AYODYA RESORT BALI",
         "rev": 228857267,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "MASON ULUWATU",
@@ -488,17 +593,17 @@ const D = {
       {
         "n": "LE MERIDIEN JIMBARAN",
         "rev": 136643331,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "ST REGIS",
         "rev": 136152190,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "COURTYARD MARRIOT HOTEL",
         "rev": 131651820,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "LOSTERIA JIMBARAN",
@@ -513,7 +618,7 @@ const D = {
       {
         "n": "KARMA KANDARA",
         "rev": 124127926,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "KLIVE BEACH CLUB",
@@ -523,17 +628,17 @@ const D = {
       {
         "n": "PENINSULA BEACH RESORT",
         "rev": 102447864,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PLATINUM HOTEL JIMBARAN BEACH BAR",
         "rev": 93945796,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "BALI TROPIC RESORT & SPA",
         "rev": 92166937,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "ZALI ULUWATU",
@@ -543,7 +648,7 @@ const D = {
       {
         "n": "BALI NUSA DUA CONVENTION CENTER",
         "rev": 87295644,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PT. KHARISMA ANUGRAH JAWARA ABADI (SAVAYA BALI)",
@@ -553,27 +658,27 @@ const D = {
       {
         "n": "JUMEIRAH",
         "rev": 84134571,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PENINSULA BAY RESORT",
         "rev": 79749988,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "ROYAL TULIP SPRINGHILL RESORT JIMBARAN",
         "rev": 79411215,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "GLAMP NUSA BALI",
         "rev": 69837788,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "SADARA BOUTIQUE BEACH RESORT",
         "rev": 67816936,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "LILY'S KOREAN BBQ",
@@ -588,17 +693,17 @@ const D = {
       {
         "n": "PLAGOO HOLIDAY HOTEL",
         "rev": 62699872,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "HILTON GARDEN IN TANJUNG BENOA",
         "rev": 61331081,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PT. GEMILANG KARYA KULINER (PLAGOO)",
         "rev": 58904189,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PALMILLA BEACH CLUB MELASTI",
@@ -618,7 +723,7 @@ const D = {
       {
         "n": "ALILA ULUWATU VILLA",
         "rev": 51452396,
-        "sp": "Monica"
+        "sp": "Dewi"
       }
     ],
     "C": [
@@ -630,7 +735,7 @@ const D = {
       {
         "n": "THE MULIA HOTEL",
         "rev": 46710350,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PIZZERIA ITALIA UNGASAN",
@@ -650,12 +755,12 @@ const D = {
       {
         "n": "HOLIDAY INN TANJUNG BENOA",
         "rev": 36548613,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "LA JOYA BALANGAN",
         "rev": 36525487,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "CASHEW TREE RESTAURANT",
@@ -665,17 +770,17 @@ const D = {
       {
         "n": "PINK COCO ULUWATU",
         "rev": 33608865,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "RADISSON BLU BALI ULUWATU",
         "rev": 33347301,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "THE SAKALA RESORT",
         "rev": 31977478,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "MAGUS WARUNG MELASTI",
@@ -685,7 +790,7 @@ const D = {
       {
         "n": "PT VISTA  PADANG ASRI (SUARGA)",
         "rev": 26711351,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "MURNI NI KOMANG",
@@ -735,7 +840,7 @@ const D = {
       {
         "n": "VOUK HOTEL",
         "rev": 18000498,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "LA BAMBA BALI",
@@ -775,7 +880,7 @@ const D = {
       {
         "n": "JIMBARAN BAY BEACH",
         "rev": 13010811,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "LOLAS ULUWATU",
@@ -800,7 +905,7 @@ const D = {
       {
         "n": "HOTEL SANTIKA SILIGITA NUSADUA",
         "rev": 12165679,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "AYAPI ASIAN FODIZ",
@@ -815,7 +920,7 @@ const D = {
       {
         "n": "AYVRTHA BOUTIQUE NATURE",
         "rev": 11516217,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "COCO BISTRO NUSA DUA",
@@ -870,7 +975,7 @@ const D = {
       {
         "n": "ULU SEGARA LUXURY SUITES & VILLAS",
         "rev": 8918919,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PT. GARUDA ADHIMATRA INDONESIA",
@@ -925,7 +1030,7 @@ const D = {
       {
         "n": "THE EDGE BALI",
         "rev": 6723838,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "MANARAI BEACH HOUSE",
@@ -950,7 +1055,7 @@ const D = {
       {
         "n": "KIARA BEACHFRONT",
         "rev": 5931006,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "BARTOLO LABUAN SAIT",
@@ -965,7 +1070,7 @@ const D = {
       {
         "n": "RENAISSANCE ULUWATU",
         "rev": 5740000,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "WHITE ORCHID NUSA DUA",
@@ -1015,7 +1120,7 @@ const D = {
       {
         "n": "SOL BY MELIA BENOA",
         "rev": 4463694,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "EL MERKAT RESTO",
@@ -1030,7 +1135,7 @@ const D = {
       {
         "n": "ASAI VILLAGE",
         "rev": 4298063,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "SEAHOUSE JIMBARAN RESTAURANT",
@@ -1045,7 +1150,7 @@ const D = {
       {
         "n": "ABI BALI VILLA JIMBARAN",
         "rev": 3917629,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "SUGAR ROCK",
@@ -1070,12 +1175,12 @@ const D = {
       {
         "n": "ARMATERRA HOTEL",
         "rev": 2905000,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "INFINITY8 BALI HOTEL",
         "rev": 2873874,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "BENDEGA RESTAURANT JIMBARAN",
@@ -1085,7 +1190,7 @@ const D = {
       {
         "n": "PT KAYU MAMA BALI",
         "rev": 2756757,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "PERMATA BILLIARD",
@@ -1100,7 +1205,7 @@ const D = {
       {
         "n": "THE BALANGAN HOTEL",
         "rev": 2495496,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "TEBA CAFE",
@@ -1115,7 +1220,7 @@ const D = {
       {
         "n": "NAGARA BOUTIQUE HOTEL AND COWORKING",
         "rev": 2360000,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "IGLOOS BAKERY JIMBARAN",
@@ -1135,7 +1240,7 @@ const D = {
       {
         "n": "NOVOTEL NUSA DUA",
         "rev": 2148117,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "GORGONZOLA RESTAURANT",
@@ -1170,7 +1275,7 @@ const D = {
       {
         "n": "ANJA JIMBARAN",
         "rev": 1461847,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "SEA BREEZE BY TEBA CAFE",
@@ -1215,7 +1320,7 @@ const D = {
       {
         "n": "SIX SENSE ULUWATU",
         "rev": 1045045,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "HIGH TIDE BAR",
@@ -1225,7 +1330,7 @@ const D = {
       {
         "n": "9 CLOUD UNGASAN / CLOUD NINE UNGASAN",
         "rev": 986486,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "SAPO JIMBARAN",
@@ -1255,7 +1360,7 @@ const D = {
       {
         "n": "NEST HOTEL NUSA DUA",
         "rev": 851351,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "THE MANGGO TREE",
@@ -1265,7 +1370,7 @@ const D = {
       {
         "n": "SUNRISE AVENTUS HOTEL NUSA DUA",
         "rev": 786487,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "NUSA BY SUKA",
@@ -1310,7 +1415,7 @@ const D = {
       {
         "n": "HERITAGE BOUTIQUE HOTEL",
         "rev": 518423,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "COFFEE GOGO JIMBARAN",
@@ -1335,7 +1440,7 @@ const D = {
       {
         "n": "JANGAN DIPAKAI MELIA BALI SOL",
         "rev": 327000,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "CHATWOOD COFFEE & EATERY",
@@ -1345,7 +1450,7 @@ const D = {
       {
         "n": "VANARA RESORT & SPA",
         "rev": 295000,
-        "sp": "Monica"
+        "sp": "Dewi"
       },
       {
         "n": "KAPENI COFFEE EATERY",
@@ -5792,6 +5897,64 @@ const D = {
       "cust": 6
     }
   ],
+  "grow_d": [
+    {
+      "n": "BALI NUSA DUA CONVENTION CENTER",
+      "cls": "B",
+      "g": 999.0,
+      "lat": 2160000,
+      "new": true
+    },
+    {
+      "n": "THE EDGE BALI",
+      "cls": "C",
+      "g": 999.0,
+      "lat": 1583432,
+      "new": true
+    },
+    {
+      "n": "GRAND HYATT NUSA DUA",
+      "cls": "A",
+      "g": 465.8,
+      "lat": 29562524,
+      "new": false
+    },
+    {
+      "n": "THE SAKALA RESORT",
+      "cls": "C",
+      "g": 152.5,
+      "lat": 5369369,
+      "new": false
+    },
+    {
+      "n": "PT. GEMILANG KARYA KULINER (PLAGOO)",
+      "cls": "B",
+      "g": 109.0,
+      "lat": 14652252,
+      "new": false
+    },
+    {
+      "n": "JIMBARAN BAY BEACH",
+      "cls": "C",
+      "g": 100.0,
+      "lat": 1189189,
+      "new": false
+    },
+    {
+      "n": "FOUR SEASON RESORT BALI",
+      "cls": "A",
+      "g": 66.4,
+      "lat": 12624000,
+      "new": false
+    },
+    {
+      "n": "MOVENPICK",
+      "cls": "A",
+      "g": 63.3,
+      "lat": 58705126,
+      "new": false
+    }
+  ],
   "grow_m": [
     {
       "n": "BALI NUSA DUA CONVENTION CENTER",
@@ -5908,6 +6071,64 @@ const D = {
       "new": true
     }
   ],
+  "bal_grow_d": [
+    {
+      "n": "RADISSON BLU BALI ULUWATU",
+      "cls": "C",
+      "g": 999.0,
+      "lat": 22970541,
+      "new": true
+    },
+    {
+      "n": "SUNRISE AVENTUS HOTEL NUSA DUA",
+      "cls": "C",
+      "g": 999.0,
+      "lat": 786487,
+      "new": true
+    },
+    {
+      "n": "THE SAKALA RESORT",
+      "cls": "C",
+      "g": 999.0,
+      "lat": 14270270,
+      "new": true
+    },
+    {
+      "n": "BULGARI",
+      "cls": "A",
+      "g": 236.8,
+      "lat": 144346850,
+      "new": false
+    },
+    {
+      "n": "THE WESTIN RESORT NUSA DUA",
+      "cls": "A",
+      "g": 205.4,
+      "lat": 92472976,
+      "new": false
+    },
+    {
+      "n": "HILTON HOTEL",
+      "cls": "A",
+      "g": 97.0,
+      "lat": 68699192,
+      "new": false
+    },
+    {
+      "n": "FOUR SEASON RESORT BALI",
+      "cls": "A",
+      "g": 50.9,
+      "lat": 89169323,
+      "new": false
+    },
+    {
+      "n": "KARMA KANDARA",
+      "cls": "B",
+      "g": 40.2,
+      "lat": 23031351,
+      "new": false
+    }
+  ],
   "bal_grow_m": [
     {
       "n": "RADISSON BLU BALI ULUWATU",
@@ -6015,6 +6236,64 @@ const D = {
       "g": 17.9,
       "lat": 49145679,
       "new": false
+    }
+  ],
+  "dec_d": [
+    {
+      "n": "HOTEL SANTIKA SILIGITA NUSADUA",
+      "cls": "C",
+      "d": -100.0,
+      "act": "URGENT",
+      "top_p": "Allana Tenderloin Whole"
+    },
+    {
+      "n": "PINK COCO ULUWATU",
+      "cls": "C",
+      "d": -100.0,
+      "act": "URGENT",
+      "top_p": "Levoni Parma Ham Boneless 14 months approx. 7 kg"
+    },
+    {
+      "n": "HERITAGE BOUTIQUE HOTEL",
+      "cls": "C",
+      "d": -100.0,
+      "act": "URGENT",
+      "top_p": "Tepung Double Zero @25Kg/Sack"
+    },
+    {
+      "n": "NOVOTEL NUSA DUA",
+      "cls": "C",
+      "d": -100.0,
+      "act": "URGENT",
+      "top_p": "Artisan Pure Matcha (500Gr/Pack)"
+    },
+    {
+      "n": "JUMEIRAH",
+      "cls": "B",
+      "d": -81.2,
+      "act": "URGENT",
+      "top_p": "Tepung Double Zero @25Kg/Sack"
+    },
+    {
+      "n": "VOUK HOTEL",
+      "cls": "C",
+      "d": -64.8,
+      "act": "URGENT",
+      "top_p": "Black Gold Topside"
+    },
+    {
+      "n": "BULGARI",
+      "cls": "A",
+      "d": -49.2,
+      "act": "URGENT",
+      "top_p": "BALIAN Glass Still (330 ml x 20)"
+    },
+    {
+      "n": "COURTYARD MARRIOT HOTEL",
+      "cls": "B",
+      "d": -46.7,
+      "act": "URGENT",
+      "top_p": "Borello Rump"
     }
   ],
   "dec_m": [
@@ -6133,6 +6412,36 @@ const D = {
       "top_p": "Artisan Pure Matcha (500Gr/Pack)"
     }
   ],
+  "bal_dec_d": [
+    {
+      "n": "9 CLOUD UNGASAN / CLOUD NINE UNGASAN",
+      "cls": "C",
+      "d": -100.0,
+      "act": "URGENT",
+      "top_p": "BALIAN Glass Sparkling (330 ml x 12)"
+    },
+    {
+      "n": "AYVRTHA BOUTIQUE NATURE",
+      "cls": "C",
+      "d": -66.7,
+      "act": "URGENT",
+      "top_p": "BALIAN Glass Still (330 ml x 20)"
+    },
+    {
+      "n": "GLAMP NUSA BALI",
+      "cls": "B",
+      "d": -37.9,
+      "act": "URGENT",
+      "top_p": "BALIAN Glass Still (750 ml x 12)"
+    },
+    {
+      "n": "PT KAYU MAMA BALI",
+      "cls": "C",
+      "d": -28.9,
+      "act": "URGENT",
+      "top_p": "BALIAN Glass Still (330 ml x 12)"
+    }
+  ],
   "bal_dec_m": [
     {
       "n": "9 CLOUD UNGASAN / CLOUD NINE UNGASAN",
@@ -6219,6 +6528,78 @@ const D = {
       "d": -25.6,
       "act": "URGENT",
       "top_p": "Tepung Double Zero @25Kg/Sack"
+    }
+  ],
+  "dorm_d": [
+    {
+      "n": "PLAGOO HOLIDAY HOTEL",
+      "cls": "B",
+      "last": "May",
+      "ytd": 62699872,
+      "top_p": "Crr Rock'n Hash Brown Triangular 10Kg/Ctn"
+    },
+    {
+      "n": "THE MULIA HOTEL",
+      "cls": "C",
+      "last": "Jul",
+      "ytd": 46710350,
+      "top_p": "Bergold Mozzarella Block"
+    },
+    {
+      "n": "ASAI VILLAGE",
+      "cls": "C",
+      "last": "Jul",
+      "ytd": 4298063,
+      "top_p": "Artisan Pure Matcha (500Gr/Pack)"
+    },
+    {
+      "n": "ARMATERRA HOTEL",
+      "cls": "C",
+      "last": "Feb",
+      "ytd": 2905000,
+      "top_p": "MAMAS BELLY RIND ON SB OUT (SKIN ON) 3-5KG/PACK"
+    },
+    {
+      "n": "ANJA JIMBARAN",
+      "cls": "C",
+      "last": "Aug",
+      "ytd": 1461847,
+      "top_p": "Tepung Easymix Pisang Goreng @1kg/pack"
+    },
+    {
+      "n": "SIX SENSE ULUWATU",
+      "cls": "C",
+      "last": "Jan",
+      "ytd": 1045045,
+      "top_p": "Tepung Double Zero @25Kg/Sack"
+    },
+    {
+      "n": "NEST HOTEL NUSA DUA",
+      "cls": "C",
+      "last": "Feb",
+      "ytd": 851351,
+      "top_p": "Tepung Double Zero @25Kg/Sack"
+    },
+    {
+      "n": "JANGAN DIPAKAI MELIA BALI SOL",
+      "cls": "C",
+      "last": "Feb",
+      "ytd": 327000,
+      "top_p": "Tepung Japanese Tempura 1kg/pack"
+    },
+    {
+      "n": "VANARA RESORT & SPA",
+      "cls": "C",
+      "last": "May",
+      "ytd": 295000,
+      "top_p": "Tepung Double Zero @25Kg/Sack"
+    },
+    {
+      "n": "9 CLOUD UNGASAN / CLOUD NINE UNGASAN",
+      "cls": "C",
+      "last": "Aug",
+      "ytd": 272973,
+      "top_p": "BALIAN Glass Sparkling (330 ml x 12)"
     }
   ],
   "dorm_m": [
@@ -6400,6 +6781,15 @@ const D = {
       "top_p": "Tepung Double Zero @25Kg/Sack"
     }
   ],
+  "bal_dorm_d": [
+    {
+      "n": "PT VISTA  PADANG ASRI (SUARGA)",
+      "cls": "C",
+      "last": "Jul",
+      "ytd": 26711351,
+      "top_p": "BALIAN Glass Still (750 ml x 12)"
+    }
+  ],
   "bal_dorm_m": [
     {
       "n": "PT VISTA  PADANG ASRI (SUARGA)",
@@ -6430,6 +6820,50 @@ const D = {
       "last": "Jul",
       "ytd": 713514,
       "top_p": "Masterista Japanese Matcha Powder Premium 500 Ml"
+    }
+  ],
+  "ups_d": [
+    {
+      "n": "INTERCONTINENTAL BALI RESORT",
+      "prod": "Halal Premium Oxtail Whole Cut 3Cm (2 Kg/Pack)",
+      "cls": "A",
+      "rev": 1693553326
+    },
+    {
+      "n": "CONRAD HOTEL",
+      "prod": "Australian Butter Unsalted",
+      "cls": "A",
+      "rev": 1301348916
+    },
+    {
+      "n": "HILTON HOTEL",
+      "prod": "MAMAS BELLY RIND ON SB OUT (SKIN ON) 3-5KG/PACK",
+      "cls": "A",
+      "rev": 1287935948
+    },
+    {
+      "n": "MERUSAKA NUSA DUA",
+      "prod": "Allana Tenderloin Whole",
+      "cls": "A",
+      "rev": 972857087
+    },
+    {
+      "n": "MOVENPICK",
+      "prod": "Gold Box Melange Butter MP331",
+      "cls": "A",
+      "rev": 490557004
+    },
+    {
+      "n": "PT. GRAHA ALAM LESTARI",
+      "prod": "BALIAN Glass Still (750 ml x 12)",
+      "cls": "A",
+      "rev": 381715992
+    },
+    {
+      "n": "NUSA DUA BEACH HOTEL",
+      "prod": "Tepung Hime @25Kg/Sack",
+      "cls": "A",
+      "rev": 351816210
     }
   ],
   "ups_m": [
@@ -6533,7 +6967,7 @@ const D = {
     {
       "rank": 2,
       "n": "INTERCONTINENTAL BALI RESORT",
-      "sp": "Monica",
+      "sp": "Dewi",
       "cls": "A",
       "skus": 33,
       "ytd": 1693553326,
@@ -6542,7 +6976,7 @@ const D = {
     {
       "rank": 3,
       "n": "CONRAD HOTEL",
-      "sp": "Monica",
+      "sp": "Dewi",
       "cls": "A",
       "skus": 13,
       "ytd": 1301348916,
@@ -6560,13 +6994,14 @@ const D = {
     {
       "rank": 5,
       "n": "MERUSAKA NUSA DUA",
-      "sp": "Monica",
+      "sp": "Dewi",
       "cls": "A",
       "skus": 18,
       "ytd": 972857087,
       "act": "Buys F&B but no Balian - cross-sell opportunity!"
     }
   ],
+  "active_d": 67,
   "active_m": 67,
   "active_j": 142,
   "skus": 238,
@@ -6575,7 +7010,7 @@ const D = {
     {
       "n": "PLAGOO HOLIDAY HOTEL",
       "cls": "B",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 100
     },
     {
@@ -6587,13 +7022,13 @@ const D = {
     {
       "n": "BALI NUSA DUA CONVENTION CENTER",
       "cls": "B",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 94
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 73
     },
     {
@@ -6605,19 +7040,19 @@ const D = {
     {
       "n": "COURTYARD MARRIOT HOTEL",
       "cls": "B",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 50
     },
     {
       "n": "JUMEIRAH",
       "cls": "B",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 39
     },
     {
       "n": "GRAND HYATT NUSA DUA",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 36
     },
     {
@@ -6644,7 +7079,7 @@ const D = {
     {
       "n": "BALI NUSA DUA CONVENTION CENTER",
       "cls": "B",
-      "sp": "Monica",
+      "sp": "Dewi",
       "gap": 5,
       "rev": 2160000.0
     },
@@ -6695,7 +7130,7 @@ const D = {
     {
       "n": "JIMBARAN BAY BEACH",
       "cls": "C",
-      "sp": "Monica",
+      "sp": "Dewi",
       "prod": "Tepung Japanese Tempura 1kg/pack",
       "pct": 100
     },
@@ -6747,54 +7182,54 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 2920939599.2697163
+      "rev": 2920939599.269716
     },
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 2792534564.929189
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
       "cls": "A",
-      "sp": "Monica",
-      "rev": 1749806884.569141
+      "sp": "Dewi",
+      "rev": 1749806884.5691411
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
-      "sp": "Monica",
-      "rev": 1693553325.5677645
+      "sp": "Dewi",
+      "rev": 1693553325.567765
     },
     {
       "n": "HILTON HOTEL",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 1495304331.19
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
-      "sp": "Monica",
-      "rev": 1301348915.7269158
+      "sp": "Dewi",
+      "rev": 1301348915.726916
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "cls": "A",
-      "sp": "Monica",
-      "rev": 972857086.7911941
+      "sp": "Dewi",
+      "rev": 972857086.791194
     },
     {
       "n": "BULGARI",
       "cls": "A",
-      "sp": "Monica",
-      "rev": 958066210.7296219
+      "sp": "Dewi",
+      "rev": 958066210.729622
     },
     {
       "n": "FOUR SEASON RESORT BALI",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "rev": 628289246.16
     },
     {
@@ -6820,7 +7255,7 @@ const D = {
     {
       "n": "BALI NUSA DUA CONVENTION CENTER",
       "cls": "B",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 87
     },
     {
@@ -6838,7 +7273,7 @@ const D = {
     {
       "n": "JUMEIRAH",
       "cls": "B",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 81
     },
     {
@@ -6856,13 +7291,13 @@ const D = {
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 69
     },
     {
       "n": "AYVRTHA BOUTIQUE NATURE",
       "cls": "C",
-      "sp": "Monica",
+      "sp": "Dewi",
       "drop": 67
     }
   ]

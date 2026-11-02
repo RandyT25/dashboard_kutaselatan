@@ -1,4 +1,4 @@
-const CACHE = 'horeca-ks-v10';
+const CACHE = 'horeca-ks-v11';
 const ASSETS = [
   './',
   './index.html',
