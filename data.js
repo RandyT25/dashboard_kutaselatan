@@ -7182,7 +7182,7 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 2920939599.269716
+      "rev": 2920939599.2697163
     },
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
@@ -7194,13 +7194,13 @@ const D = {
       "n": "PT. GRAHA ALAM LESTARI",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 1749806884.5691411
+      "rev": 1749806884.569141
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 1693553325.567765
+      "rev": 1693553325.5677645
     },
     {
       "n": "HILTON HOTEL",
@@ -7212,19 +7212,19 @@ const D = {
       "n": "CONRAD HOTEL",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 1301348915.726916
+      "rev": 1301348915.7269158
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 972857086.791194
+      "rev": 972857086.7911941
     },
     {
       "n": "BULGARI",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 958066210.729622
+      "rev": 958066210.7296219
     },
     {
       "n": "FOUR SEASON RESORT BALI",
