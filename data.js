@@ -7205,49 +7205,49 @@ const D = {
       "n": "BAMBU BALI ULUWATU",
       "cls": "A",
       "sp": "Juni",
-      "rev": 2949419356.029716
+      "rev": 2949419356.0297165
     },
     {
       "n": "PARADISUS BY MELIA NUSA DUA",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 2816180509.729189
+      "rev": 2816180509.7291894
     },
     {
       "n": "PT. GRAHA ALAM LESTARI",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 1818135714.119126
+      "rev": 1818135714.1191258
     },
     {
       "n": "INTERCONTINENTAL BALI RESORT",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 1703718467.807764
+      "rev": 1703718467.8077636
     },
     {
       "n": "HILTON HOTEL",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 1505620997.91
+      "rev": 1505620997.9099998
     },
     {
       "n": "CONRAD HOTEL",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 1301348915.726916
+      "rev": 1301348915.7269158
     },
     {
       "n": "BULGARI",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 997378013.709621
+      "rev": 997378013.7096208
     },
     {
       "n": "MERUSAKA NUSA DUA",
       "cls": "A",
       "sp": "Dewi",
-      "rev": 989759491.491194
+      "rev": 989759491.4911941
     },
     {
       "n": "FOUR SEASON RESORT BALI",
@@ -7259,7 +7259,7 @@ const D = {
       "n": "NOURISH UNGASAN",
       "cls": "A",
       "sp": "Juni",
-      "rev": 544512485.369857
+      "rev": 544512485.3698571
     }
   ],
   "aov_drops": [
